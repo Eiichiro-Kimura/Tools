@@ -1,16 +1,21 @@
+import 'package:dazn_schedule/google_calendar/google_calendar.dart';
 import 'package:dazn_schedule/program_guide/program.dart';
 import 'package:flutter/material.dart';
 
 class ProgramGuideView extends SingleChildScrollView {
 
-  ProgramGuideView(AsyncSnapshot<List<Program>> snapshot,
+  ProgramGuideView(BuildContext context,
+      AsyncSnapshot<List<Program>> snapshot,
       TextEditingController controller) : super(
       child: Column(
-        children: _createWidgets(snapshot, controller),
+        children: _createWidgets(context, snapshot, controller),
       )
   );
 
-  static List<Widget> _createWidgets(AsyncSnapshot<List<Program>> snapshot,
+  static final _googleCalendar = GoogleCalendar();
+
+  static List<Widget> _createWidgets(BuildContext context,
+      AsyncSnapshot<List<Program>> snapshot,
       TextEditingController controller) {
     final widgets = <Widget>[];
 
@@ -33,6 +38,7 @@ class ProgramGuideView extends SingleChildScrollView {
                     program.genre,
                     textScaleFactor: 0.9,
                   ),
+                  onTap: () { _googleCalendar.add(program); },
                 ),
               ),
             ),

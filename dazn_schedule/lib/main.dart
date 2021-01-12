@@ -53,18 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 SearchView(context, _controller, (text) {setState(() {});}),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: ProgramGuideView(snapshot, _controller),
+                    child: ProgramGuideView(context, snapshot, _controller),
                   ),
                 )
               ]
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
