@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/google_calendar/google_calendar.dart';
+import 'package:dazn_schedule/io/google_calendar.dart';
 import 'package:dazn_schedule/program_guide/program.dart';
 import 'package:flutter/material.dart';
 
