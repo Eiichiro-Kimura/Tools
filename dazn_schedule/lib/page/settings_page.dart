@@ -47,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildNormal(BuildContext context) {
     final programFilter =
-      PageManager().getPrevArguments(context) as ProgramFilter;
+      PageManager().getPrevArguments<ProgramFilter>(context);
     final settingGoogleApiClientId = _settings.get(
         SettingsKind.googleApiClientId
     );
