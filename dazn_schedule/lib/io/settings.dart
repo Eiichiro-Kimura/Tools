@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum SettingsKind {
 
   googleApiClientId,
+  daznGenre,
+  daznTournamentName,
 }
 
 class Settings {
@@ -12,7 +14,17 @@ class Settings {
         'GoogleApiClientId',
         '',
         'GoogleApiクライアントID'
-    )
+    ),
+    SettingsKind.daznGenre: _SettingsInfo(
+        'DaznGenre',
+        '',
+        'ジャンル'
+    ),
+    SettingsKind.daznTournamentName: _SettingsInfo(
+        'DaznTournamentName',
+        '',
+        'リーグ'
+    ),
   };
 
   SharedPreferences _sharedPreferences;

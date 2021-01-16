@@ -1,4 +1,5 @@
 import 'package:dazn_schedule/program_guide/program.dart';
+import 'package:dazn_schedule/program_guide/program_filter.dart';
 import 'package:universal_html/driver.dart' as driver;
 // ignore: implementation_imports
 import 'package:universal_html/src/html_with_internals.dart' as html_internals;
@@ -7,6 +8,13 @@ class ProgramGuide {
 
   static const url = 'https://flyingsc.github.io/dazn-schedule/';
   final _programs = <Program>[];
+
+  ProgramFilter get programFilter {
+    final programFilter = ProgramFilter();
+    _programs.forEach(programFilter.add);
+
+    return programFilter;
+  }
 
   Future<List<Program>> generate() async {
     final client = driver.HtmlDriver();
