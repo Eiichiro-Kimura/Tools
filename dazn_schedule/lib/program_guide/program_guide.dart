@@ -17,6 +17,10 @@ class ProgramGuide {
   }
 
   Future<List<Program>> generate() async {
+    // 一度取得済み情報をクリア
+    _programs.clear();
+
+    // クライアントを取得
     final client = driver.HtmlDriver();
 
     // Webページを取得
