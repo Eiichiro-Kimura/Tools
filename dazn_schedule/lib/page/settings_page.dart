@@ -1,4 +1,5 @@
 import 'package:dazn_schedule/io/settings.dart';
+import 'package:dazn_schedule/page/page_manager.dart';
 import 'package:dazn_schedule/program_guide/program_filter.dart';
 import 'package:dazn_schedule/view/setting_item_dropdown_view.dart';
 import 'package:dazn_schedule/view/setting_item_text_view.dart';
@@ -45,8 +46,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildNormal(BuildContext context) {
-    final programFilter = ModalRoute.of(context).settings.arguments
-      as ProgramFilter;
+    final programFilter =
+      PageManager().getPrevArguments<ProgramFilter>(context);
     final settingGoogleApiClientId = _settings.get(
         SettingsKind.googleApiClientId
     );

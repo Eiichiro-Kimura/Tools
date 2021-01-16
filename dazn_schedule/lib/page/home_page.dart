@@ -1,4 +1,5 @@
 import 'package:dazn_schedule/io/settings.dart';
+import 'package:dazn_schedule/page/page_manager.dart';
 import 'package:dazn_schedule/program_guide/program.dart';
 import 'package:dazn_schedule/program_guide/program_guide.dart';
 import 'package:dazn_schedule/view/program_guide_view.dart';
@@ -82,9 +83,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _toSettingPage() {
-    Navigator.of(context).pushNamed(
-        '/settings',
-        arguments: _programGuide.programFilter
-    ).then((_) => _updateScreen());
+    PageManager()
+        .forward(context, PageKind.settings, _programGuide.programFilter)
+        .then((_) => _updateScreen());
   }
 }
