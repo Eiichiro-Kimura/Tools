@@ -26,7 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
     _settings.init().then((value) {
       setState(() {
         _googleApiClientIdController.text =
-            _settings.getStringValue(SettingsKind.googleApiClientId);
+            _settings.get(SettingsKind.googleApiClientId).value;
       });
     });
   }
@@ -47,6 +47,15 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildNormal(BuildContext context) {
     final programFilter = ModalRoute.of(context).settings.arguments
       as ProgramFilter;
+    final settingGoogleApiClientId = _settings.get(
+        SettingsKind.googleApiClientId
+    );
+    final settingDaznGenre = _settings.get(
+        SettingsKind.daznGenre
+    );
+    final settingDaznTournamentName = _settings.get(
+        SettingsKind.daznTournamentName
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -55,36 +64,25 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         children: [
           SettingItemTextView(
-            _settings.getName(SettingsKind.googleApiClientId),
+            settingGoogleApiClientId.name,
             _googleApiClientIdController,
-            (value) {
-              _settings.setStringValue(SettingsKind.googleApiClientId, value);
-            },
+            settingGoogleApiClientId.updateValue,
           ),
           SettingItemDropdownView(
             context,
-            SettingsKind.daznGenre,
-            _settings.getName(SettingsKind.daznGenre),
             programFilter.genres,
-            _settings.getStringValue(SettingsKind.daznGenre),
-            _dropdownCallback,
+            settingDaznGenre,
+            _updateScreen,
           ),
           SettingItemDropdownView(
             context,
-            SettingsKind.daznTournamentName,
-            _settings.getName(SettingsKind.daznTournamentName),
             programFilter.tournamentNames,
-            _settings.getStringValue(SettingsKind.daznTournamentName),
-            _dropdownCallback,
+            settingDaznTournamentName,
+            _updateScreen,
           ),
         ],
       ),
     );
-  }
-
-  void _dropdownCallback(SettingsKind settingsKind, String value) {
-    _settings.setStringValue(settingsKind, value);
-    _updateScreen();
   }
 
   void _updateScreen() {

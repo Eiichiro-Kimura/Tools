@@ -1,25 +1,15 @@
 import 'package:dazn_schedule/io/settings.dart';
 import 'package:flutter/material.dart';
 
-typedef SettingItemDropdownCallback
-  = void Function(SettingsKind settingsKind, String value);
-
 class SettingItemDropdownView extends Row {
 
-  SettingItemDropdownView(BuildContext context, SettingsKind settingsKind,
-      String name, List<String> textList, String selectedText,
-      SettingItemDropdownCallback callback): super(
+  SettingItemDropdownView(BuildContext context, List<String> textList,
+      SettingsInfo settingsInfo, VoidCallback callback): super(
     children: [
-      Text(name),
+      Text(settingsInfo.name),
       const SizedBox(width: marginSize),
       Expanded(
-        child: _createDropdownButton(
-            context,
-            settingsKind,
-            textList,
-            selectedText,
-            callback
-        ),
+        child: _createDropdownButton(context, textList, settingsInfo, callback),
       ),
       const SizedBox(width: marginSize),
     ],
@@ -28,20 +18,23 @@ class SettingItemDropdownView extends Row {
   static const double marginSize = 20;
 
   static DropdownButton _createDropdownButton(BuildContext context,
-      SettingsKind settingsKind, List<String> textList, String selectedText,
-      SettingItemDropdownCallback callback) {
+      List<String> textList, SettingsInfo settingsInfo, VoidCallback callback) {
 
-    final selectedTextUse = selectedText.isEmpty ? textList[0] : selectedText;
+    final valueText = settingsInfo.value.isEmpty ?
+      textList[0] : settingsInfo.value;
 
     return DropdownButton<String>(
-      value: selectedTextUse,
+      value: valueText,
       items: textList.map((String text) {
         return DropdownMenuItem<String>(
           value: text,
           child: Text(text),
         );
       }).toList(),
-      onChanged: (value) { callback(settingsKind, value); },
+      onChanged: (value) {
+        settingsInfo.updateValue(value);
+        callback();
+      },
     );
   }
 }

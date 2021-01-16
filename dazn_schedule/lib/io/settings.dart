@@ -9,48 +9,56 @@ enum SettingsKind {
 
 class Settings {
 
-  final _infoMap = {
-    SettingsKind.googleApiClientId: _SettingsInfo(
-        'GoogleApiClientId',
-        '',
-        'GoogleApiクライアントID'
-    ),
-    SettingsKind.daznGenre: _SettingsInfo(
-        'DaznGenre',
-        '',
-        'ジャンル'
-    ),
-    SettingsKind.daznTournamentName: _SettingsInfo(
-        'DaznTournamentName',
-        '',
-        'リーグ'
-    ),
-  };
+  final _infoMap = <SettingsKind, SettingsInfo>{};
 
   SharedPreferences _sharedPreferences;
 
+  SettingsInfo get(SettingsKind settingsKind) {
+    return _infoMap[settingsKind];
+  }
+
   Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
+    _infoMap[SettingsKind.googleApiClientId] = SettingsInfo(
+        _sharedPreferences,
+        'GoogleApiClientId',
+        '',
+        'GoogleApiクライアントID'
+    );
+    _infoMap[SettingsKind.daznGenre] = SettingsInfo(
+        _sharedPreferences,
+        'DaznGenre',
+        '',
+        'ジャンル'
+    );
+    _infoMap[SettingsKind.daznTournamentName] = SettingsInfo(
+        _sharedPreferences,
+        'DaznTournamentName',
+        '',
+        'リーグ'
+    );
   }
 
   bool get isValid => null != _sharedPreferences;
-
-  String getStringValue(SettingsKind settingsKind) =>
-      _sharedPreferences.getString(_infoMap[settingsKind].key) ??
-      _infoMap[settingsKind].defaultValue as String;
-
-  String getName(SettingsKind settingsKind) =>
-      _infoMap[settingsKind].name;
-
-  void setStringValue(SettingsKind settingsKind, String value) =>
-      _sharedPreferences.setString(_infoMap[settingsKind].key, value);
 }
 
-class _SettingsInfo {
+class SettingsInfo {
 
-  _SettingsInfo(this.key, this.defaultValue, this.name);
+  SettingsInfo(
+      this._sharedPreferences,
+      this.key,
+      this.defaultValue,
+      this.name
+  );
 
+  final SharedPreferences _sharedPreferences;
   final String key;
   final dynamic defaultValue;
   final String name;
+
+  String get value =>
+      _sharedPreferences.getString(key) ?? defaultValue as String;
+
+  void updateValue(String value) =>
+      _sharedPreferences.setString(key, value);
 }
