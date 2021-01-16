@@ -25,7 +25,7 @@ class SettingItemDropdownView extends Row {
 
     return DropdownButton<String>(
       value: valueText,
-      items: textList.map((String text) {
+      items: textList.map((text) {
         return DropdownMenuItem<String>(
           value: text,
           child: Text(text),

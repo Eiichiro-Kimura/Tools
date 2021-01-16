@@ -30,17 +30,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _settings.isValid ? _buildNormal(context) : _buildLoading(context);
-  }
+  Widget build(BuildContext context) =>
+      _settings.isValid ? _buildNormal(context) : _buildLoading(context);
 
-  Widget _buildLoading(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-    );
-  }
+  Widget _buildLoading(BuildContext context) =>
+      Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+      );
 
   Widget _buildNormal(BuildContext context) {
     return Scaffold(
@@ -78,13 +76,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _updateScreen() {
-    setState(() {});
-  }
+  void _updateScreen() =>
+      setState(() {});
 
-  void _toSettingPage() {
-    PageManager()
-        .forward(context, PageKind.settings, _programGuide.programFilter)
-        .then((_) => _updateScreen());
-  }
+  void _toSettingPage() =>
+      PageManager()
+          .forward(context, PageKind.settings, _programGuide.programFilter)
+          .then((_) => _updateScreen());
 }

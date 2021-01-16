@@ -35,7 +35,6 @@ class Program {
     return isHitKeyword && isSelected;
   }
 
-  String _getNumberMonthDay(String text) {
-    return NumberFormat('00').format(int.parse(text));
-  }
+  String _getNumberMonthDay(String text) =>
+      NumberFormat('00').format(int.parse(text));
 }

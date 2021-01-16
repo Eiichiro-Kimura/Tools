@@ -1,17 +1,18 @@
+import 'package:dazn_schedule/io/settings.dart';
 import 'package:flutter/material.dart';
 
 class SettingItemTextView extends Row {
 
-  SettingItemTextView(String name, TextEditingController textEditingController,
-      ValueChanged<String> onChanged) : super(
+  SettingItemTextView(SettingsInfo settingsInfo,
+      TextEditingController textEditingController): super(
     children: [
-      Text(name),
+      Text(settingsInfo.name),
       const SizedBox(width: marginSize),
       Expanded(
         child: TextField(
           controller: textEditingController,
           maxLines: 1,
-          onChanged: onChanged,
+          onChanged: settingsInfo.updateValue,
         ),
       ),
       const SizedBox(width: marginSize),

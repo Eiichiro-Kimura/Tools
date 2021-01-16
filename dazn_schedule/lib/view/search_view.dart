@@ -14,7 +14,7 @@ class SearchView extends Container {
             controller: controller,
             decoration: const InputDecoration(
                 hintText: 'Search',
-                border: InputBorder.none
+                border: InputBorder.none,
             ),
             onChanged: valueChanged,
           ),

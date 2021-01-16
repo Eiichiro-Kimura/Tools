@@ -5,24 +5,24 @@ import 'package:flutter/material.dart';
 class ProgramCardView extends Card {
 
   ProgramCardView(GoogleCalendar googleCalendar, Program program): super(
-    margin: const EdgeInsets.all(10),
+    margin: const EdgeInsets.all(marginSize),
     child: Container(
       child: ListTile(
-        contentPadding: const EdgeInsets.all(10),
+        contentPadding: const EdgeInsets.all(marginSize),
         leading: Text(
           '${program.date}\n${program.time}',
-          textScaleFactor: 0.9,
+          textScaleFactor: textScale,
         ),
         title: Text(program.programName),
         subtitle: Text(program.tournamentName),
-        trailing: Text(
-          program.genre,
-          textScaleFactor: 0.9,
-        ),
+        trailing: Text(program.genre, textScaleFactor: textScale),
         onTap: () {
           googleCalendar.add(program);
         },
       ),
     ),
   );
+
+  static const double marginSize = 10;
+  static const double textScale = 0.9;
 }

@@ -10,14 +10,11 @@ class GoogleAuth {
 
   void authenticate(void Function(AuthClient authClient) callback) {
     try {
-      clientViaUserConsent(
-          ClientId(googleApiClientId, ''),
-          scopes,
-          _prompt
-      ).then((authClient) {
-        callback(authClient);
-        authClient.close();
-      });
+      clientViaUserConsent(ClientId(googleApiClientId, ''), scopes, _prompt)
+          .then((authClient) {
+            callback(authClient);
+            authClient.close();
+          });
     } on Exception catch (ex) {
       print(ex.toString());
     }
