@@ -1,5 +1,4 @@
-import 'package:dazn_schedule/page/home_page.dart';
-import 'package:dazn_schedule/page/settings_page.dart';
+import 'package:dazn_schedule/page/page_manager.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,10 +16,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/':          (context) => const HomePage(title: 'Dazn Schedule'),
-        '/settings':  (context) => const SettingsPage(title: 'Settings'),
-      },
+      routes: PageManager().routes,
     );
   }
 }
