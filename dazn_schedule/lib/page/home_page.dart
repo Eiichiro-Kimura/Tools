@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  final _programGuide = ProgramGuide();
   final _settings = Settings();
   final _controller = TextEditingController();
 
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    _settings.init().then((value) => _updateScreen());
+    _settings.init().then((_) => _updateScreen());
   }
 
   @override
@@ -46,19 +47,21 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: FutureBuilder<List<Program>>(
-        future: ProgramGuide().generate(),
+        future: _programGuide.generate(),
         builder: (BuildContext context,
             AsyncSnapshot<List<Program>> snapshot) {
           return Column(
             children: [
-              SearchView(context, _controller, (text) { _updateScreen(); }),
+              SearchView(context, _controller, (_) => _updateScreen()),
               Expanded(
                 child: SingleChildScrollView(
                   child: ProgramGuideView(
                       context,
                       snapshot,
                       _controller,
-                      _settings.getStringValue(SettingsKind.googleApiClientId)
+                      _settings.get(SettingsKind.googleApiClientId).value,
+                      _settings.get(SettingsKind.daznGenre).value,
+                      _settings.get(SettingsKind.daznTournamentName).value,
                   ),
                 ),
               ),
@@ -67,7 +70,7 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () { Navigator.of(context).pushNamed('/settings'); },
+        onPressed: _toSettingPage,
         tooltip: 'Settings',
         child: const Icon(Icons.settings),
       ),
@@ -76,5 +79,12 @@ class _HomePageState extends State<HomePage> {
 
   void _updateScreen() {
     setState(() {});
+  }
+
+  void _toSettingPage() {
+    Navigator.of(context).pushNamed(
+        '/settings',
+        arguments: _programGuide.programFilter
+    ).then((_) => _updateScreen());
   }
 }

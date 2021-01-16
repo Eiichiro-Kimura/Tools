@@ -1,4 +1,6 @@
 import 'package:dazn_schedule/io/settings.dart';
+import 'package:dazn_schedule/program_guide/program_filter.dart';
+import 'package:dazn_schedule/view/setting_item_dropdown_view.dart';
 import 'package:dazn_schedule/view/setting_item_text_view.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +26,37 @@ class _SettingsPageState extends State<SettingsPage> {
     _settings.init().then((value) {
       setState(() {
         _googleApiClientIdController.text =
-            _settings.getStringValue(SettingsKind.googleApiClientId);
+            _settings.get(SettingsKind.googleApiClientId).value;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    return _settings.isValid ? _buildNormal(context) : _buildLoading(context);
+  }
+
+  Widget _buildLoading(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+    );
+  }
+
+  Widget _buildNormal(BuildContext context) {
+    final programFilter = ModalRoute.of(context).settings.arguments
+      as ProgramFilter;
+    final settingGoogleApiClientId = _settings.get(
+        SettingsKind.googleApiClientId
+    );
+    final settingDaznGenre = _settings.get(
+        SettingsKind.daznGenre
+    );
+    final settingDaznTournamentName = _settings.get(
+        SettingsKind.daznTournamentName
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -38,16 +64,28 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         children: [
           SettingItemTextView(
-            _settings.getName(SettingsKind.googleApiClientId),
+            settingGoogleApiClientId.name,
             _googleApiClientIdController,
-            (value) {
-              _settings.setStringValue(
-                  SettingsKind.googleApiClientId, value
-              );
-            },
+            settingGoogleApiClientId.updateValue,
+          ),
+          SettingItemDropdownView(
+            context,
+            programFilter.genres,
+            settingDaznGenre,
+            _updateScreen,
+          ),
+          SettingItemDropdownView(
+            context,
+            programFilter.tournamentNames,
+            settingDaznTournamentName,
+            _updateScreen,
           ),
         ],
       ),
     );
+  }
+
+  void _updateScreen() {
+    setState(() {});
   }
 }
