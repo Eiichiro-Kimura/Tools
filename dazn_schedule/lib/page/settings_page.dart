@@ -24,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
 
-    _settings.init().then((value) {
+    _settings.init().then((_) {
       setState(() {
         _googleApiClientIdController.text =
             _settings.get(SettingsKind.googleApiClientId).value;
@@ -33,30 +33,19 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _settings.isValid ? _buildNormal(context) : _buildLoading(context);
-  }
+  Widget build(BuildContext context) =>
+      _settings.isValid ? _buildNormal(context) : _buildLoading(context);
 
-  Widget _buildLoading(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-    );
-  }
+  Widget _buildLoading(BuildContext context) =>
+      Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+      );
 
   Widget _buildNormal(BuildContext context) {
     final programFilter =
       PageManager().getPrevArguments<ProgramFilter>(context);
-    final settingGoogleApiClientId = _settings.get(
-        SettingsKind.googleApiClientId
-    );
-    final settingDaznGenre = _settings.get(
-        SettingsKind.daznGenre
-    );
-    final settingDaznTournamentName = _settings.get(
-        SettingsKind.daznTournamentName
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -65,20 +54,19 @@ class _SettingsPageState extends State<SettingsPage> {
       body: Column(
         children: [
           SettingItemTextView(
-            settingGoogleApiClientId.name,
+            _settings.get(SettingsKind.googleApiClientId),
             _googleApiClientIdController,
-            settingGoogleApiClientId.updateValue,
           ),
           SettingItemDropdownView(
             context,
             programFilter.genres,
-            settingDaznGenre,
+            _settings.get(SettingsKind.daznGenre),
             _updateScreen,
           ),
           SettingItemDropdownView(
             context,
             programFilter.tournamentNames,
-            settingDaznTournamentName,
+            _settings.get(SettingsKind.daznTournamentName),
             _updateScreen,
           ),
         ],
@@ -86,7 +74,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  void _updateScreen() {
-    setState(() {});
-  }
+  void _updateScreen() =>
+      setState(() {});
 }

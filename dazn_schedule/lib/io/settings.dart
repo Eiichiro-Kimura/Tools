@@ -46,19 +46,19 @@ class SettingsInfo {
 
   SettingsInfo(
       this._sharedPreferences,
-      this.key,
-      this.defaultValue,
+      this._key,
+      this._defaultValue,
       this.name
   );
 
   final SharedPreferences _sharedPreferences;
-  final String key;
-  final dynamic defaultValue;
+  final String _key;
+  final dynamic _defaultValue;
   final String name;
 
   String get value =>
-      _sharedPreferences.getString(key) ?? defaultValue as String;
+      _sharedPreferences.getString(_key) ?? _defaultValue as String;
 
   void updateValue(String value) =>
-      _sharedPreferences.setString(key, value);
+      _sharedPreferences.setString(_key, value);
 }

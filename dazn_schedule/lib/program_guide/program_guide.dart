@@ -27,8 +27,7 @@ class ProgramGuide {
     await client.setDocumentFromUri(Uri.parse(url));
 
     // 最初の日時行を取得
-    final dateRow = client.document.querySelector('.date-row');
-    var programRow = dateRow;
+    var programRow = client.document.querySelector('.date-row');
 
     while (null != programRow) {
       // 日付を取得

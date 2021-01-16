@@ -22,10 +22,10 @@ class GoogleCalendar {
           .events
           .insert(event, calendarId)
           .then((authClient) {
-        if ('confirmed' == authClient.status) {
-        } else {
-        }
-      });
+            if ('confirmed' == authClient.status) {
+            } else {
+            }
+          });
     });
   }
 

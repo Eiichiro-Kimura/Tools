@@ -10,10 +10,11 @@ class ProgramFilter {
   List<String> get tournamentNames => _tournamentNames;
 
   void add(Program program) {
-    _genres.add(program.genre);
-    _tournamentNames.add(program.tournamentName);
-
-    _genres = Set.of(_genres).toList();
-    _tournamentNames = Set.of(_tournamentNames).toList();
+    _genres = Set
+        .of(_genres..add(program.genre))
+        .toList();
+    _tournamentNames = Set
+        .of(_tournamentNames..add(program.tournamentName))
+        .toList();
   }
 }
