@@ -3,18 +3,28 @@ import 'package:dazn_schedule/program_guide/program.dart';
 
 class ProgramFilter {
 
-  List<String> _genres = [];
-  List<String> _tournamentNames = [];
+  ProgramFilter(List<Program> programs):
+        genres = _toFilterListGenres(programs),
+        tournamentNames = _toFilterListTournamentName(programs);
 
-  List<String> get genres => _genres;
-  List<String> get tournamentNames => _tournamentNames;
+  final List<String> genres;
+  final List<String> tournamentNames;
 
-  void add(Program program) {
-    _genres = Set
-        .of(_genres..add(program.genre))
-        .toList();
-    _tournamentNames = Set
-        .of(_tournamentNames..add(program.tournamentName))
-        .toList();
+  static List<String> _toFilterListGenres(List<Program> programs) =>
+      _toFilterList(programs, (program) => program.genre);
+
+  static List<String> _toFilterListTournamentName(List<Program> programs) =>
+      _toFilterList(programs, (program) => program.tournamentName);
+
+  static List<String> _toFilterList(List<Program> programs,
+      String Function(Program) addFunction) {
+
+    final filterList = <String>[];
+
+    for (final program in programs) {
+      filterList.add(addFunction(program));
+    }
+
+    return Set.of(filterList).toList();
   }
 }
