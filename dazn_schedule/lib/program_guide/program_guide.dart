@@ -7,14 +7,10 @@ import 'package:universal_html/src/html_with_internals.dart' as html_internals;
 class ProgramGuide {
 
   static const url = 'https://flyingsc.github.io/dazn-schedule/';
+  ProgramFilter _programFilter;
   final _programs = <Program>[];
 
-  ProgramFilter get programFilter {
-    final programFilter = ProgramFilter();
-    _programs.forEach(programFilter.add);
-
-    return programFilter;
-  }
+  ProgramFilter get programFilter => _programFilter;
 
   Future<List<Program>> generate() async {
     // 一度取得済み情報をクリア
@@ -40,6 +36,9 @@ class ProgramGuide {
       programRow = _parseProgramRow(date, programRow.nextElementSibling);
     }
 
+    // 番組フィルターを作成
+    _programFilter = ProgramFilter(_programs);
+
     return _programs;
   }
 
@@ -49,17 +48,17 @@ class ProgramGuide {
     var programRowUse = programRow;
 
     while (null != programRowUse && 'date-row' != programRowUse.className) {
-      _programs.add(
-        Program(
-          date,
-          programRowUse.querySelector('.date').text,
-          programRowUse.querySelector('.genre').text,
-          programRowUse.querySelector('.tournament').text,
-          programRowUse.querySelector('.tournament').nextElementSibling.text,
-          programRowUse.querySelector('.tournament').nextElementSibling
-              .nextElementSibling.text,
-        )
+      final program = Program(
+        date,
+        programRowUse.querySelector('.date').text,
+        programRowUse.querySelector('.genre').text,
+        programRowUse.querySelector('.tournament').text,
+        programRowUse.querySelector('.tournament').nextElementSibling.text,
+        programRowUse.querySelector('.tournament').nextElementSibling
+            .nextElementSibling.text,
       );
+
+      _programs.add(program);
 
       programRowUse = programRowUse.nextElementSibling;
     }

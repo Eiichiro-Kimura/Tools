@@ -11,7 +11,7 @@ class AppView extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: '/',
+      initialRoute: PageManager().initialRoute,
       routes: PageManager().routes,
     );
   }
