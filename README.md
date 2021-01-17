@@ -15,7 +15,8 @@
 
 * Flutterスマホアプリの習作。
 * DAZNの番組検索、Googleカレンダーへの登録がしたくて作成。
-* GoogleAPIのクライアントキーが必要（なくても番組検索は可能）。
+* Googleカレンダー登録機能には、GoogleAPIのクライアントキーが必要。
+* 番組表機能はWebスクレイピング、リーグ順位表機能はWebAPIで実装。
 * iPhone12mini / Androidエミュレータで動作確認済み。
 
 ### RedmineSupporter
