@@ -3,7 +3,7 @@ import 'package:dazn_schedule/page/page_manager.dart';
 import 'package:dazn_schedule/program_guide/program.dart';
 import 'package:dazn_schedule/program_guide/program_guide.dart';
 import 'package:dazn_schedule/view/home_drawer.dart';
-import 'package:dazn_schedule/view/program_guide_view.dart';
+import 'package:dazn_schedule/view/programs_view.dart';
 import 'package:dazn_schedule/view/search_view.dart';
 import 'package:flutter/material.dart';
 
@@ -64,15 +64,13 @@ class _HomePageState extends State<HomePage> {
             children: [
               SearchView(context, _controller, (_) => _updateScreen()),
               Expanded(
-                child: SingleChildScrollView(
-                  child: ProgramGuideView(
-                      context,
-                      snapshot.data,
-                      _controller,
-                      _settings.get(SettingsKind.googleApiClientId).value,
-                      _settings.get(SettingsKind.daznGenre).value,
-                      _settings.get(SettingsKind.daznTournamentName).value,
-                  ),
+                child: ProgramsView(
+                  context,
+                  snapshot.data,
+                  _controller,
+                  _settings.get(SettingsKind.googleApiClientId).value,
+                  _settings.get(SettingsKind.daznGenre).value,
+                  _settings.get(SettingsKind.daznTournamentName).value,
                 ),
               ),
             ],

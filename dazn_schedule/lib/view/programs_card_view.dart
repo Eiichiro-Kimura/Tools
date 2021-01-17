@@ -2,9 +2,9 @@ import 'package:dazn_schedule/io/google_calendar.dart';
 import 'package:dazn_schedule/program_guide/program.dart';
 import 'package:flutter/material.dart';
 
-class ProgramCardView extends Card {
+class ProgramsCardView extends Card {
 
-  ProgramCardView(GoogleCalendar googleCalendar, Program program): super(
+  ProgramsCardView(GoogleCalendar googleCalendar, Program program): super(
     margin: const EdgeInsets.all(marginSize),
     child: Container(
       child: ListTile(
