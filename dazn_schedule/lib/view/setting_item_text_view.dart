@@ -10,14 +10,14 @@ class SettingItemTextView extends Row {
       const SizedBox(width: marginSize),
       Expanded(
         child: TextField(
+          textAlign: TextAlign.end,
           controller: textEditingController,
           maxLines: 1,
           onChanged: settingsInfo.updateValue,
         ),
       ),
-      const SizedBox(width: marginSize),
     ],
   );
 
-  static const double marginSize = 20;
+  static const double marginSize = 40;
 }
