@@ -1,7 +1,6 @@
 import 'package:dazn_schedule/competition_standings/competition_standings.dart';
 import 'package:dazn_schedule/competition_standings/team_standing.dart';
 import 'package:flutter/material.dart';
-import 'competition_standings_card_view.dart';
 import 'competition_standings_view.dart';
 
 class HomeDrawer extends Drawer {
