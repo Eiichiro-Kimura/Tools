@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   googleapis: ^0.56.1
   googleapis_auth: ^0.2.12
+  http: ^0.12.2
   intl: ^0.16.1
   shared_preferences: ^0.5.12+4
   universal_html: ^1.2.3

@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class ProgramGuideView extends SingleChildScrollView {
 
-  ProgramGuideView(BuildContext context, AsyncSnapshot<List<Program>> snapshot,
+  ProgramGuideView(BuildContext context, List<Program> programs,
       TextEditingController controller, String googleApiClientId,
       String selectedGenre, String selectedTournamentName) : super(
       child: Column(
         children: _createWidgets(
             context,
-            snapshot,
+            programs,
             controller,
             googleApiClientId,
             selectedGenre,
@@ -21,14 +21,14 @@ class ProgramGuideView extends SingleChildScrollView {
   );
 
   static List<Widget> _createWidgets(BuildContext context,
-      AsyncSnapshot<List<Program>> snapshot, TextEditingController controller,
+      List<Program> programs, TextEditingController controller,
       String googleApiClientId, String selectedGenre,
       String selectedTournamentName) {
     final googleCalendar = GoogleCalendar(googleApiClientId);
     final widgets = <Widget>[];
 
-    if (null != snapshot.data) {
-      for (final program in snapshot.data) {
+    if (null != programs) {
+      for (final program in programs) {
         if (program.contains(controller.text, selectedGenre,
             selectedTournamentName)) {
 
