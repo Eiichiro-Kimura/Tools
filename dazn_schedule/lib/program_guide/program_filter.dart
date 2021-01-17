@@ -1,4 +1,3 @@
-
 import 'package:dazn_schedule/program_guide/program.dart';
 
 class ProgramFilter {
