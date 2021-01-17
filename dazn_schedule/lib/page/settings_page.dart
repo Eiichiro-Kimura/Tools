@@ -51,25 +51,28 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          SettingItemTextView(
-            _settings.get(SettingsKind.googleApiClientId),
-            _googleApiClientIdController,
-          ),
-          SettingItemDropdownView(
-            context,
-            programFilter.genres,
-            _settings.get(SettingsKind.daznGenre),
-            _updateScreen,
-          ),
-          SettingItemDropdownView(
-            context,
-            programFilter.tournamentNames,
-            _settings.get(SettingsKind.daznTournamentName),
-            _updateScreen,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            SettingItemTextView(
+              _settings.get(SettingsKind.googleApiClientId),
+              _googleApiClientIdController,
+            ),
+            SettingItemDropdownView(
+              context,
+              programFilter.genres,
+              _settings.get(SettingsKind.daznGenre),
+              _updateScreen,
+            ),
+            SettingItemDropdownView(
+              context,
+              programFilter.tournamentNames,
+              _settings.get(SettingsKind.daznTournamentName),
+              _updateScreen,
+            ),
+          ],
+        ),
       ),
     );
   }

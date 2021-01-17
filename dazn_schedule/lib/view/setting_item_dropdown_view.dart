@@ -5,13 +5,10 @@ class SettingItemDropdownView extends Row {
 
   SettingItemDropdownView(BuildContext context, List<String> textList,
       SettingsInfo settingsInfo, VoidCallback callback): super(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(settingsInfo.name),
-      const SizedBox(width: marginSize),
-      Expanded(
-        child: _createDropdownButton(context, textList, settingsInfo, callback),
-      ),
-      const SizedBox(width: marginSize),
+      _createDropdownButton(context, textList, settingsInfo, callback),
     ],
   );
 
