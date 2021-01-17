@@ -2,6 +2,7 @@ import 'package:dazn_schedule/io/settings.dart';
 import 'package:dazn_schedule/page/page_manager.dart';
 import 'package:dazn_schedule/program_guide/program.dart';
 import 'package:dazn_schedule/program_guide/program_guide.dart';
+import 'package:dazn_schedule/view/home_drawer.dart';
 import 'package:dazn_schedule/view/program_guide_view.dart';
 import 'package:dazn_schedule/view/search_view.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
       ),
+      drawer: HomeDrawer(_settings.get(SettingsKind.daznTournamentName).value),
       body: FutureBuilder<List<Program>>(
         future: _programGuide.generate(),
         builder: (BuildContext context,
@@ -56,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   child: ProgramGuideView(
                       context,
-                      snapshot,
+                      snapshot.data,
                       _controller,
                       _settings.get(SettingsKind.googleApiClientId).value,
                       _settings.get(SettingsKind.daznGenre).value,
