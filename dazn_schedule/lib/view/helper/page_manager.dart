@@ -1,5 +1,5 @@
-import 'package:dazn_schedule/page/home_page.dart';
-import 'package:dazn_schedule/page/settings_page.dart';
+import 'package:dazn_schedule/view/page/home_page.dart';
+import 'package:dazn_schedule/view/page/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class PageManager {

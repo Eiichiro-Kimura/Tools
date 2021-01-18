@@ -1,5 +1,5 @@
-import 'package:dazn_schedule/io/google_calendar.dart';
-import 'package:dazn_schedule/program_guide/program.dart';
+import 'package:dazn_schedule/model/io/google_calendar.dart';
+import 'package:dazn_schedule/model/program.dart';
 import 'package:flutter/material.dart';
 
 class ProgramsCardView extends Card {

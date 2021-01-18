@@ -1,9 +1,11 @@
-import 'package:dazn_schedule/io/settings.dart';
-import 'package:dazn_schedule/page/page_manager.dart';
-import 'package:dazn_schedule/program_guide/program_filter.dart';
-import 'package:dazn_schedule/view/setting_item_dropdown_view.dart';
-import 'package:dazn_schedule/view/setting_item_text_view.dart';
+import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
+import 'package:dazn_schedule/view/helper/page_manager.dart';
+import 'package:dazn_schedule/model/program_filter.dart';
+import 'package:dazn_schedule/view/view/setting_item_dropdown_view.dart';
+import 'package:dazn_schedule/view/view/setting_item_text_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
 
@@ -17,58 +19,45 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  final _settings = Settings();
   final _googleApiClientIdController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    _settings.init().then((_) {
-      setState(() {
-        _googleApiClientIdController.text =
-            _settings.get(SettingsKind.googleApiClientId).value;
-      });
-    });
+    _googleApiClientIdController.text = Provider
+        .of<SettingsViewModel>(context, listen: false)
+        .get(SettingsKind.googleApiClientId)
+        .value;
   }
 
   @override
-  Widget build(BuildContext context) =>
-      _settings.isValid ? _buildNormal(context) : _buildLoading(context);
-
-  Widget _buildLoading(BuildContext context) =>
-      Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-      );
-
-  Widget _buildNormal(BuildContext context) {
+  Widget build(BuildContext context) {
+    final settingsViewModel =
+      Provider.of<SettingsViewModel>(context, listen: false);
     final programFilter =
       PageManager().getPrevArguments<ProgramFilter>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: SimpleAppBar(widget.title),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             SettingItemTextView(
-              _settings.get(SettingsKind.googleApiClientId),
+              settingsViewModel.get(SettingsKind.googleApiClientId),
               _googleApiClientIdController,
             ),
             SettingItemDropdownView(
               context,
               programFilter.genres,
-              _settings.get(SettingsKind.daznGenre),
+              settingsViewModel.get(SettingsKind.daznGenre),
               _updateScreen,
             ),
             SettingItemDropdownView(
               context,
               programFilter.tournamentNames,
-              _settings.get(SettingsKind.daznTournamentName),
+              settingsViewModel.get(SettingsKind.daznTournamentName),
               _updateScreen,
             ),
           ],

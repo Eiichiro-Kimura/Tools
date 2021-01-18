@@ -32,6 +32,7 @@ dependencies:
   googleapis_auth: ^0.2.12
   http: ^0.12.2
   intl: ^0.16.1
+  provider: ^4.3.3
   shared_preferences: ^0.5.12+4
   universal_html: ^1.2.3
   url_launcher: ^5.7.10

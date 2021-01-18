@@ -1,19 +1,19 @@
-import 'package:dazn_schedule/io/settings.dart';
+import 'package:dazn_schedule/model/setting.dart';
 import 'package:flutter/material.dart';
 
 class SettingItemTextView extends Row {
 
-  SettingItemTextView(SettingsInfo settingsInfo,
+  SettingItemTextView(Setting setting,
       TextEditingController textEditingController): super(
     children: [
-      Text(settingsInfo.name),
+      Text(setting.name),
       const SizedBox(width: marginSize),
       Expanded(
         child: TextField(
           textAlign: TextAlign.end,
           controller: textEditingController,
           maxLines: 1,
-          onChanged: settingsInfo.updateValue,
+          onChanged: setting.updateValue,
         ),
       ),
     ],
