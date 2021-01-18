@@ -1,4 +1,3 @@
-import 'package:dazn_schedule/view_model/competition_standings_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view_model/program_view_model.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
