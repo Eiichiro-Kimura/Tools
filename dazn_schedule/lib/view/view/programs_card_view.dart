@@ -1,10 +1,11 @@
-import 'package:dazn_schedule/model/io/google_calendar.dart';
 import 'package:dazn_schedule/model/program.dart';
+import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProgramsCardView extends Card {
 
-  ProgramsCardView(GoogleCalendar googleCalendar, Program program): super(
+  ProgramsCardView(BuildContext context, Program program): super(
     margin: const EdgeInsets.all(marginSize),
     child: Container(
       child: ListTile(
@@ -17,7 +18,9 @@ class ProgramsCardView extends Card {
         subtitle: Text(program.tournamentName),
         trailing: Text(program.genre, textScaleFactor: textScale),
         onTap: () {
-          googleCalendar.add(program);
+          Provider
+              .of<CloudCalendarViewModel>(context, listen: false)
+              .add(program);
         },
       ),
     ),

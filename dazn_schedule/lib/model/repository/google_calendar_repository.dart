@@ -1,22 +1,30 @@
 import 'package:dazn_schedule/model/io/google_auth.dart';
 import 'package:dazn_schedule/model/program.dart';
+import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart';
 import 'package:googleapis/calendar/v3.dart';
 
-class GoogleCalendar {
-
-  GoogleCalendar(String googleApiClientId):
-        _googleAuth = GoogleAuth(
-            [CalendarApi.CalendarScope],
-            googleApiClientId
-        );
+class GoogleCalendarRepository implements ICloudCalendarRepository {
 
   static const timeZone = 'GMT+09:00';
   static const calendarId = 'primary';
-  final GoogleAuth _googleAuth;
+  GoogleAuth _googleAuth;
 
-  void add(Program program) => _addEvent(_createEvent(program));
+  @override
+  void init(String apiClientId) =>
+      _googleAuth = GoogleAuth(
+          [CalendarApi.CalendarScope],
+          apiClientId
+      );
+
+  @override
+  void add(Program program) =>
+      _addEvent(_createEvent(program));
 
   void _addEvent(Event event) {
+    if (null == _googleAuth) {
+      return;
+    }
+
     _googleAuth.authenticate((authClient) {
       CalendarApi(authClient)
           .events

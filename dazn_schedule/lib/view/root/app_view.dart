@@ -1,3 +1,5 @@
+import 'package:dazn_schedule/model/repository/google_calendar_repository.dart';
+import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/competition_standings_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/model/repository/preferences_repository.dart';
@@ -20,6 +22,9 @@ class AppView extends StatelessWidget {
         ),
         ChangeNotifierProvider(
             create: (_) => CompetitionStandingsViewModel()
+        ),
+        ChangeNotifierProvider(
+            create: (_) => CloudCalendarViewModel(GoogleCalendarRepository())
         ),
       ],
       child: MaterialApp(
