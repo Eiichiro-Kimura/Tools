@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/program_guide/program.dart';
+import 'package:dazn_schedule/model/program.dart';
 
 class ProgramFilter {
 

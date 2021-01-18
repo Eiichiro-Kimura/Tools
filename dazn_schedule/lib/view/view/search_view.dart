@@ -3,30 +3,32 @@ import 'package:flutter/material.dart';
 class SearchView extends Container {
 
   SearchView(BuildContext context, TextEditingController controller,
-      ValueChanged<String> valueChanged): super(
+      VoidCallback callback) : super(
     color: Theme.of(context).primaryColor,
     child: Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(marginSize),
       child: Card(
         child: ListTile(
           leading: const Icon(Icons.search),
           title: TextField(
             controller: controller,
             decoration: const InputDecoration(
-                hintText: 'Search',
-                border: InputBorder.none,
+              hintText: 'Search',
+              border: InputBorder.none,
             ),
-            onChanged: valueChanged,
+            onChanged: (_) => callback(),
           ),
           trailing: IconButton(
             icon: const Icon(Icons.cancel),
             onPressed: () {
               controller.clear();
-              valueChanged('');
+              callback();
             },
           ),
         ),
       ),
     ),
   );
+
+  static const double marginSize = 8;
 }
