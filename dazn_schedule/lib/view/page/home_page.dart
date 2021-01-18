@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view_model/program_view_model.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
@@ -27,10 +28,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    Provider
-        .of<SettingsViewModel>(context, listen: false)
+    final settingsViewModel = Provider
+        .of<SettingsViewModel>(context, listen: false);
+
+    settingsViewModel
         .init()
-        .then((_) => _init());
+        .then((_) => _init(settingsViewModel));
   }
 
   @override
@@ -58,8 +61,14 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: HomeFloatingActionButton(context, _updateScreen),
       );
 
-  void _init() =>
-      Provider.of<ProgramViewModel>(context, listen: false).generate();
+  void _init(SettingsViewModel settingsViewModel) {
+    Provider
+        .of<ProgramViewModel>(context, listen: false)
+        .generate();
+    Provider
+        .of<CloudCalendarViewModel>(context, listen: false)
+        .init(settingsViewModel.get(SettingsKind.googleApiClientId).value);
+  }
 
   void _updateScreen() =>
       setState(() {});

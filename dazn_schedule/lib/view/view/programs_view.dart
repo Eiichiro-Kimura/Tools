@@ -1,4 +1,3 @@
-import 'package:dazn_schedule/model/io/google_calendar.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view_model/program_view_model.dart';
 import 'package:dazn_schedule/view/view/programs_card_view.dart';
@@ -19,22 +18,18 @@ class ProgramsView extends SingleChildScrollView {
     final programs = Provider.of<ProgramViewModel>(context).programs;
     final settingsViewModel = Provider.of<SettingsViewModel>(context);
 
-    final googleApiClientId = settingsViewModel
-        .get(SettingsKind.googleApiClientId)
-        .value;
     final selectedGenre = settingsViewModel
         .get(SettingsKind.daznGenre)
         .value;
     final selectedTournamentName = settingsViewModel
         .get(SettingsKind.daznTournamentName)
         .value;
-    final googleCalendar = GoogleCalendar(googleApiClientId);
 
     if (null != programs) {
       for (final program in programs) {
         if (program.contains(controller.text, selectedGenre,
             selectedTournamentName)) {
-          widgets.add(ProgramsCardView(googleCalendar, program));
+          widgets.add(ProgramsCardView(context, program));
         }
       }
     }

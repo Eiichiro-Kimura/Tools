@@ -8,6 +8,7 @@ class ProgramFilter {
 
   final List<String> genres;
   final List<String> tournamentNames;
+  static const tournamentNameMaxLength = 15;
 
   static List<String> _toFilterListGenres(List<Program> programs) =>
       _toFilterList(programs, (program) => program.genre);
@@ -21,6 +22,11 @@ class ProgramFilter {
     final filterList = <String>[];
 
     for (final program in programs) {
+      // 長過ぎる名前は設定画面に表示できないので
+      if (program.tournamentName.length > tournamentNameMaxLength) {
+        continue;
+      }
+
       filterList.add(addFunction(program));
     }
 
