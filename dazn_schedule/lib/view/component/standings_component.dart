@@ -1,11 +1,11 @@
-import 'package:dazn_schedule/view_model/competition_standings_view_model.dart';
-import 'package:dazn_schedule/view/view/competition_standings_card_view.dart';
+import 'package:dazn_schedule/view/component/standings_card_component.dart';
+import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CompetitionStandingsView extends SingleChildScrollView {
+class StandingsComponent extends SingleChildScrollView {
 
-  CompetitionStandingsView(BuildContext context) : super(
+  StandingsComponent(BuildContext context) : super(
     child: Column(
       children: _createWidgets(context),
     ),
@@ -14,12 +14,12 @@ class CompetitionStandingsView extends SingleChildScrollView {
   static List<Widget> _createWidgets(BuildContext context) {
     var widgets = <Widget>[];
     final teamStandings = Provider
-        .of<CompetitionStandingsViewModel>(context)
+        .of<StandingsViewModel>(context)
         .teamStandings;
 
     if (null != teamStandings) {
       widgets = teamStandings
-          .map((teamStanding) => CompetitionStandingsCardView(teamStanding))
+          .map((teamStanding) => StandingsCardComponent(teamStanding))
           .toList();
     }
 

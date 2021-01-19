@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:dazn_schedule/model/repository/i_competition_repository.dart';
 import 'package:dazn_schedule/model/team_standing.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class CompetitionStandingsViewModel extends ChangeNotifier {
+class FootballCompetitionRepository implements ICompetitionRepository {
 
   static const _baseUrl = 'http://api.football-data.org/v2/competitions';
   static const _apiToken = 'cce49f9cf8104f8da53c7e5bae7a3094';
@@ -16,36 +16,26 @@ class CompetitionStandingsViewModel extends ChangeNotifier {
     'FAカップ': 2021,
     'コッパ・イタリア': 2019,
   };
-  List<TeamStanding> _teamStandings;
 
-  List<TeamStanding> get teamStandings => _teamStandings;
-
-  String _getUrl(String tournamentName) {
-    return '$_baseUrl/${_competitionIdMap[tournamentName]}/standings';
-  }
-
-  Future<void> generate(String tournamentName) async {
-    if (null != _teamStandings) {
-      _teamStandings.clear();
-    }
-
+  @override
+  Future<List<TeamStanding>> getStandings(String tournamentName) async {
     final response = await http.get(
         _getUrl(tournamentName),
         headers: {'X-Auth-Token': _apiToken}
     );
     if (200 != response.statusCode) {
-      return;
+      return null;
     }
 
     final root = json.decoder.convert(response.body) as Map<String, dynamic>;
     final total = root['standings'][0] as Map<String, dynamic>;
     final table = total['table'] as List<dynamic>;
 
-    _teamStandings = table.map(_createTeamStanding).toList();
-
-    // リスナーに通達
-    notifyListeners();
+    return table.map(_createTeamStanding).toList();
   }
+
+  String _getUrl(String tournamentName) =>
+      '$_baseUrl/${_competitionIdMap[tournamentName]}/standings';
 
   TeamStanding _createTeamStanding(dynamic element) {
     final teamResult = element as Map<String, dynamic>;

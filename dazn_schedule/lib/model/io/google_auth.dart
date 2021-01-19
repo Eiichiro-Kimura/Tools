@@ -8,17 +8,12 @@ class GoogleAuth {
   final List<String> scopes;
   final String googleApiClientId;
 
-  void authenticate(void Function(AuthClient authClient) callback) {
-    try {
+  void authenticate(void Function(AuthClient authClient) callback) =>
       clientViaUserConsent(ClientId(googleApiClientId, ''), scopes, _prompt)
           .then((authClient) {
             callback(authClient);
             authClient.close();
           });
-    } on Exception catch (ex) {
-      print(ex.toString());
-    }
-  }
 
   Future<void> _prompt(String url) async {
     if (await canLaunch(url)) {

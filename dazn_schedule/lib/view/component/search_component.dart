@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SearchView extends Container {
+class SearchComponent extends Container {
 
-  SearchView(BuildContext context, TextEditingController controller,
+  SearchComponent(BuildContext context, TextEditingController controller,
       VoidCallback callback) : super(
     color: Theme.of(context).primaryColor,
     child: Padding(

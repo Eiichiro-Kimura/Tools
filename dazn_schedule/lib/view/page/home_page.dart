@@ -5,8 +5,8 @@ import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
 import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
 import 'package:dazn_schedule/view/drawer/home_drawer.dart';
 import 'package:dazn_schedule/view/floating_action_button/home_floating_action_button.dart';
-import 'package:dazn_schedule/view/view/programs_view.dart';
-import 'package:dazn_schedule/view/view/search_view.dart';
+import 'package:dazn_schedule/view/component/programs_component.dart';
+import 'package:dazn_schedule/view/component/search_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,9 +52,9 @@ class _HomePageState extends State<HomePage> {
         drawer: HomeDrawer(context),
         body: Column(
           children: [
-            SearchView(context, _controller, _updateScreen),
+            SearchComponent(context, _controller, _updateScreen),
             Expanded(
-              child: ProgramsView(context, _controller),
+              child: ProgramsComponent(context, _controller),
             ),
           ],
         ),

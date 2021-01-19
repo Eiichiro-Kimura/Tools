@@ -17,21 +17,18 @@ class GoogleCalendarRepository implements ICloudCalendarRepository {
       );
 
   @override
-  void add(Program program) =>
-      _addEvent(_createEvent(program));
-
-  void _addEvent(Event event) {
+  void addEvent(Program program) {
     if (null == _googleAuth) {
-      return;
+      throw Exception('GoogleAuth Null Error');
     }
 
     _googleAuth.authenticate((authClient) {
       CalendarApi(authClient)
           .events
-          .insert(event, calendarId)
+          .insert(_createEvent(program), calendarId)
           .then((authClient) {
-            if ('confirmed' == authClient.status) {
-            } else {
+            if ('confirmed' != authClient.status) {
+              throw Exception('CalendarApi Error ${authClient.status}');
             }
           });
     });
