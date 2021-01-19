@@ -1,5 +1,5 @@
-import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
