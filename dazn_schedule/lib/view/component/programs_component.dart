@@ -1,6 +1,6 @@
 import 'package:dazn_schedule/view/component/programs_card_component.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
-import 'package:dazn_schedule/view_model/program_view_model.dart';
+import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +16,7 @@ class ProgramsComponent extends SingleChildScrollView {
   static List<Widget> _createWidgets(BuildContext context,
       TextEditingController controller) {
     final widgets = <Widget>[];
-    final programs = Provider.of<ProgramViewModel>(context).programs;
+    final programs = Provider.of<ProgramsViewModel>(context).programs;
     final settingsViewModel = Provider.of<SettingsViewModel>(context);
 
     final selectedGenre = settingsViewModel

@@ -1,6 +1,6 @@
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
-import 'package:dazn_schedule/view_model/program_view_model.dart';
+import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
 import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
 import 'package:dazn_schedule/view/drawer/home_drawer.dart';
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
 
   void _init(SettingsViewModel settingsViewModel) {
     Provider
-        .of<ProgramViewModel>(context, listen: false)
+        .of<ProgramsViewModel>(context, listen: false)
         .generate();
     Provider
         .of<CloudCalendarViewModel>(context, listen: false)
