@@ -1,12 +1,13 @@
+import 'package:dazn_schedule/view/component/programs_card_component.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view_model/program_view_model.dart';
-import 'package:dazn_schedule/view/view/programs_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProgramsView extends SingleChildScrollView {
+class ProgramsComponent extends SingleChildScrollView {
 
-  ProgramsView(BuildContext context, TextEditingController controller) : super(
+  ProgramsComponent(BuildContext context,
+      TextEditingController controller) : super(
       child: Column(
         children: _createWidgets(context, controller),
       )
@@ -29,7 +30,7 @@ class ProgramsView extends SingleChildScrollView {
       for (final program in programs) {
         if (program.contains(controller.text, selectedGenre,
             selectedTournamentName)) {
-          widgets.add(ProgramsCardView(context, program));
+          widgets.add(ProgramsCardComponent(context, program));
         }
       }
     }

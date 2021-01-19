@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../view/competition_standings_view.dart';
+import 'package:dazn_schedule/view/component/standings_component.dart';
 
 class HomeDrawer extends Drawer {
 
   HomeDrawer(BuildContext context) : super(
     child: Padding(
       padding: const EdgeInsets.only(top: marginSize),
-      child: CompetitionStandingsView(context),
+      child: StandingsComponent(context),
     ),
   );
 

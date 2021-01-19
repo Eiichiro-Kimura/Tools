@@ -1,9 +1,9 @@
 import 'package:dazn_schedule/model/setting.dart';
 import 'package:flutter/material.dart';
 
-class SettingItemDropdownView extends Row {
+class SettingItemDropdownComponent extends Row {
 
-  SettingItemDropdownView(BuildContext context, List<String> textList,
+  SettingItemDropdownComponent(BuildContext context, List<String> textList,
       Setting setting, VoidCallback callback): super(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

@@ -2,8 +2,8 @@ import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
 import 'package:dazn_schedule/view/helper/page_manager.dart';
 import 'package:dazn_schedule/model/program_filter.dart';
-import 'package:dazn_schedule/view/view/setting_item_dropdown_view.dart';
-import 'package:dazn_schedule/view/view/setting_item_text_view.dart';
+import 'package:dazn_schedule/view/component/setting_item_dropdown_component.dart';
+import 'package:dazn_schedule/view/component/setting_item_text_component.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,17 +44,17 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            SettingItemTextView(
+            SettingItemTextComponent(
               settingsViewModel.get(SettingsKind.googleApiClientId),
               _googleApiClientIdController,
             ),
-            SettingItemDropdownView(
+            SettingItemDropdownComponent(
               context,
               programFilter.genres,
               settingsViewModel.get(SettingsKind.daznGenre),
               _updateScreen,
             ),
-            SettingItemDropdownView(
+            SettingItemDropdownComponent(
               context,
               programFilter.tournamentNames,
               settingsViewModel.get(SettingsKind.daznTournamentName),

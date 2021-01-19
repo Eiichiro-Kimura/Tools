@@ -1,9 +1,9 @@
 import 'package:dazn_schedule/model/team_standing.dart';
 import 'package:flutter/material.dart';
 
-class CompetitionStandingsCardView extends Card {
+class StandingsCardComponent extends Card {
 
-  CompetitionStandingsCardView(TeamStanding teamStanding): super(
+  StandingsCardComponent(TeamStanding teamStanding): super(
     margin: const EdgeInsets.all(marginSize),
     child: Container(
       child: ListTile(
