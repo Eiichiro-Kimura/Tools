@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:dazn_schedule/view/component/standings_component.dart';
+import 'package:flutter/material.dart';
 
 class HomeDrawer extends Drawer {
 
