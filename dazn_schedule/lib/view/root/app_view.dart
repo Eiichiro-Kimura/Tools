@@ -1,6 +1,7 @@
+import 'package:dazn_schedule/model/repository/football_competition_repository.dart';
 import 'package:dazn_schedule/model/repository/google_calendar_repository.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
-import 'package:dazn_schedule/view_model/competition_standings_view_model.dart';
+import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/model/repository/preferences_repository.dart';
 import 'package:dazn_schedule/view/helper/page_manager.dart';
@@ -21,7 +22,7 @@ class AppView extends StatelessWidget {
             create: (_) => ProgramViewModel()
         ),
         ChangeNotifierProvider(
-            create: (_) => CompetitionStandingsViewModel()
+            create: (_) => StandingsViewModel(FootballCompetitionRepository())
         ),
         ChangeNotifierProvider(
             create: (_) => CloudCalendarViewModel(GoogleCalendarRepository())

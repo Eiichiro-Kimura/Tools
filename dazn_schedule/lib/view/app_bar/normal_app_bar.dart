@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/view_model/competition_standings_view_model.dart';
+import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class NormalAppBar extends AppBar {
           .value;
 
       await Provider
-          .of<CompetitionStandingsViewModel>(context, listen: false)
+          .of<StandingsViewModel>(context, listen: false)
           .generate(daznTournamentName);
 
       Scaffold.of(context).openDrawer();

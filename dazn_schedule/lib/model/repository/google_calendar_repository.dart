@@ -17,7 +17,7 @@ class GoogleCalendarRepository implements ICloudCalendarRepository {
       );
 
   @override
-  void add(Program program) {
+  void addEvent(Program program) {
     if (null == _googleAuth) {
       throw Exception('GoogleAuth Null Error');
     }

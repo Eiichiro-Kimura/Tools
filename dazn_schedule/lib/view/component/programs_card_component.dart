@@ -28,7 +28,9 @@ class ProgramsCardComponent extends Card {
 
   static void _onTap(BuildContext context, Program program) {
     try {
-      Provider.of<CloudCalendarViewModel>(context, listen: false).add(program);
+      Provider
+          .of<CloudCalendarViewModel>(context, listen: false)
+          .addEvent(program);
     } on Exception catch (ex) {
       SnackBarHelper.show(context, 'エラーが発生しました[${ex.toString()}]');
     }

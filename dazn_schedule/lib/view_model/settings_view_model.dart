@@ -16,9 +16,8 @@ class SettingsViewModel extends ChangeNotifier {
   final IPreferencesRepository preferencesRepository;
   final _infoMap = <SettingsKind, Setting>{};
 
-  Setting get(SettingsKind settingsKind) {
-    return _infoMap[settingsKind];
-  }
+  Setting get(SettingsKind settingsKind) =>
+      _infoMap[settingsKind];
 
   Future<void> init() async {
     await preferencesRepository.init();
