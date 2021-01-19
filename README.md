@@ -13,11 +13,21 @@
 ![dazn_schedule_image2](https://user-images.githubusercontent.com/77208334/104845935-4a45a780-591b-11eb-9865-d0a15530a14e.png)
 ![dazn_schedule_image3](https://user-images.githubusercontent.com/77208334/104845937-4ade3e00-591b-11eb-98df-50068d98e7e9.png)
 
+#### 制作背景
 * Flutterスマホアプリの習作。
 * DAZNの番組検索、Googleカレンダーへの登録がしたくて作成。
-* Googleカレンダー登録機能には、GoogleAPIのクライアントキーが必要。
-* 番組表機能はWebスクレイピング、リーグ順位表機能はWebAPIで実装。
 * iPhone12mini / Androidエミュレータで動作確認済み。
+
+#### 主な機能
+* DAZN番組表機能
+* 番組表フィルタリング機能
+* リーグ順位表機能（サッカーのみ）
+* Googleカレンダー登録機能（GoogleAPIのクライアントキーが必要）
+
+#### 使用している技術的要素
+* Webスクレイピング：番組表機能
+* WebAPI：リーグ順位表機能
+* Provider + MVVM：ソフトウェアアーキテクチャパターン
 
 ### RedmineSupporter
 
