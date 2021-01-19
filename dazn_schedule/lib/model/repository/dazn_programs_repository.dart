@@ -1,21 +1,16 @@
 import 'package:dazn_schedule/model/program.dart';
-import 'package:dazn_schedule/model/program_filter.dart';
-import 'package:flutter/material.dart';
+import 'package:dazn_schedule/model/repository/i_programs_repository.dart';
 import 'package:universal_html/driver.dart' as driver;
 // ignore: implementation_imports
 import 'package:universal_html/src/html_with_internals.dart' as html_internals;
 
-class ProgramViewModel extends ChangeNotifier {
+class DaznProgramsRepository implements IProgramsRepository {
 
   static const url = 'https://flyingsc.github.io/dazn-schedule/';
-  ProgramFilter _programFilter;
-  final programs = <Program>[];
 
-  ProgramFilter get programFilter => _programFilter;
-
-  Future<void> generate() async {
-    // 一度取得済み情報をクリア
-    programs.clear();
+  @override
+  Future<List<Program>> getPrograms() async {
+    final programs = <Program>[];
 
     // クライアントを取得
     final client = driver.HtmlDriver();
@@ -34,18 +29,20 @@ class ProgramViewModel extends ChangeNotifier {
           .replaceAll('）', '');
 
       // 番組行をパース
-      programRow = _parseProgramRow(date, programRow.nextElementSibling);
+      final parseResult = _parseProgramRow(date, programRow.nextElementSibling);
+
+      // 次のループのための準備
+      programRow = parseResult.programRow;
+      programs.addAll(parseResult.programs);
     }
 
-    // 番組フィルターを作成
-    _programFilter = ProgramFilter(programs);
-
-    // リスナーに通歌津
-    notifyListeners();
+    return programs;
   }
 
-  html_internals.Element _parseProgramRow(String date,
+  _ParseResult _parseProgramRow(String date,
       html_internals.Element programRow) {
+
+    final programs = <Program>[];
     var programRowUse = programRow;
 
     while (null != programRowUse && 'date-row' != programRowUse.className) {
@@ -64,6 +61,14 @@ class ProgramViewModel extends ChangeNotifier {
       programRowUse = programRowUse.nextElementSibling;
     }
 
-    return programRowUse;
+    return _ParseResult(programs, programRowUse);
   }
+}
+
+class _ParseResult {
+
+  _ParseResult(this.programs, this.programRow);
+
+  final List<Program> programs;
+  final html_internals.Element programRow;
 }
