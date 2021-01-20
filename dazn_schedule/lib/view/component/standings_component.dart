@@ -13,7 +13,7 @@ class StandingsComponent extends SingleChildScrollView {
 
   static List<Widget> _createWidgets(BuildContext context) {
     var widgets = <Widget>[];
-    final teamStandings = Provider.of<StandingsViewModel>(context).value;
+    final teamStandings = context.watch<StandingsViewModel>().value;
 
     if (null != teamStandings) {
       widgets = teamStandings
