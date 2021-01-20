@@ -1,18 +1,17 @@
 import 'package:dazn_schedule/model/repository/i_preferences_repository.dart';
+import 'package:dazn_schedule/view_model/settings_view_model.dart';
 
 class Setting {
 
-  Setting(this._preferencesRepository, this._key, this._defaultValue,
-      this.name);
+  Setting(this._preferencesRepository, this.settingsKind, this.name,
+      this.key, this._defaultValue);
 
   final IPreferencesRepository _preferencesRepository;
-  final String _key;
-  final dynamic _defaultValue;
+  final SettingsKind settingsKind;
   final String name;
+  final String key;
+  final dynamic _defaultValue;
 
   String get value =>
-      _preferencesRepository.getString(_key) ?? _defaultValue as String;
-
-  void updateValue(String value) =>
-      _preferencesRepository.setString(_key, value);
+      _preferencesRepository.getString(key) ?? _defaultValue as String;
 }

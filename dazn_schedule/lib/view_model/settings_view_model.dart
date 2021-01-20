@@ -16,34 +16,44 @@ class SettingsViewModel extends ChangeNotifier {
   final IPreferencesRepository preferencesRepository;
   final _infoMap = <SettingsKind, Setting>{};
 
-  Setting get(SettingsKind settingsKind) =>
+  bool get isValid => preferencesRepository.isValid;
+
+  Setting getSetting(SettingsKind settingsKind) =>
       _infoMap[settingsKind];
 
-  Future<void> init() async {
-    await preferencesRepository.init();
-
-    _infoMap[SettingsKind.googleApiClientId] = Setting(
-        preferencesRepository,
-        'GoogleApiClientId',
-        '',
-        'GoogleApiクライアントID'
-    );
-    _infoMap[SettingsKind.daznGenre] = Setting(
-        preferencesRepository,
-        'DaznGenre',
-        '',
-        'ジャンル'
-    );
-    _infoMap[SettingsKind.daznTournamentName] = Setting(
-        preferencesRepository,
-        'DaznTournamentName',
-        '',
-        'リーグ'
-    );
+  void setValue(SettingsKind settingsKind, String value) {
+    preferencesRepository.setString(getSetting(settingsKind).key, value);
 
     // リスナーに通達
     notifyListeners();
   }
 
-  bool get isValid => preferencesRepository.isValid;
+  Future<void> init() async {
+    await preferencesRepository.init();
+
+    _infoMap[SettingsKind.googleApiClientId] = Setting(
+      preferencesRepository,
+      SettingsKind.googleApiClientId,
+      'GoogleApiクライアントID',
+      'GoogleApiClientId',
+      '',
+    );
+    _infoMap[SettingsKind.daznGenre] = Setting(
+      preferencesRepository,
+      SettingsKind.daznGenre,
+      'ジャンル',
+      'DaznGenre',
+      '',
+    );
+    _infoMap[SettingsKind.daznTournamentName] = Setting(
+      preferencesRepository,
+      SettingsKind.daznTournamentName,
+      'リーグ',
+      'DaznTournamentName',
+      '',
+    );
+
+    // リスナーに通達
+    notifyListeners();
+  }
 }

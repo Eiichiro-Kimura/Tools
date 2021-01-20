@@ -7,6 +7,7 @@ import 'package:dazn_schedule/view/floating_action_button/home_floating_action_b
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,23 +23,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final _controller = TextEditingController();
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    final settingsViewModel = Provider
-        .of<SettingsViewModel>(context, listen: false);
+    final settingsViewModel = context.read<SettingsViewModel>();
 
     settingsViewModel
         .init()
-        .then((_) => _init(settingsViewModel));
+        .then(
+            (_) => _init(
+              settingsViewModel.getSetting(SettingsKind.googleApiClientId).value
+            )
+        );
   }
 
   @override
   Widget build(BuildContext context) =>
-      Provider.of<SettingsViewModel>(context).isValid ?
+      context.watch<SettingsViewModel>().isValid ?
         _buildNormal(context) : _buildLoading(context);
 
   Widget _buildLoading(BuildContext context) =>
@@ -52,22 +56,32 @@ class _HomePageState extends State<HomePage> {
         drawer: HomeDrawer(context),
         body: Column(
           children: [
-            SearchComponent(context, _controller, _updateScreen),
+            SearchComponent(context, _searchController, _updateScreen),
             Expanded(
-              child: ProgramsComponent(context, _controller),
+              child: ProgramsComponent(context, _searchController.text),
             ),
           ],
         ),
-        floatingActionButton: HomeFloatingActionButton(context, _updateScreen),
+        floatingActionButton: HomeFloatingActionButton(
+            context,
+            _initProgramsAndStandings
+        ),
       );
 
-  void _init(SettingsViewModel settingsViewModel) {
-    Provider
-        .of<ProgramsViewModel>(context, listen: false)
-        .generate();
-    Provider
-        .of<CloudCalendarViewModel>(context, listen: false)
-        .init(settingsViewModel.get(SettingsKind.googleApiClientId).value);
+  void _init(String apiClientId) {
+    context.read<CloudCalendarViewModel>().init(apiClientId);
+
+    _initProgramsAndStandings();
+  }
+
+  void _initProgramsAndStandings() {
+    final daznTournamentName = context
+        .read<SettingsViewModel>()
+        .getSetting(SettingsKind.daznTournamentName)
+        .value;
+
+    context.read<ProgramsViewModel>().generate();
+    context.read<StandingsViewModel>().generate(daznTournamentName);
   }
 
   void _updateScreen() =>

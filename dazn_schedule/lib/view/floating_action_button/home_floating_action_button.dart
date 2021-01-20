@@ -16,7 +16,7 @@ class HomeFloatingActionButton extends FloatingActionButton {
           .forward(
             context,
             PageKind.settings,
-            Provider.of<ProgramsViewModel>(context, listen: false).programFilter
+            context.read<ProgramsViewModel>().programFilter
           )
           .then((_) => callback())
   ;
