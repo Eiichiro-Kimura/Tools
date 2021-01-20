@@ -7,6 +7,7 @@ import 'package:dazn_schedule/view/floating_action_button/home_floating_action_b
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -61,12 +62,26 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        floatingActionButton: HomeFloatingActionButton(context, _updateScreen),
+        floatingActionButton: HomeFloatingActionButton(
+            context,
+            _initProgramsAndStandings
+        ),
       );
 
   void _init(String apiClientId) {
-    context.read<ProgramsViewModel>().generate();
     context.read<CloudCalendarViewModel>().init(apiClientId);
+
+    _initProgramsAndStandings();
+  }
+
+  void _initProgramsAndStandings() {
+    final daznTournamentName = context
+        .read<SettingsViewModel>()
+        .getSetting(SettingsKind.daznTournamentName)
+        .value;
+
+    context.read<ProgramsViewModel>().generate();
+    context.read<StandingsViewModel>().generate(daznTournamentName);
   }
 
   void _updateScreen() =>

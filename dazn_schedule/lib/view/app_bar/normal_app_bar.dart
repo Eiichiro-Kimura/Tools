@@ -12,22 +12,9 @@ class NormalAppBar extends AppBar {
         return IconButton(
           icon: const Icon(Icons.menu),
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          onPressed: () => _onPressed(context)
+          onPressed: () => Scaffold.of(context).openDrawer(),
         );
       },
     ),
   );
-
-  static Future<void> _onPressed(BuildContext context) async {
-      final daznTournamentName = context
-          .read<SettingsViewModel>()
-          .getSetting(SettingsKind.daznTournamentName)
-          .value;
-
-      await context
-          .read<StandingsViewModel>()
-          .generate(daznTournamentName);
-
-      Scaffold.of(context).openDrawer();
-  }
 }
