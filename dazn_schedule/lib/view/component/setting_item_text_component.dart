@@ -1,9 +1,11 @@
 import 'package:dazn_schedule/model/setting.dart';
+import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingItemTextComponent extends Row {
 
-  SettingItemTextComponent(Setting setting,
+  SettingItemTextComponent(BuildContext context, Setting setting,
       TextEditingController textEditingController): super(
     children: [
       Text(setting.name),
@@ -13,7 +15,11 @@ class SettingItemTextComponent extends Row {
           textAlign: TextAlign.end,
           controller: textEditingController,
           maxLines: 1,
-          onChanged: setting.updateValue,
+          onChanged: (value) {
+            context
+                .read<SettingsViewModel>()
+                .setValue(setting.settingsKind, value);
+          }
         ),
       ),
     ],

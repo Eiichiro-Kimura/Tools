@@ -1,21 +1,23 @@
 import 'package:dazn_schedule/model/setting.dart';
+import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingItemDropdownComponent extends Row {
 
   SettingItemDropdownComponent(BuildContext context, List<String> textList,
-      Setting setting, VoidCallback callback): super(
+      Setting setting): super(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(setting.name),
-      _createDropdownButton(context, textList, setting, callback),
+      _createDropdownButton(context, textList, setting),
     ],
   );
 
   static const double marginSize = 20;
 
   static DropdownButton _createDropdownButton(BuildContext context,
-      List<String> textList, Setting setting, VoidCallback callback) {
+      List<String> textList, Setting setting) {
 
     final valueText = setting.value.isEmpty ?
       textList[0] : setting.value;
@@ -29,9 +31,10 @@ class SettingItemDropdownComponent extends Row {
         );
       }).toList(),
       onChanged: (value) {
-        setting.updateValue(value);
-        callback();
-      },
+        context
+            .read<SettingsViewModel>()
+            .setValue(setting.settingsKind, value);
+      }
     );
   }
 }

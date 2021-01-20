@@ -17,10 +17,10 @@ class ProgramsComponent extends SingleChildScrollView {
     final programs = context.watch<ProgramsViewModel>().value;
     final settingsViewModel = context.watch<SettingsViewModel>();
     final selectedGenre = settingsViewModel
-        .get(SettingsKind.daznGenre)
+        .getSetting(SettingsKind.daznGenre)
         .value;
     final selectedTournamentName = settingsViewModel
-        .get(SettingsKind.daznTournamentName)
+        .getSetting(SettingsKind.daznTournamentName)
         .value;
 
     if (null != programs) {

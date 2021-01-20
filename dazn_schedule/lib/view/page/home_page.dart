@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         .init()
         .then(
             (_) => _init(
-              settingsViewModel.get(SettingsKind.googleApiClientId).value
+              settingsViewModel.getSetting(SettingsKind.googleApiClientId).value
             )
         );
   }

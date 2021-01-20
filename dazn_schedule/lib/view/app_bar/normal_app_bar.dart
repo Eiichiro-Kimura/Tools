@@ -21,7 +21,7 @@ class NormalAppBar extends AppBar {
   static Future<void> _onPressed(BuildContext context) async {
       final daznTournamentName = context
           .read<SettingsViewModel>()
-          .get(SettingsKind.daznTournamentName)
+          .getSetting(SettingsKind.daznTournamentName)
           .value;
 
       await context
