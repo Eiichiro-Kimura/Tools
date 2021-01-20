@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final _controller = TextEditingController();
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -55,9 +55,9 @@ class _HomePageState extends State<HomePage> {
         drawer: HomeDrawer(context),
         body: Column(
           children: [
-            SearchComponent(context, _controller, _updateScreen),
+            SearchComponent(context, _searchController, _updateScreen),
             Expanded(
-              child: ProgramsComponent(context, _controller),
+              child: ProgramsComponent(context, _searchController.text),
             ),
           ],
         ),
