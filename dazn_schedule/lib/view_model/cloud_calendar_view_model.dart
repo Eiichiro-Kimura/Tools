@@ -1,8 +1,7 @@
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart';
-import 'package:flutter/material.dart';
 
-class CloudCalendarViewModel extends ChangeNotifier {
+class CloudCalendarViewModel {
 
   CloudCalendarViewModel(this.cloudCalendarRepository);
 

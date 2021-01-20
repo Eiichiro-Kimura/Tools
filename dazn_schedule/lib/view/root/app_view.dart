@@ -25,8 +25,8 @@ class AppView extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => StandingsViewModel(FootballCompetitionRepository())
         ),
-        ChangeNotifierProvider(
-            create: (_) => CloudCalendarViewModel(GoogleCalendarRepository())
+        Provider<CloudCalendarViewModel>.value(
+            value: CloudCalendarViewModel(GoogleCalendarRepository())
         ),
       ],
       child: MaterialApp(
