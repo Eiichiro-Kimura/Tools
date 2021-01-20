@@ -16,9 +16,8 @@ class ProgramsComponent extends SingleChildScrollView {
   static List<Widget> _createWidgets(BuildContext context,
       TextEditingController controller) {
     final widgets = <Widget>[];
-    final programs = Provider.of<ProgramsViewModel>(context).programs;
-    final settingsViewModel = Provider.of<SettingsViewModel>(context);
-
+    final programs = context.watch<ProgramsViewModel>().programs;
+    final settingsViewModel = context.watch<SettingsViewModel>();
     final selectedGenre = settingsViewModel
         .get(SettingsKind.daznGenre)
         .value;

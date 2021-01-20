@@ -28,17 +28,20 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    final settingsViewModel = Provider
-        .of<SettingsViewModel>(context, listen: false);
+    final settingsViewModel = context.read<SettingsViewModel>();
 
     settingsViewModel
         .init()
-        .then((_) => _init(settingsViewModel));
+        .then(
+            (_) => _init(
+              settingsViewModel.get(SettingsKind.googleApiClientId).value
+            )
+        );
   }
 
   @override
   Widget build(BuildContext context) =>
-      Provider.of<SettingsViewModel>(context).isValid ?
+      context.watch<SettingsViewModel>().isValid ?
         _buildNormal(context) : _buildLoading(context);
 
   Widget _buildLoading(BuildContext context) =>
@@ -61,13 +64,9 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: HomeFloatingActionButton(context, _updateScreen),
       );
 
-  void _init(SettingsViewModel settingsViewModel) {
-    Provider
-        .of<ProgramsViewModel>(context, listen: false)
-        .generate();
-    Provider
-        .of<CloudCalendarViewModel>(context, listen: false)
-        .init(settingsViewModel.get(SettingsKind.googleApiClientId).value);
+  void _init(String apiClientId) {
+    context.read<ProgramsViewModel>().generate();
+    context.read<CloudCalendarViewModel>().init(apiClientId);
   }
 
   void _updateScreen() =>

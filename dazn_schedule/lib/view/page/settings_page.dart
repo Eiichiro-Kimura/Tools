@@ -25,18 +25,17 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
 
-    _googleApiClientIdController.text = Provider
-        .of<SettingsViewModel>(context, listen: false)
+    _googleApiClientIdController.text = context
+        .read<SettingsViewModel>()
         .get(SettingsKind.googleApiClientId)
         .value;
   }
 
   @override
   Widget build(BuildContext context) {
-    final settingsViewModel =
-      Provider.of<SettingsViewModel>(context, listen: false);
-    final programFilter =
-      PageManager().getPrevArguments<ProgramFilter>(context);
+    final settingsViewModel = context.read<SettingsViewModel>();
+    final programFilter = PageManager()
+        .getPrevArguments<ProgramFilter>(context);
 
     return Scaffold(
       appBar: SimpleAppBar(widget.title),

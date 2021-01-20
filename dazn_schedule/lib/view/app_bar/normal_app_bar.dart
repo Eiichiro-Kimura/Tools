@@ -19,13 +19,13 @@ class NormalAppBar extends AppBar {
   );
 
   static Future<void> _onPressed(BuildContext context) async {
-      final daznTournamentName = Provider
-          .of<SettingsViewModel>(context, listen: false)
+      final daznTournamentName = context
+          .read<SettingsViewModel>()
           .get(SettingsKind.daznTournamentName)
           .value;
 
-      await Provider
-          .of<StandingsViewModel>(context, listen: false)
+      await context
+          .read<StandingsViewModel>()
           .generate(daznTournamentName);
 
       Scaffold.of(context).openDrawer();
