@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/view/component/rotation_icon_component.dart';
 import 'package:flutter/material.dart';
 
 class SearchComponent extends Container {
@@ -19,11 +20,7 @@ class SearchComponent extends Container {
             onChanged: (_) => callback(),
           ),
           trailing: IconButton(
-            icon: RotationTransition(
-              turns: Tween<double>(begin: tweenBegin, end: tweenEnd)
-                  .animate(animeController),
-              child: const Icon(Icons.cancel),
-            ),
+            icon: RotationIconComponent(Icons.cancel, animeController),
             onPressed: () => _onPressed(
                 textController,
                 animeController,
@@ -36,8 +33,6 @@ class SearchComponent extends Container {
   );
 
   static const double marginSize = 8;
-  static const double tweenBegin = 0;
-  static const double tweenEnd = 0.3;
 
   static void _onPressed(TextEditingController textController,
       AnimationController animeController, VoidCallback callback) {
