@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/view/component/rotation_icon_component.dart';
 import 'package:dazn_schedule/view/helper/page_manager.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +10,8 @@ class HomeFloatingActionButton extends FloatingActionButton {
       VoidCallback callback) : super(
     onPressed: () => _onPressed(context, controller, callback),
     tooltip: 'Settings',
-    child: RotationTransition(
-        turns: Tween<double>(begin: tweenBegin, end: tweenEnd)
-            .animate(controller),
-        child: const Icon(Icons.settings),
-    ),
+    child: RotationIconComponent(Icons.settings, controller),
   );
-
-  static const double tweenBegin = 0;
-  static const double tweenEnd = 0.3;
 
   static void _onPressed(BuildContext context, AnimationController controller,
       VoidCallback callback) =>
