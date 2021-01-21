@@ -21,13 +21,26 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with TickerProviderStateMixin {
 
+  static const int animationTimeMS = 300;
   final _searchController = TextEditingController();
+  AnimationController _menuController;
+  AnimationController _settingController;
 
   @override
   void initState() {
     super.initState();
+
+    _menuController = AnimationController(
+      duration: const Duration(milliseconds: animationTimeMS),
+      vsync: this,
+    );
+    _settingController = AnimationController(
+        duration: const Duration(milliseconds: animationTimeMS),
+        vsync: this
+    );
 
     final settingsViewModel = context.read<SettingsViewModel>();
 
@@ -38,6 +51,14 @@ class _HomePageState extends State<HomePage> {
               settingsViewModel.getSetting(SettingsKind.googleApiClientId).value
             )
         );
+  }
+
+  @override
+  void dispose() {
+    _menuController.dispose();
+    _searchController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -52,7 +73,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildNormal(BuildContext context) =>
       Scaffold(
-        appBar: NormalAppBar(widget.title),
+        appBar: NormalAppBar(widget.title, _menuController),
         drawer: HomeDrawer(context),
         body: Column(
           children: [
@@ -63,8 +84,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: HomeFloatingActionButton(
-            context,
-            _initProgramsAndStandings
+          context,
+          _settingController,
+          _initProgramsAndStandings,
         ),
       );
 

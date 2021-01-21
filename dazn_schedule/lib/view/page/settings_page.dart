@@ -33,6 +33,13 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   @override
+  void dispose() {
+    _googleApiClientIdController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final settingsViewModel = context.watch<SettingsViewModel>();
     final programFilter = PageManager()

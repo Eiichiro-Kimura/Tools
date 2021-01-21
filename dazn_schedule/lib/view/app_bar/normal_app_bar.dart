@@ -1,20 +1,28 @@
-import 'package:dazn_schedule/view_model/settings_view_model.dart';
-import 'package:dazn_schedule/view_model/standings_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class NormalAppBar extends AppBar {
 
-  NormalAppBar(String title) : super(
+  NormalAppBar(String title, AnimationController controller) : super(
     title: Text(title),
     leading: Builder(
       builder: (BuildContext context) {
         return IconButton(
-          icon: const Icon(Icons.menu),
+          icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_arrow,
+            progress: controller,
+          ),
+          color: Theme.of(context).scaffoldBackgroundColor,
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          onPressed: () => Scaffold.of(context).openDrawer(),
+          onPressed: () => _onPressed(context, controller),
         );
       },
     ),
   );
+
+  static void _onPressed(BuildContext context,
+      AnimationController controller) =>
+      controller.forward().then((_) {
+        Scaffold.of(context).openDrawer();
+        controller.reset();
+      });
 }
