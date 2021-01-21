@@ -27,7 +27,8 @@
 #### 使用している技術的要素
 * Webスクレイピング：番組表機能
 * WebAPI：リーグ順位表機能
-* Provider + MVVM：ソフトウェアアーキテクチャパターン
+* Provider + MVVM：ソフトウェア アーキテクチャパターン
+* Flutter Widget Animaion：アイコンアニメーション
 
 ### RedmineSupporter
 
