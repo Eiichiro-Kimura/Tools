@@ -23,6 +23,6 @@ class NormalAppBar extends AppBar {
       AnimationController controller) =>
       controller.forward().then((_) {
         Scaffold.of(context).openDrawer();
-        controller.reverse();
+        controller.reset();
       });
 }

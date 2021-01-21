@@ -22,11 +22,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
 
   static const int animationTimeMS = 300;
   final _searchController = TextEditingController();
   AnimationController _menuController;
+  AnimationController _settingController;
 
   @override
   void initState() {
@@ -35,6 +36,10 @@ class _HomePageState extends State<HomePage>
     _menuController = AnimationController(
       duration: const Duration(milliseconds: animationTimeMS),
       vsync: this,
+    );
+    _settingController = AnimationController(
+        duration: const Duration(milliseconds: animationTimeMS),
+        vsync: this
     );
 
     final settingsViewModel = context.read<SettingsViewModel>();
@@ -79,8 +84,9 @@ class _HomePageState extends State<HomePage>
           ],
         ),
         floatingActionButton: HomeFloatingActionButton(
-            context,
-            _initProgramsAndStandings
+          context,
+          _settingController,
+          _initProgramsAndStandings,
         ),
       );
 
