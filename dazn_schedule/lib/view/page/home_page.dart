@@ -49,6 +49,14 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() {
+    _menuController.dispose();
+    _searchController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) =>
       context.watch<SettingsViewModel>().isValid ?
         _buildNormal(context) : _buildLoading(context);
