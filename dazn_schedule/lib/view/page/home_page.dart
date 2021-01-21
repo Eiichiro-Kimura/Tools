@@ -21,13 +21,21 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
 
+  static const int animationTimeMS = 300;
   final _searchController = TextEditingController();
+  AnimationController _menuController;
 
   @override
   void initState() {
     super.initState();
+
+    _menuController = AnimationController(
+      duration: const Duration(milliseconds: animationTimeMS),
+      vsync: this,
+    );
 
     final settingsViewModel = context.read<SettingsViewModel>();
 
@@ -52,7 +60,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildNormal(BuildContext context) =>
       Scaffold(
-        appBar: NormalAppBar(widget.title),
+        appBar: NormalAppBar(widget.title, _menuController),
         drawer: HomeDrawer(context),
         body: Column(
           children: [
