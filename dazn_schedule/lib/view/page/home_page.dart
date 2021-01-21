@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage>
   static const int animationTimeMS = 300;
   final _searchController = TextEditingController();
   AnimationController _menuController;
+  AnimationController _cancelController;
   AnimationController _settingController;
 
   @override
@@ -36,6 +37,10 @@ class _HomePageState extends State<HomePage>
     _menuController = AnimationController(
       duration: const Duration(milliseconds: animationTimeMS),
       vsync: this,
+    );
+    _cancelController = AnimationController(
+        duration: const Duration(milliseconds: animationTimeMS),
+        vsync: this
     );
     _settingController = AnimationController(
         duration: const Duration(milliseconds: animationTimeMS),
@@ -55,8 +60,10 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
-    _menuController.dispose();
     _searchController.dispose();
+    _menuController.dispose();
+    _cancelController.dispose();
+    _settingController.dispose();
 
     super.dispose();
   }
@@ -77,7 +84,12 @@ class _HomePageState extends State<HomePage>
         drawer: HomeDrawer(context),
         body: Column(
           children: [
-            SearchComponent(context, _searchController, _updateScreen),
+            SearchComponent(
+                context,
+                _searchController,
+                _cancelController,
+                _updateScreen
+            ),
             Expanded(
               child: ProgramsComponent(context, _searchController.text),
             ),
