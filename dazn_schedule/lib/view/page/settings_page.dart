@@ -2,6 +2,7 @@ import 'package:dazn_schedule/model/program_filter.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
 import 'package:dazn_schedule/view/component/setting_item_dropdown_component.dart';
 import 'package:dazn_schedule/view/component/setting_item_text_component.dart';
+import 'package:dazn_schedule/view/controller/settings_controller.dart';
 import 'package:dazn_schedule/view/helper/page_manager.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +21,13 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
 
   static const double marginSize = 20;
-  final _googleApiClientIdController = TextEditingController();
+  final _settingsController = SettingsController();
 
   @override
   void initState() {
     super.initState();
 
-    _googleApiClientIdController.text = context
+    _settingsController.googleApiClientIdText.text = context
         .read<SettingsViewModel>()
         .getSetting(SettingsKind.googleApiClientId)
         .value;
@@ -34,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void dispose() {
-    _googleApiClientIdController.dispose();
+    _settingsController.dispose();
 
     super.dispose();
   }
@@ -54,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingItemTextComponent(
               context,
               settingsViewModel.getSetting(SettingsKind.googleApiClientId),
-              _googleApiClientIdController,
+              _settingsController.googleApiClientIdText,
             ),
             SettingItemDropdownComponent(
               context,
