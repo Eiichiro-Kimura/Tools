@@ -21,8 +21,10 @@ class NormalAppBar extends AppBar {
 
   static void _onPressed(BuildContext context,
       AnimationController animationController) =>
-      animationController.forward().then((_) {
-        Scaffold.of(context).openDrawer();
-        animationController.reset();
-      });
+      animationController
+          .forward()
+          .then((_) {
+            Scaffold.of(context).openDrawer();
+            animationController.reset();
+          });
 }

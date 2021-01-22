@@ -22,12 +22,11 @@ class HomeFloatingActionButton extends FloatingActionButton {
             animationController.reset();
           });
 
-  static void _toSettingPage(BuildContext context, VoidCallback callback) =>
-      PageManager()
-          .forward(
-            context,
-            PageKind.settings,
-            context.read<ProgramsViewModel>().programFilter
-          )
-          .then((_) => callback());
+  static void _toSettingPage(BuildContext context, VoidCallback callback) {
+    final programFilter = context.read<ProgramsViewModel>().programFilter;
+
+    PageManager()
+        .forward(context, PageKind.settings, programFilter)
+        .then((_) => callback());
+  }
 }

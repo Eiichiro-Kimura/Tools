@@ -13,8 +13,8 @@ class ProgramsViewModel extends ValueNotifier<List<Program>> {
   ProgramFilter get programFilter => _programFilter;
 
   Future<void> generate() async {
-    // 番組表を取得
-    value = await programsRepository.getPrograms();
+    // 番組表を生成
+    value = await programsRepository.createPrograms();
 
     // 番組フィルターを作成
     _programFilter = ProgramFilter(value);

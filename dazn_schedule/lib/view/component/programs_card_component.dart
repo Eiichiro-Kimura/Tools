@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class ProgramsCardComponent extends Card {
 
-  ProgramsCardComponent(BuildContext context, Program program): super(
+  ProgramsCardComponent(BuildContext context, Program program) : super(
     margin: const EdgeInsets.all(marginSize),
     child: Container(
       child: ListTile(

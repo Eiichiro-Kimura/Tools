@@ -51,6 +51,5 @@ class FootballCompetitionRepository implements ICompetitionRepository {
     );
   }
 
-  String _toStringFromInt(dynamic value) =>
-      (value as int).toString();
+  String _toStringFromInt(dynamic value) => (value as int).toString();
 }

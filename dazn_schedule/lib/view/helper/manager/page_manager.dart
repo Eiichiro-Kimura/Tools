@@ -13,8 +13,7 @@ class PageManager {
     PageKind.settings:  PageInfo('/settings', (context) => const SettingsPage(title: 'Settings')),
   };
 
-  String get initialRoute =>
-      _pageInfoMap[PageKind.home].route;
+  String get initialRoute => _pageInfoMap[PageKind.home].route;
 
   Map<String, WidgetBuilder> get routes {
     final routes = <String, WidgetBuilder>{};

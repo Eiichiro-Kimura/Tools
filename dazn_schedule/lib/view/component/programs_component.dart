@@ -16,16 +16,16 @@ class ProgramsComponent extends SingleChildScrollView {
     final widgets = <Widget>[];
     final programs = context.watch<ProgramsViewModel>().value;
     final settingsViewModel = context.watch<SettingsViewModel>();
-    final selectedGenre = settingsViewModel
+    final genre = settingsViewModel
         .getSetting(SettingsKind.daznGenre)
         .value;
-    final selectedTournamentName = settingsViewModel
+    final tournamentName = settingsViewModel
         .getSetting(SettingsKind.daznTournamentName)
         .value;
 
     if (null != programs) {
       for (final program in programs) {
-        if (program.contains(keyword, selectedGenre, selectedTournamentName)) {
+        if (program.contains(keyword, genre, tournamentName)) {
           widgets.add(ProgramsCardComponent(context, program));
         }
       }
