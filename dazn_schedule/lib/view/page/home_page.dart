@@ -2,6 +2,7 @@ import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
 import 'package:dazn_schedule/view/component/programs_component.dart';
 import 'package:dazn_schedule/view/component/search_component.dart';
+import 'package:dazn_schedule/view/controller/home_controller.dart';
 import 'package:dazn_schedule/view/drawer/home_drawer.dart';
 import 'package:dazn_schedule/view/floating_action_button/home_floating_action_button.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
@@ -21,31 +22,17 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
-  static const int animationTimeMS = 300;
-  final _searchController = TextEditingController();
-  AnimationController _menuController;
-  AnimationController _cancelController;
-  AnimationController _settingController;
+  _HomePageState() {
+    _homeController = HomeController(this);
+  }
+
+  HomeController _homeController;
 
   @override
   void initState() {
     super.initState();
-
-    _menuController = AnimationController(
-      duration: const Duration(milliseconds: animationTimeMS),
-      vsync: this,
-    );
-    _cancelController = AnimationController(
-        duration: const Duration(milliseconds: animationTimeMS),
-        vsync: this
-    );
-    _settingController = AnimationController(
-        duration: const Duration(milliseconds: animationTimeMS),
-        vsync: this
-    );
 
     final settingsViewModel = context.read<SettingsViewModel>();
 
@@ -60,10 +47,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
-    _searchController.dispose();
-    _menuController.dispose();
-    _cancelController.dispose();
-    _settingController.dispose();
+    _homeController.dispose();
 
     super.dispose();
   }
@@ -80,24 +64,30 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildNormal(BuildContext context) =>
       Scaffold(
-        appBar: NormalAppBar(widget.title, _menuController),
+        appBar: NormalAppBar(
+            widget.title,
+            _homeController.menuAnimationController
+        ),
         drawer: HomeDrawer(context),
         body: Column(
           children: [
             SearchComponent(
                 context,
-                _searchController,
-                _cancelController,
+                _homeController.searchTextController,
+                _homeController.cancelAnimationController,
                 _updateScreen
             ),
             Expanded(
-              child: ProgramsComponent(context, _searchController.text),
+              child: ProgramsComponent(
+                  context,
+                  _homeController.searchTextController.text
+              ),
             ),
           ],
         ),
         floatingActionButton: HomeFloatingActionButton(
           context,
-          _settingController,
+          _homeController.settingsAnimationController,
           _initProgramsAndStandings,
         ),
       );

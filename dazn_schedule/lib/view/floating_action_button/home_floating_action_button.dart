@@ -6,20 +6,20 @@ import 'package:provider/provider.dart';
 
 class HomeFloatingActionButton extends FloatingActionButton {
 
-  HomeFloatingActionButton(BuildContext context, AnimationController controller,
-      VoidCallback callback) : super(
-    onPressed: () => _onPressed(context, controller, callback),
+  HomeFloatingActionButton(BuildContext context,
+      AnimationController animationController, VoidCallback callback) : super(
+    onPressed: () => _onPressed(context, animationController, callback),
     tooltip: 'Settings',
-    child: RotationIconComponent(Icons.settings, controller),
+    child: RotationIconComponent(Icons.settings, animationController),
   );
 
-  static void _onPressed(BuildContext context, AnimationController controller,
-      VoidCallback callback) =>
-      controller
+  static void _onPressed(BuildContext context,
+      AnimationController animationController, VoidCallback callback) =>
+      animationController
           .forward()
           .then((_) {
             _toSettingPage(context, callback);
-            controller.reset();
+            animationController.reset();
           });
 
   static void _toSettingPage(BuildContext context, VoidCallback callback) =>
