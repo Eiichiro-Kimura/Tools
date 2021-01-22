@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class HomeController {
 
-  HomeController(TickerProvider tickerProvider) :
+  HomeController(TickerProvider tickerProvider, VoidCallback callback) :
         menuAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeMS),
           vsync: tickerProvider,
@@ -15,7 +15,10 @@ class HomeController {
         settingsAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeMS),
           vsync: tickerProvider,
-        );
+        )
+  {
+    searchText.addListener(callback);
+  }
 
   static const int animationTimeMS = 300;
   final AnimationController menuAnimation;

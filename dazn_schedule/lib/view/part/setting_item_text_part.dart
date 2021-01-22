@@ -3,9 +3,9 @@ import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingItemTextComponent extends Row {
+class SettingItemTextPart extends Row {
 
-  SettingItemTextComponent(BuildContext context, Setting setting,
+  SettingItemTextPart(BuildContext context, Setting setting,
       TextEditingController textEditingController) : super(
     children: [
       Text(setting.name),

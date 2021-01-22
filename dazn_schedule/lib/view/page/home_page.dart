@@ -1,10 +1,10 @@
 import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
-import 'package:dazn_schedule/view/component/programs_component.dart';
-import 'package:dazn_schedule/view/component/search_component.dart';
 import 'package:dazn_schedule/view/drawer/home_drawer.dart';
 import 'package:dazn_schedule/view/floating_action_button/home_floating_action_button.dart';
 import 'package:dazn_schedule/view/helper/controller/home_controller.dart';
+import 'package:dazn_schedule/view/part/programs_part.dart';
+import 'package:dazn_schedule/view/part/search_part.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   _HomePageState() {
-    _homeController = HomeController(this);
+    _homeController = HomeController(this, _updateScreen);
   }
 
   HomeController _homeController;
@@ -65,24 +65,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildNormal(BuildContext context) =>
       Scaffold(
-        appBar: NormalAppBar(
-            widget.title,
-            _homeController.menuAnimation,
-        ),
+        appBar: NormalAppBar(widget.title, _homeController.menuAnimation),
         drawer: HomeDrawer(context),
         body: Column(
           children: [
             SearchComponent(
                 context,
                 _homeController.searchText,
-                _homeController.cancelAnimation,
-                _updateScreen
+                _homeController.cancelAnimation
             ),
             Expanded(
-              child: ProgramsComponent(
-                  context,
-                  _homeController.searchText.text
-              ),
+              child: ProgramsPart(context, _homeController.searchText.text),
             ),
           ],
         ),
@@ -109,6 +102,5 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     context.read<StandingsViewModel>().generate(daznTournamentName);
   }
 
-  void _updateScreen() =>
-      setState(() {});
+  void _updateScreen() => setState(() {});
 }

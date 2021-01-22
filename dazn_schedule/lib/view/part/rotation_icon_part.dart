@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class RotationIconComponent extends RotationTransition {
+class RotationIconPart extends RotationTransition {
 
-  RotationIconComponent(IconData iconData,
+  RotationIconPart(IconData iconData,
       AnimationController animationController) : super(
     turns: Tween<double>(begin: tweenBegin, end: tweenEnd)
             .animate(animationController),

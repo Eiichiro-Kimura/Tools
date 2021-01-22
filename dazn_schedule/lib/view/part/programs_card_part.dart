@@ -4,9 +4,9 @@ import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProgramsCardComponent extends Card {
+class ProgramsCardPart extends Card {
 
-  ProgramsCardComponent(BuildContext context, Program program) : super(
+  ProgramsCardPart(BuildContext context, Program program) : super(
     margin: const EdgeInsets.all(marginSize),
     child: Container(
       child: ListTile(
