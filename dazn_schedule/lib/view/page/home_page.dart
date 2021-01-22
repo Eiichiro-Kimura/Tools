@@ -66,28 +66,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       Scaffold(
         appBar: NormalAppBar(
             widget.title,
-            _homeController.menuAnimationController
+            _homeController.menuAnimation,
         ),
         drawer: HomeDrawer(context),
         body: Column(
           children: [
             SearchComponent(
                 context,
-                _homeController.searchTextController,
-                _homeController.cancelAnimationController,
+                _homeController.searchText,
+                _homeController.cancelAnimation,
                 _updateScreen
             ),
             Expanded(
               child: ProgramsComponent(
                   context,
-                  _homeController.searchTextController.text
+                  _homeController.searchText.text
               ),
             ),
           ],
         ),
         floatingActionButton: HomeFloatingActionButton(
           context,
-          _homeController.settingsAnimationController,
+          _homeController.settingsAnimation,
           _initProgramsAndStandings,
         ),
       );

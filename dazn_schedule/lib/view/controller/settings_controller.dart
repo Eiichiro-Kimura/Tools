@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class SettingsController {
 
-  final googleApiClientIdTextController = TextEditingController();
+  final googleApiClientIdText = TextEditingController();
 
   void dispose() {
-    googleApiClientIdTextController.dispose();
+    googleApiClientIdText.dispose();
   }
 }

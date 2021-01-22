@@ -4,29 +4,29 @@ import 'package:flutter/material.dart';
 class HomeController {
 
   HomeController(TickerProvider tickerProvider) :
-        menuAnimationController = AnimationController(
+        menuAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeMS),
           vsync: tickerProvider,
         ),
-        cancelAnimationController = AnimationController(
+        cancelAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeMS),
           vsync: tickerProvider,
         ),
-        settingsAnimationController = AnimationController(
+        settingsAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeMS),
           vsync: tickerProvider,
         );
 
   static const int animationTimeMS = 300;
-  final AnimationController menuAnimationController;
-  final AnimationController cancelAnimationController;
-  final AnimationController settingsAnimationController;
-  final searchTextController = TextEditingController();
+  final AnimationController menuAnimation;
+  final AnimationController cancelAnimation;
+  final AnimationController settingsAnimation;
+  final searchText = TextEditingController();
 
   void dispose() {
-    menuAnimationController.dispose();
-    cancelAnimationController.dispose();
-    settingsAnimationController.dispose();
-    searchTextController.dispose();
+    menuAnimation.dispose();
+    cancelAnimation.dispose();
+    settingsAnimation.dispose();
+    searchText.dispose();
   }
 }

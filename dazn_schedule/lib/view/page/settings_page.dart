@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
 
-    _settingsController.googleApiClientIdTextController.text = context
+    _settingsController.googleApiClientIdText.text = context
         .read<SettingsViewModel>()
         .getSetting(SettingsKind.googleApiClientId)
         .value;
@@ -55,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingItemTextComponent(
               context,
               settingsViewModel.getSetting(SettingsKind.googleApiClientId),
-              _settingsController.googleApiClientIdTextController,
+              _settingsController.googleApiClientIdText,
             ),
             SettingItemDropdownComponent(
               context,
