@@ -2,9 +2,9 @@ import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
 import 'package:dazn_schedule/view/component/programs_component.dart';
 import 'package:dazn_schedule/view/component/search_component.dart';
-import 'package:dazn_schedule/view/controller/home_controller.dart';
 import 'package:dazn_schedule/view/drawer/home_drawer.dart';
 import 'package:dazn_schedule/view/floating_action_button/home_floating_action_button.dart';
+import 'package:dazn_schedule/view/helper/controller/home_controller.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
@@ -38,11 +38,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     settingsViewModel
         .init()
-        .then(
-            (_) => _init(
-              settingsViewModel.getSetting(SettingsKind.googleApiClientId).value
-            )
-        );
+        .then((_) {
+          final googleApiClientId = settingsViewModel
+              .getSetting(SettingsKind.googleApiClientId)
+              .value;
+          _init(googleApiClientId);
+        });
   }
 
   @override

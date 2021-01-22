@@ -18,8 +18,7 @@ class SettingsViewModel extends ChangeNotifier {
 
   bool get isValid => preferencesRepository.isValid;
 
-  Setting getSetting(SettingsKind settingsKind) =>
-      _infoMap[settingsKind];
+  Setting getSetting(SettingsKind settingsKind) => _infoMap[settingsKind];
 
   void setValue(SettingsKind settingsKind, String value) {
     preferencesRepository.setString(getSetting(settingsKind).key, value);

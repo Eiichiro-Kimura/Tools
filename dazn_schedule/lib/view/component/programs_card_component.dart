@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/program.dart';
-import 'package:dazn_schedule/view/helper/snack_bar_helper.dart';
+import 'package:dazn_schedule/view/helper/notice/snack_bar_notice.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class ProgramsCardComponent extends Card {
     try {
       context.read<CloudCalendarViewModel>().addEvent(program);
     } on Exception catch (ex) {
-      SnackBarHelper.show(context, 'エラーが発生しました[${ex.toString()}]');
+      SnackBarNotice.show(context, 'エラーが発生しました[${ex.toString()}]');
     }
   }
 }
