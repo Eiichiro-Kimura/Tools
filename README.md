@@ -28,6 +28,7 @@
 * Webスクレイピング：番組表機能
 * WebAPI：リーグ順位表機能
 * Provider + MVVM：ソフトウェア アーキテクチャパターン
+* DI：Provider + リポジトリのコンストラクタ インジェクション
 * Flutter Widget Animaion：アイコンアニメーション
 
 ### RedmineSupporter
