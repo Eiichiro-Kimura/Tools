@@ -1,30 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
 
-class NormalAppBar extends AppBar {
+class NormalAppBar extends BaseAppBar {
 
   NormalAppBar(String title, AnimationController animationController) : super(
-    title: Text(title),
-    leading: Builder(
-      builder: (BuildContext context) {
-        return IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.menu_arrow,
-            progress: animationController,
-          ),
-          color: Theme.of(context).scaffoldBackgroundColor,
-          tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          onPressed: () => _onPressed(context, animationController),
-        );
-      },
-    ),
+    title,
+    animationController,
+    (context) => Scaffold.of(context).openDrawer()
   );
-
-  static void _onPressed(BuildContext context,
-      AnimationController animationController) =>
-      animationController
-          .forward()
-          .then((_) {
-            Scaffold.of(context).openDrawer();
-            animationController.reset();
-          });
 }

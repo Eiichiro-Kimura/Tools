@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/program_filter.dart';
-import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
+import 'package:dazn_schedule/view/app_bar/settings_app_bar.dart';
 import 'package:dazn_schedule/view/helper/controller/settings_controller.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view/part/setting_item_dropdown_part.dart';
@@ -18,10 +18,15 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage>
+    with TickerProviderStateMixin {
+
+  _SettingsPageState() {
+    _settingsController = SettingsController(this);
+  }
 
   static const double marginSize = 20;
-  final _settingsController = SettingsController();
+  SettingsController _settingsController;
 
   @override
   void initState() {
@@ -47,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
         .getPrevArguments<ProgramFilter>(context);
 
     return Scaffold(
-      appBar: SimpleAppBar(widget.title),
+      appBar: SettingsAppBar(widget.title, _settingsController.menuAnimation),
       body: Padding(
         padding: const EdgeInsets.all(marginSize),
         child: Column(

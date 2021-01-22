@@ -31,6 +31,8 @@ class PageManager {
           _pageInfoMap[pageKind].route,
           arguments: arguments
       );
+
+  void backward(BuildContext context) => Navigator.of(context).pop();
 }
 
 enum PageKind {
