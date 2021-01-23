@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
@@ -14,26 +15,11 @@ class HomeFloatingActionButton extends FloatingActionButton {
 
   static void _onPressedSettings(BuildContext context,
       AnimationController animationController, VoidCallback callback) =>
+      animationController.forwardReset(() {
+        final programFilter = context.read<ProgramsViewModel>().programFilter;
 
-      animationController
-          .forward()
-          .then(
-              (_) => _onPressedSettingsEnd(
-                  context,
-                  animationController,
-                  callback
-              )
-          );
-
-  static void _onPressedSettingsEnd(BuildContext context,
-      AnimationController animationController, VoidCallback callback) {
-
-    final programFilter = context.read<ProgramsViewModel>().programFilter;
-
-    PageManager()
-        .forward(context, PageKind.settings, programFilter)
-        .then((_) => callback());
-
-    animationController.reset();
-  }
+        PageManager()
+            .forward(context, PageKind.settings, programFilter)
+            .then((_) => callback());
+      });
 }

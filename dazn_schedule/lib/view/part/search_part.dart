@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:date_range_picker/date_range_picker.dart' as date_range_picker;
 import 'package:dazn_schedule/extensions/date_time_extension.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
@@ -9,7 +10,7 @@ import 'package:provider/provider.dart';
 class SearchComponent extends Container {
 
   SearchComponent(BuildContext context, TextEditingController textController,
-      AnimationController cancelAnimationController,
+      AnimationController clearAnimationController,
       AnimationController calendarAnimationController) : super(
     color: Theme.of(context).primaryColor,
     child: Padding(
@@ -30,12 +31,12 @@ class SearchComponent extends Container {
                 trailing: IconButton(
                   icon: RotationIconPart(
                       Icons.cancel,
-                      cancelAnimationController
+                      clearAnimationController
                   ),
-                  onPressed: () => _onPressedCancel(
+                  onPressed: () => _onPressedClear(
                       context,
                       textController,
-                      cancelAnimationController
+                      clearAnimationController
                   ),
                 ),
               ),
@@ -59,54 +60,35 @@ class SearchComponent extends Container {
 
   static const double marginSize = 8;
 
-  static void _onPressedCancel(BuildContext context,
+  static void _onPressedClear(BuildContext context,
       TextEditingController textController,
       AnimationController animationController) =>
-      animationController
-          .forward()
-          .then(
-              (_) => _onPressedCancelEnd(textController, animationController)
-          );
-
-  static void _onPressedCancelEnd(TextEditingController textController,
-      AnimationController animationController) {
-
-    textController.clear();
-    animationController.reset();
-  }
+      animationController.forwardReset(textController.clear);
 
   static void _onPressedCalendar(BuildContext context,
       AnimationController animationController) =>
-      animationController
-          .forward()
-          .then((_) => _onPressedCalendarEnd(context, animationController));
+      animationController.forwardReverse(() async {
+        final dateFilterViewModel = context.read<DateFilterViewModel>();
+        final now = DateTime.now();
+        final initialFirstDate = (dateFilterViewModel.firstDate ?? now)
+          ..copyFirstTime();
+        final initialLastDate = (dateFilterViewModel.lastDate ?? now)
+          ..copyFirstTime();
+        final firstDate = now.subtract(const Duration(days: 1));
+        final lastDate = now.add(const Duration(days: 30));
+        final selectedDates = await date_range_picker.showDatePicker(
+          context: context,
+          locale: const Locale('ja'),
+          initialFirstDate: initialFirstDate,
+          initialLastDate: initialLastDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+        );
 
-  static Future<void> _onPressedCalendarEnd(BuildContext context,
-      AnimationController animationController) async {
-
-    animationController.reverse();
-
-    final dateFilterViewModel = context.read<DateFilterViewModel>();
-    final now = DateTime.now();
-    final initialFirstDate = (dateFilterViewModel.firstDate ?? now)
-      ..copyFirstTime();
-    final initialLastDate = (dateFilterViewModel.lastDate ?? now)
-      ..copyFirstTime();
-    final firstDate = now.subtract(const Duration(days: 1));
-    final lastDate = now.add(const Duration(days: 30));
-
-    final selectedDates = await date_range_picker.showDatePicker(
-      context: context,
-      locale: const Locale('ja'),
-      initialFirstDate: initialFirstDate,
-      initialLastDate: initialLastDate,
-      firstDate: firstDate,
-      lastDate: lastDate,
-    );
-    if (null != selectedDates) {
-      dateFilterViewModel
-        ..firstDate = selectedDates[0].copyFirstTime()
-        ..lastDate = selectedDates[selectedDates.length - 1].copyLastTime();
-    }
-  }
+        if (null != selectedDates) {
+          dateFilterViewModel
+            ..firstDate = selectedDates[0].copyFirstTime()
+            ..lastDate = selectedDates[selectedDates.length - 1].copyLastTime();
+        }
+      });
 }

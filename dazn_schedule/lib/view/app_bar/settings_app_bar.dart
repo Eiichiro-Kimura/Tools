@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class SettingsAppBar extends BaseAppBar {
 
   SettingsAppBar(String title, AnimationController animationController) : super(
-    title,
-    animationController,
-    (context) => PageManager().backward(context)
+      title,
+      AnimatedIcons.arrow_menu,
+      animationController,
+      (context) => PageManager().backward(context)
   );
 }

@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
 import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
@@ -10,6 +11,7 @@ class NormalAppBar extends BaseAppBar {
       AnimationController leadingAnimationController,
       AnimationController trashAnimationController) : super(
     title,
+    AnimatedIcons.menu_arrow,
     leadingAnimationController,
     (context) => Scaffold.of(context).openDrawer(),
     actions: [
@@ -40,23 +42,8 @@ class NormalAppBar extends BaseAppBar {
   static void _onPressedTrash(BuildContext context,
       TextEditingController textEditingController,
       AnimationController animationController) =>
-      animationController
-          .forward()
-          .then(
-              (_) => _onPressedTrashEnd(
-                  context,
-                  textEditingController,
-                  animationController
-              )
-          );
-
-  static void _onPressedTrashEnd(BuildContext context,
-      TextEditingController textEditingController,
-      AnimationController animationController) {
-
-    animationController.reverse();
-
-    textEditingController.text = '';
-    context.read<DateFilterViewModel>().clear();
-  }
+      animationController.forwardReverse(() {
+        textEditingController.text = '';
+        context.read<DateFilterViewModel>().clear();
+      });
 }

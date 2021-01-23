@@ -1,15 +1,17 @@
+import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends AppBar {
 
-  BaseAppBar(String title, AnimationController animationController,
+  BaseAppBar(String title, AnimatedIconData animatedIconData,
+      AnimationController animationController,
       void Function(BuildContext) callback, {List<Widget> actions}) : super(
     title: Text(title),
     leading: Builder(
       builder: (context) {
         return IconButton(
           icon: AnimatedIcon(
-            icon: AnimatedIcons.arrow_menu,
+            icon: animatedIconData,
             progress: animationController,
           ),
           color: Theme.of(context).scaffoldBackgroundColor,
@@ -27,17 +29,5 @@ class BaseAppBar extends AppBar {
   static void _onPressedMenu(BuildContext context,
       AnimationController animationController,
       void Function(BuildContext) callback) =>
-      animationController
-          .forward()
-          .then(
-              (_) => _onPressedMenuEnd(context, animationController, callback)
-          );
-
-  static void _onPressedMenuEnd(BuildContext context,
-      AnimationController animationController,
-      void Function(BuildContext) callback) {
-
-    callback(context);
-    animationController.reset();
-  }
+      animationController.forwardReset(() => callback(context));
 }

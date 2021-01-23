@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             SearchComponent(
                 context,
                 _homeController.searchText,
-                _homeController.cancelAnimation,
+                _homeController.clearAnimation,
                 _homeController.calendarAnimation
             ),
             Expanded(
