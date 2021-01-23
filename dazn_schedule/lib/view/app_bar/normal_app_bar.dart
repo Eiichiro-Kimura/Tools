@@ -50,9 +50,9 @@ class NormalAppBar extends BaseAppBar {
               )
           );
 
-  static Future<void> _onPressedTrashEnd(BuildContext context,
+  static void _onPressedTrashEnd(BuildContext context,
       TextEditingController textEditingController,
-      AnimationController animationController) async {
+      AnimationController animationController) {
 
     animationController.reverse();
 

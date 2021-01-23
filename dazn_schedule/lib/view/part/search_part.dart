@@ -1,4 +1,4 @@
-import 'package:date_range_picker/date_range_picker.dart' as date_rage_picker;
+import 'package:date_range_picker/date_range_picker.dart' as date_range_picker;
 import 'package:dazn_schedule/extensions/date_time_extension.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
@@ -95,7 +95,7 @@ class SearchComponent extends Container {
     final firstDate = now.subtract(const Duration(days: 1));
     final lastDate = now.add(const Duration(days: 30));
 
-    final selectedDates = await date_rage_picker.showDatePicker(
+    final selectedDates = await date_range_picker.showDatePicker(
       context: context,
       locale: const Locale('ja'),
       initialFirstDate: initialFirstDate,

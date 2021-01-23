@@ -25,7 +25,7 @@ class HomeFloatingActionButton extends FloatingActionButton {
               )
           );
 
-  static Future<void> _onPressedSettingsEnd(BuildContext context,
+  static void _onPressedSettingsEnd(BuildContext context,
       AnimationController animationController, VoidCallback callback) {
 
     final programFilter = context.read<ProgramsViewModel>().programFilter;
