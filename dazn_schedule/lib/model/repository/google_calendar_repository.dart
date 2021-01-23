@@ -2,6 +2,7 @@ import 'package:dazn_schedule/model/io/google_auth.dart';
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart';
 import 'package:googleapis/calendar/v3.dart';
+import 'package:googleapis_auth/auth.dart';
 
 class GoogleCalendarRepository implements ICloudCalendarRepository {
 
@@ -19,16 +20,21 @@ class GoogleCalendarRepository implements ICloudCalendarRepository {
       throw Exception('GoogleAuth Null Error');
     }
 
-    _googleAuth.authenticate((authClient) {
+    _googleAuth.authenticate(
+            (authClient) => _authenticated(program, authClient)
+    );
+  }
+
+  void _authenticated(Program program, AuthClient authClient) =>
       CalendarApi(authClient)
           .events
           .insert(_createEvent(program), calendarId)
-          .then((authClient) {
-            if ('confirmed' != authClient.status) {
-              throw Exception('CalendarApi Error ${authClient.status}');
-            }
-          });
-    });
+          .then(_calendarInsertFinished);
+
+  void _calendarInsertFinished(Event event) {
+    if ('confirmed' != event.status) {
+      throw Exception('CalendarApi Error ${event.status}');
+    }
   }
 
   Event _createEvent(Program program) {

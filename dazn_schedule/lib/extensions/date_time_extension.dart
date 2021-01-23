@@ -1,6 +1,6 @@
 extension DateTimeExtension on DateTime {
 
-  DateTime copyFirstTime() =>
+  DateTime cloneToDayStart() =>
       copyWith(
           hour: 0,
           minute: 0,
@@ -9,7 +9,7 @@ extension DateTimeExtension on DateTime {
           microsecond: 0
       );
 
-  DateTime copyLastTime() =>
+  DateTime cloneToDayEnd() =>
       copyWith(
           hour: 23,
           minute: 59,

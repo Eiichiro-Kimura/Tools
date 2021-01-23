@@ -24,29 +24,34 @@ class Program {
       DateTime selectedLastDate, String selectedGenre,
       String selectedTournamentName) {
 
-    final isSelectedGenre = selectedGenre == genre;
-    final isSelectedTournamentName = selectedTournamentName == tournamentName;
     final isHitKeyword = date.contains(keyword) ||
         time.contains(keyword) ||
         genre.contains(keyword) ||
         tournamentName.contains(keyword) ||
         programName.contains(keyword) ||
         commentaryName.contains(keyword);
-
-    bool isSelectedDate;
-    if (null == selectedFirstDate || null == selectedLastDate) {
-      isSelectedDate = true;
-    } else {
-      isSelectedDate = selectedFirstDate.isBefore(dateTime) &&
-          selectedLastDate.isAfter(dateTime);
-    }
+    final isValidDate = _isValidDate(selectedFirstDate, selectedLastDate);
+    final isSelectedGenre = selectedGenre == genre;
+    final isSelectedTournamentName = selectedTournamentName == tournamentName;
 
     return isHitKeyword &&
+        isValidDate &&
         isSelectedGenre &&
-        isSelectedTournamentName &&
-        isSelectedDate;
+        isSelectedTournamentName;
   }
 
   String _getNumberMonthDay(String text) =>
       NumberFormat('00').format(int.parse(text));
+
+  bool _isValidDate(DateTime firstDate, DateTime lastDate) {
+    bool isValidDate;
+
+    if (null == firstDate || null == lastDate) {
+      isValidDate = true;
+    } else {
+      isValidDate = firstDate.isBefore(dateTime) && lastDate.isAfter(dateTime);
+    }
+
+    return isValidDate;
+  }
 }

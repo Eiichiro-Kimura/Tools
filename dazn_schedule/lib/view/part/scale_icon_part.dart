@@ -5,7 +5,7 @@ class ScaleIconPart extends ScaleTransition {
   ScaleIconPart(IconData iconData,
       AnimationController animationController) : super(
     scale: Tween<double>(begin: tweenBegin, end: tweenEnd)
-            .animate(animationController),
+        .animate(animationController),
     child: Icon(iconData),
   );
 

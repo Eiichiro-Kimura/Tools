@@ -12,7 +12,7 @@ class HomeController {
           duration: const Duration(milliseconds: animationTimeScale),
           vsync: tickerProvider,
         ),
-        cancelAnimation = AnimationController(
+        clearAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
         ),
@@ -32,7 +32,7 @@ class HomeController {
   static const int animationTimeScale = 100;
   final AnimationController menuAnimation;
   final AnimationController trashAnimation;
-  final AnimationController cancelAnimation;
+  final AnimationController clearAnimation;
   final AnimationController calendarAnimation;
   final AnimationController settingsAnimation;
   final searchText = TextEditingController();
@@ -40,7 +40,7 @@ class HomeController {
   void dispose() {
     menuAnimation.dispose();
     trashAnimation.dispose();
-    cancelAnimation.dispose();
+    clearAnimation.dispose();
     calendarAnimation.dispose();
     settingsAnimation.dispose();
     searchText.dispose();

@@ -18,8 +18,6 @@ class ProgramsPart extends SingleChildScrollView {
     final programs = context.watch<ProgramsViewModel>().value;
     final settingsViewModel = context.watch<SettingsViewModel>();
     final dateFilterViewModel = context.watch<DateFilterViewModel>();
-    final firstDate = dateFilterViewModel.firstDate;
-    final lastDate = dateFilterViewModel.lastDate;
     final genre = settingsViewModel
         .getSetting(SettingsKind.filterGenre)
         .value;
@@ -30,11 +28,11 @@ class ProgramsPart extends SingleChildScrollView {
     if (null != programs) {
       for (final program in programs) {
         final isContains = program.contains(
-          keyword,
-          firstDate,
-          lastDate,
-          genre,
-          tournamentName
+            keyword,
+            dateFilterViewModel.firstDate,
+            dateFilterViewModel.lastDate,
+            genre,
+            tournamentName
         );
 
         if (isContains) {

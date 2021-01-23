@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
 import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
@@ -10,55 +11,39 @@ class NormalAppBar extends BaseAppBar {
       AnimationController leadingAnimationController,
       AnimationController trashAnimationController) : super(
     title,
+    AnimatedIcons.menu_arrow,
     leadingAnimationController,
-      (context) => Scaffold.of(context).openDrawer(),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(marginSize),
-          child: Row(
-            children: [
-              Builder(
-                builder: (BuildContext context) {
-                  return IconButton(
-                    icon: ScaleIconPart(Icons.delete, trashAnimationController),
-                    onPressed: () => _onPressedTrash(
-                        context,
-                        textEditingController,
-                        trashAnimationController
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+    (context) => Scaffold.of(context).openDrawer(),
+    actions: [
+      Padding(
+        padding: const EdgeInsets.all(marginSize),
+        child: Row(
+          children: [
+            Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: ScaleIconPart(Icons.delete, trashAnimationController),
+                  onPressed: () => _onPressedTrash(
+                      context,
+                      textEditingController,
+                      trashAnimationController
+                  ),
+                );
+              },
+            ),
+          ],
         ),
-      ],
+      ),
+    ],
   );
 
   static const double marginSize = 8;
 
   static void _onPressedTrash(BuildContext context,
       TextEditingController textEditingController,
-      AnimationController animationController) {
-
-    animationController
-        .forward()
-        .then(
-            (_) => _onPressedTrashEnd(
-                context,
-                textEditingController,
-                animationController
-            )
-        );
-  }
-
-  static Future<void> _onPressedTrashEnd(BuildContext context,
-      TextEditingController textEditingController,
-      AnimationController animationController) async {
-
-    animationController.reverse();
-
-    textEditingController.text = '';
-    context.read<DateFilterViewModel>().clear();
-  }
+      AnimationController animationController) =>
+      animationController.forwardReverse(() {
+        textEditingController.text = '';
+        context.read<DateFilterViewModel>().clear();
+      });
 }

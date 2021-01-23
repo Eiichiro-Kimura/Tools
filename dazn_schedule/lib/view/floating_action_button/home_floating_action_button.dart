@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
@@ -8,25 +9,17 @@ class HomeFloatingActionButton extends FloatingActionButton {
 
   HomeFloatingActionButton(BuildContext context,
       AnimationController animationController, VoidCallback callback) : super(
-    onPressed: () => _onPressed(context, animationController, callback),
-    tooltip: 'Settings',
+    onPressed: () => _onPressedSettings(context, animationController, callback),
     child: RotationIconPart(Icons.settings, animationController),
   );
 
-  static void _onPressed(BuildContext context,
+  static void _onPressedSettings(BuildContext context,
       AnimationController animationController, VoidCallback callback) =>
-      animationController
-          .forward()
-          .then((_) {
-            _toSettingPage(context, callback);
-            animationController.reset();
-          });
+      animationController.forwardReset(() {
+        final programFilter = context.read<ProgramsViewModel>().programFilter;
 
-  static void _toSettingPage(BuildContext context, VoidCallback callback) {
-    final programFilter = context.read<ProgramsViewModel>().programFilter;
-
-    PageManager()
-        .forward(context, PageKind.settings, programFilter)
-        .then((_) => callback());
-  }
+        PageManager()
+            .forward(context, PageKind.settings, programFilter)
+            .then((_) => callback());
+      });
 }
