@@ -4,11 +4,11 @@ class SettingsController {
 
   SettingsController(TickerProvider tickerProvider) :
         menuAnimation = AnimationController(
-          duration: const Duration(milliseconds: animationTimeMS),
+          duration: const Duration(milliseconds: animationTime),
           vsync: tickerProvider,
         );
 
-  static const int animationTimeMS = 300;
+  static const int animationTime = 300;
   final AnimationController menuAnimation;
   final googleApiClientIdText = TextEditingController();
 

@@ -11,46 +11,44 @@ class NormalAppBar extends BaseAppBar {
       AnimationController trashAnimationController) : super(
     title,
     leadingAnimationController,
-      (context) => Scaffold.of(context).openDrawer(),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(marginSize),
-          child: Row(
-            children: [
-              Builder(
-                builder: (BuildContext context) {
-                  return IconButton(
-                    icon: ScaleIconPart(Icons.delete, trashAnimationController),
-                    onPressed: () => _onPressedTrash(
-                        context,
-                        textEditingController,
-                        trashAnimationController
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+    (context) => Scaffold.of(context).openDrawer(),
+    actions: [
+      Padding(
+        padding: const EdgeInsets.all(marginSize),
+        child: Row(
+          children: [
+            Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: ScaleIconPart(Icons.delete, trashAnimationController),
+                  onPressed: () => _onPressedTrash(
+                      context,
+                      textEditingController,
+                      trashAnimationController
+                  ),
+                );
+              },
+            ),
+          ],
         ),
-      ],
+      ),
+    ],
   );
 
   static const double marginSize = 8;
 
   static void _onPressedTrash(BuildContext context,
       TextEditingController textEditingController,
-      AnimationController animationController) {
-
-    animationController
-        .forward()
-        .then(
-            (_) => _onPressedTrashEnd(
-                context,
-                textEditingController,
-                animationController
-            )
-        );
-  }
+      AnimationController animationController) =>
+      animationController
+          .forward()
+          .then(
+              (_) => _onPressedTrashEnd(
+                  context,
+                  textEditingController,
+                  animationController
+              )
+          );
 
   static Future<void> _onPressedTrashEnd(BuildContext context,
       TextEditingController textEditingController,

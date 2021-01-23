@@ -27,10 +27,9 @@ class PageManager {
 
   Future<T> forward<T extends Object>(BuildContext context, PageKind pageKind,
       Object arguments) =>
-      Navigator.of(context).pushNamed(
-          _pageInfoMap[pageKind].route,
-          arguments: arguments
-      );
+      Navigator
+          .of(context)
+          .pushNamed(_pageInfoMap[pageKind].route, arguments: arguments);
 
   void backward(BuildContext context) => Navigator.of(context).pop();
 }

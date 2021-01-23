@@ -21,7 +21,8 @@ class DateFilterViewModel extends ChangeNotifier {
   }
 
   void clear() {
-    firstDate = null;
-    lastDate = null;
+    _firstDate = null;
+    _lastDate = null;
+    notifyListeners();
   }
 }

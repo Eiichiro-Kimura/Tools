@@ -5,29 +5,39 @@ class BaseAppBar extends AppBar {
   BaseAppBar(String title, AnimationController animationController,
       void Function(BuildContext) callback, {List<Widget> actions}) : super(
     title: Text(title),
-    actions: actions,
     leading: Builder(
-      builder: (BuildContext context) {
+      builder: (context) {
         return IconButton(
           icon: AnimatedIcon(
             icon: AnimatedIcons.arrow_menu,
             progress: animationController,
           ),
           color: Theme.of(context).scaffoldBackgroundColor,
-          tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          onPressed: () => _onPressed(context, animationController, callback),
+          onPressed: () => _onPressedMenu(
+              context,
+              animationController,
+              callback
+          ),
         );
       },
     ),
+    actions: actions,
   );
 
-  static void _onPressed(BuildContext context,
+  static void _onPressedMenu(BuildContext context,
       AnimationController animationController,
       void Function(BuildContext) callback) =>
       animationController
           .forward()
-          .then((_) {
-            callback(context);
-            animationController.reset();
-          });
+          .then(
+              (_) => _onPressedMenuEnd(context, animationController, callback)
+          );
+
+  static void _onPressedMenuEnd(BuildContext context,
+      AnimationController animationController,
+      void Function(BuildContext) callback) {
+
+    callback(context);
+    animationController.reset();
+  }
 }

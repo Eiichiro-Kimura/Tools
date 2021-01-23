@@ -8,25 +8,32 @@ class HomeFloatingActionButton extends FloatingActionButton {
 
   HomeFloatingActionButton(BuildContext context,
       AnimationController animationController, VoidCallback callback) : super(
-    onPressed: () => _onPressed(context, animationController, callback),
-    tooltip: 'Settings',
+    onPressed: () => _onPressedSettings(context, animationController, callback),
     child: RotationIconPart(Icons.settings, animationController),
   );
 
-  static void _onPressed(BuildContext context,
+  static void _onPressedSettings(BuildContext context,
       AnimationController animationController, VoidCallback callback) =>
+
       animationController
           .forward()
-          .then((_) {
-            _toSettingPage(context, callback);
-            animationController.reset();
-          });
+          .then(
+              (_) => _onPressedSettingsEnd(
+                  context,
+                  animationController,
+                  callback
+              )
+          );
 
-  static void _toSettingPage(BuildContext context, VoidCallback callback) {
+  static Future<void> _onPressedSettingsEnd(BuildContext context,
+      AnimationController animationController, VoidCallback callback) {
+
     final programFilter = context.read<ProgramsViewModel>().programFilter;
 
     PageManager()
         .forward(context, PageKind.settings, programFilter)
         .then((_) => callback());
+
+    animationController.reset();
   }
 }

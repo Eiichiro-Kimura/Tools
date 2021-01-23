@@ -5,7 +5,7 @@ class RotationIconPart extends RotationTransition {
   RotationIconPart(IconData iconData,
       AnimationController animationController) : super(
     turns: Tween<double>(begin: tweenBegin, end: tweenEnd)
-            .animate(animationController),
+        .animate(animationController),
     child: Icon(iconData),
   );
 

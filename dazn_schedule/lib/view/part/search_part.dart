@@ -1,5 +1,5 @@
 import 'package:date_range_picker/date_range_picker.dart' as date_rage_picker;
-import 'package:dazn_schedule/extensions/date_time.dart';
+import 'package:dazn_schedule/extensions/date_time_extension.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
 import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
@@ -76,12 +76,10 @@ class SearchComponent extends Container {
   }
 
   static void _onPressedCalendar(BuildContext context,
-      AnimationController animationController) {
-
-    animationController
-        .forward()
-        .then((_) => _onPressedCalendarEnd(context, animationController));
-  }
+      AnimationController animationController) =>
+      animationController
+          .forward()
+          .then((_) => _onPressedCalendarEnd(context, animationController));
 
   static Future<void> _onPressedCalendarEnd(BuildContext context,
       AnimationController animationController) async {

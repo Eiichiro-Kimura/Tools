@@ -29,9 +29,10 @@ class SettingItemDropdownPart extends Row {
           child: Text(text),
         );
       }).toList(),
-      onChanged: (value) {
-        context.read<SettingsViewModel>().setValue(setting.settingsKind, value);
-      }
+      onChanged: (value) => _onChanged(context, setting, value),
     );
   }
+
+  static void _onChanged(BuildContext context, Setting setting, String value) =>
+      context.read<SettingsViewModel>().setValue(setting.settingsKind, value);
 }
