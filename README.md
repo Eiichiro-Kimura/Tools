@@ -10,9 +10,6 @@
 ### dazn_schedule
 
 ![demo](https://user-images.githubusercontent.com/77208334/105568766-41bbf980-5d7f-11eb-8c7b-15c9b17b36ab.gif)
-![dazn_schedule_image1](https://user-images.githubusercontent.com/77208334/104845933-49147a80-591b-11eb-9ed2-73c034a2c319.png)
-![dazn_schedule_image2](https://user-images.githubusercontent.com/77208334/104845935-4a45a780-591b-11eb-9865-d0a15530a14e.png)
-![dazn_schedule_image3](https://user-images.githubusercontent.com/77208334/104845937-4ade3e00-591b-11eb-98df-50068d98e7e9.png)
 
 #### 制作背景
 * Flutterスマホアプリの習作。
