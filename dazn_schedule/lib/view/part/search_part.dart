@@ -1,6 +1,5 @@
 import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
-import 'package:date_range_picker/date_range_picker.dart' as date_range_picker;
-import 'package:dazn_schedule/extensions/date_time_extension.dart';
+import 'package:dazn_schedule/view/helper/notice/date_range_picker.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
 import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
@@ -70,25 +69,18 @@ class SearchComponent extends Container {
       animationController.forwardReverse(() async {
         final dateFilterViewModel = context.read<DateFilterViewModel>();
         final now = DateTime.now();
-        final initialFirstDate = (dateFilterViewModel.firstDate ?? now)
-          ..copyFirstTime();
-        final initialLastDate = (dateFilterViewModel.lastDate ?? now)
-          ..copyFirstTime();
-        final firstDate = now.subtract(const Duration(days: 1));
-        final lastDate = now.add(const Duration(days: 30));
-        final selectedDates = await date_range_picker.showDatePicker(
-          context: context,
-          locale: const Locale('ja'),
-          initialFirstDate: initialFirstDate,
-          initialLastDate: initialLastDate,
-          firstDate: firstDate,
-          lastDate: lastDate,
+        final selectedDates = await DateRangePicker.show(
+            context,
+            dateFilterViewModel.firstDayStart,
+            dateFilterViewModel.lastDayStart,
+            now.subtract(const Duration(days: 1)),
+            now.add(const Duration(days: 30))
         );
 
         if (null != selectedDates) {
           dateFilterViewModel
-            ..firstDate = selectedDates[0].copyFirstTime()
-            ..lastDate = selectedDates[selectedDates.length - 1].copyLastTime();
+            ..firstDate = selectedDates[0]
+            ..lastDate = selectedDates[selectedDates.length - 1];
         }
       });
 }
