@@ -3,10 +3,9 @@ import 'package:dazn_schedule/model/setting.dart';
 import 'package:flutter/material.dart';
 
 enum SettingsKind {
-
   googleApiClientId,
-  daznGenre,
-  daznTournamentName,
+  filterGenre,
+  filterTournamentName,
 }
 
 class SettingsViewModel extends ChangeNotifier {
@@ -18,13 +17,10 @@ class SettingsViewModel extends ChangeNotifier {
 
   bool get isValid => preferencesRepository.isValid;
 
-  Setting getSetting(SettingsKind settingsKind) =>
-      _infoMap[settingsKind];
+  Setting getSetting(SettingsKind settingsKind) => _infoMap[settingsKind];
 
   void setValue(SettingsKind settingsKind, String value) {
     preferencesRepository.setString(getSetting(settingsKind).key, value);
-
-    // リスナーに通達
     notifyListeners();
   }
 
@@ -38,22 +34,21 @@ class SettingsViewModel extends ChangeNotifier {
       'GoogleApiClientId',
       '',
     );
-    _infoMap[SettingsKind.daznGenre] = Setting(
+    _infoMap[SettingsKind.filterGenre] = Setting(
       preferencesRepository,
-      SettingsKind.daznGenre,
+      SettingsKind.filterGenre,
       'ジャンル',
-      'DaznGenre',
+      'FilterGenre',
       '',
     );
-    _infoMap[SettingsKind.daznTournamentName] = Setting(
+    _infoMap[SettingsKind.filterTournamentName] = Setting(
       preferencesRepository,
-      SettingsKind.daznTournamentName,
+      SettingsKind.filterTournamentName,
       'リーグ',
-      'DaznTournamentName',
+      'FilterTournamentName',
       '',
     );
 
-    // リスナーに通達
     notifyListeners();
   }
 }

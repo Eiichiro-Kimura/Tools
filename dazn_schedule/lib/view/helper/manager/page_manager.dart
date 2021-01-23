@@ -13,8 +13,7 @@ class PageManager {
     PageKind.settings:  PageInfo('/settings', (context) => const SettingsPage(title: 'Settings')),
   };
 
-  String get initialRoute =>
-      _pageInfoMap[PageKind.home].route;
+  String get initialRoute => _pageInfoMap[PageKind.home].route;
 
   Map<String, WidgetBuilder> get routes {
     final routes = <String, WidgetBuilder>{};
@@ -32,6 +31,8 @@ class PageManager {
           _pageInfoMap[pageKind].route,
           arguments: arguments
       );
+
+  void backward(BuildContext context) => Navigator.of(context).pop();
 }
 
 enum PageKind {

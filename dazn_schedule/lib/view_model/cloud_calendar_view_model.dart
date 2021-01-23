@@ -7,9 +7,7 @@ class CloudCalendarViewModel {
 
   final ICloudCalendarRepository cloudCalendarRepository;
 
-  void init(String apiClientId) =>
-      cloudCalendarRepository.init(apiClientId);
+  void init(String apiClientId) => cloudCalendarRepository.init(apiClientId);
 
-  void addEvent(Program program) =>
-      cloudCalendarRepository.addEvent(program);
+  void addEvent(Program program) => cloudCalendarRepository.addEvent(program);
 }

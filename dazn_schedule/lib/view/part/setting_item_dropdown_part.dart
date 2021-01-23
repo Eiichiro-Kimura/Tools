@@ -3,10 +3,10 @@ import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingItemDropdownComponent extends Row {
+class SettingItemDropdownPart extends Row {
 
-  SettingItemDropdownComponent(BuildContext context, List<String> textList,
-      Setting setting): super(
+  SettingItemDropdownPart(BuildContext context, List<String> textList,
+      Setting setting) : super(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(setting.name),
@@ -19,8 +19,7 @@ class SettingItemDropdownComponent extends Row {
   static DropdownButton _createDropdownButton(BuildContext context,
       List<String> textList, Setting setting) {
 
-    final valueText = setting.value.isEmpty ?
-      textList[0] : setting.value;
+    final valueText = setting.value.isEmpty ? textList[0] : setting.value;
 
     return DropdownButton<String>(
       value: valueText,
@@ -31,9 +30,7 @@ class SettingItemDropdownComponent extends Row {
         );
       }).toList(),
       onChanged: (value) {
-        context
-            .read<SettingsViewModel>()
-            .setValue(setting.settingsKind, value);
+        context.read<SettingsViewModel>().setValue(setting.settingsKind, value);
       }
     );
   }

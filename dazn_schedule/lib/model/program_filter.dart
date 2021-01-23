@@ -2,7 +2,7 @@ import 'package:dazn_schedule/model/program.dart';
 
 class ProgramFilter {
 
-  ProgramFilter(List<Program> programs):
+  ProgramFilter(List<Program> programs) :
         genres = _toFilterListGenres(programs),
         tournamentNames = _toFilterListTournamentName(programs);
 

@@ -1,10 +1,10 @@
 import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
 import 'package:dazn_schedule/view/app_bar/simple_app_bar.dart';
-import 'package:dazn_schedule/view/component/programs_component.dart';
-import 'package:dazn_schedule/view/component/search_component.dart';
-import 'package:dazn_schedule/view/controller/home_controller.dart';
 import 'package:dazn_schedule/view/drawer/home_drawer.dart';
 import 'package:dazn_schedule/view/floating_action_button/home_floating_action_button.dart';
+import 'package:dazn_schedule/view/helper/controller/home_controller.dart';
+import 'package:dazn_schedule/view/part/programs_part.dart';
+import 'package:dazn_schedule/view/part/search_part.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   _HomePageState() {
-    _homeController = HomeController(this);
+    _homeController = HomeController(this, _updateScreen);
   }
 
   HomeController _homeController;
@@ -38,11 +38,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     settingsViewModel
         .init()
-        .then(
-            (_) => _init(
-              settingsViewModel.getSetting(SettingsKind.googleApiClientId).value
-            )
-        );
+        .then((_) {
+          final googleApiClientId = settingsViewModel
+              .getSetting(SettingsKind.googleApiClientId)
+              .value;
+          _init(googleApiClientId);
+        });
   }
 
   @override
@@ -65,8 +66,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget _buildNormal(BuildContext context) =>
       Scaffold(
         appBar: NormalAppBar(
-            widget.title,
-            _homeController.menuAnimation,
+          widget.title,
+          _homeController.searchText,
+          _homeController.menuAnimation,
+          _homeController.trashAnimation
         ),
         drawer: HomeDrawer(context),
         body: Column(
@@ -75,13 +78,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 context,
                 _homeController.searchText,
                 _homeController.cancelAnimation,
-                _updateScreen
+                _homeController.calendarAnimation
             ),
             Expanded(
-              child: ProgramsComponent(
-                  context,
-                  _homeController.searchText.text
-              ),
+              child: ProgramsPart(context, _homeController.searchText.text),
             ),
           ],
         ),
@@ -101,13 +101,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void _initProgramsAndStandings() {
     final daznTournamentName = context
         .read<SettingsViewModel>()
-        .getSetting(SettingsKind.daznTournamentName)
+        .getSetting(SettingsKind.filterTournamentName)
         .value;
 
     context.read<ProgramsViewModel>().generate();
     context.read<StandingsViewModel>().generate(daznTournamentName);
   }
 
-  void _updateScreen() =>
-      setState(() {});
+  void _updateScreen() => setState(() {});
 }

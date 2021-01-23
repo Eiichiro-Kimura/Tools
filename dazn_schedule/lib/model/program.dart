@@ -20,19 +20,31 @@ class Program {
     return DateTime.parse('$year-$month-$day $time:00');
   }
 
-  bool contains(String keyword, String selectedGenre,
+  bool contains(String keyword, DateTime selectedFirstDate,
+      DateTime selectedLastDate, String selectedGenre,
       String selectedTournamentName) {
 
+    final isSelectedGenre = selectedGenre == genre;
+    final isSelectedTournamentName = selectedTournamentName == tournamentName;
     final isHitKeyword = date.contains(keyword) ||
         time.contains(keyword) ||
         genre.contains(keyword) ||
         tournamentName.contains(keyword) ||
         programName.contains(keyword) ||
         commentaryName.contains(keyword);
-    final isSelected = selectedGenre == genre &&
-        selectedTournamentName == tournamentName;
 
-    return isHitKeyword && isSelected;
+    bool isSelectedDate;
+    if (null == selectedFirstDate || null == selectedLastDate) {
+      isSelectedDate = true;
+    } else {
+      isSelectedDate = selectedFirstDate.isBefore(dateTime) &&
+          selectedLastDate.isAfter(dateTime);
+    }
+
+    return isHitKeyword &&
+        isSelectedGenre &&
+        isSelectedTournamentName &&
+        isSelectedDate;
   }
 
   String _getNumberMonthDay(String text) =>

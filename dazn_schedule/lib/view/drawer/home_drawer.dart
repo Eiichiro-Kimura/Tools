@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/view/component/standings_component.dart';
+import 'package:dazn_schedule/view/part/standings_part.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends Drawer {
@@ -6,7 +6,7 @@ class HomeDrawer extends Drawer {
   HomeDrawer(BuildContext context) : super(
     child: Padding(
       padding: const EdgeInsets.only(top: marginSize),
-      child: StandingsComponent(context),
+      child: StandingsPart(context),
     ),
   );
 

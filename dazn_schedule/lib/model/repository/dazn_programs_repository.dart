@@ -1,7 +1,6 @@
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/model/repository/i_programs_repository.dart';
 import 'package:universal_html/driver.dart' as driver;
-// ignore: implementation_imports
 import 'package:universal_html/src/html_with_internals.dart' as html_internals;
 
 class DaznProgramsRepository implements IProgramsRepository {
@@ -9,7 +8,7 @@ class DaznProgramsRepository implements IProgramsRepository {
   static const url = 'https://flyingsc.github.io/dazn-schedule/';
 
   @override
-  Future<List<Program>> getPrograms() async {
+  Future<List<Program>> createPrograms() async {
     final programs = <Program>[];
 
     // クライアントを取得
