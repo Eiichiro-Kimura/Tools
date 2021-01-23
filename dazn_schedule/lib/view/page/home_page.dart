@@ -65,14 +65,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildNormal(BuildContext context) =>
       Scaffold(
-        appBar: NormalAppBar(widget.title, _homeController.menuAnimation),
+        appBar: NormalAppBar(
+          widget.title,
+          _homeController.searchText,
+          _homeController.menuAnimation,
+          _homeController.trashAnimation
+        ),
         drawer: HomeDrawer(context),
         body: Column(
           children: [
             SearchComponent(
                 context,
                 _homeController.searchText,
-                _homeController.cancelAnimation
+                _homeController.cancelAnimation,
+                _homeController.calendarAnimation
             ),
             Expanded(
               child: ProgramsPart(context, _homeController.searchText.text),
@@ -95,7 +101,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void _initProgramsAndStandings() {
     final daznTournamentName = context
         .read<SettingsViewModel>()
-        .getSetting(SettingsKind.daznTournamentName)
+        .getSetting(SettingsKind.filterTournamentName)
         .value;
 
     context.read<ProgramsViewModel>().generate();

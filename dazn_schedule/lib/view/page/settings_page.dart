@@ -65,12 +65,12 @@ class _SettingsPageState extends State<SettingsPage>
             SettingItemDropdownPart(
               context,
               programFilter.genres,
-              settingsViewModel.getSetting(SettingsKind.daznGenre),
+              settingsViewModel.getSetting(SettingsKind.filterGenre),
             ),
             SettingItemDropdownPart(
               context,
               programFilter.tournamentNames,
-              settingsViewModel.getSetting(SettingsKind.daznTournamentName),
+              settingsViewModel.getSetting(SettingsKind.filterTournamentName),
             ),
           ],
         ),

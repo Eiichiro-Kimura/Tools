@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class BaseAppBar extends AppBar {
 
   BaseAppBar(String title, AnimationController animationController,
-      void Function(BuildContext) callback) : super(
+      void Function(BuildContext) callback, {List<Widget> actions}) : super(
     title: Text(title),
+    actions: actions,
     leading: Builder(
       builder: (BuildContext context) {
         return IconButton(
