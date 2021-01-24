@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/model/program_filter.dart';
 import 'package:intl/intl.dart';
 
 class Program {
@@ -34,8 +35,9 @@ class Program {
         programName.contains(keyword) ||
         commentaryName.contains(keyword);
     final isValidDate = _isValidDate(selectedFirstDate, selectedLastDate);
-    final isSelectedGenre = selectedGenre == genre;
-    final isSelectedTournamentName = selectedTournamentName == tournamentName;
+    final isSelectedGenre = _isSelectedSettings(selectedGenre, genre);
+    final isSelectedTournamentName = _isSelectedSettings(selectedTournamentName,
+        tournamentName);
 
     return isHitKeyword &&
         isValidDate &&
@@ -45,6 +47,10 @@ class Program {
 
   String _getNumberMonthDay(String text) =>
       NumberFormat('00').format(int.parse(text));
+
+  bool _isSelectedSettings(String settingsName, String programName) =>
+      settingsName.isEmpty || settingsName == ProgramFilter.allFilterName ||
+      settingsName == programName;
 
   bool _isValidDate(DateTime firstDate, DateTime lastDate) {
     bool isValidDate;
