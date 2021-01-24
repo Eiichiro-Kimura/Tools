@@ -6,6 +6,7 @@ import 'package:dazn_schedule/view/helper/controller/home_controller.dart';
 import 'package:dazn_schedule/view/part/programs_part.dart';
 import 'package:dazn_schedule/view/part/search_part.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
+import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view_model/standings_view_model.dart';
@@ -94,6 +95,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   void _init(String apiClientId) {
     context.read<CloudCalendarViewModel>().init(apiClientId);
+    context.read<FavoriteTeamViewModel>().init();
 
     _initProgramsAndStandings();
   }

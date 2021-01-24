@@ -3,7 +3,8 @@ import 'package:intl/intl.dart';
 class Program {
 
   const Program(this.date, this.time, this.genre, this.tournamentName,
-      this.programName, this.commentaryName);
+      this.programName, this.commentaryName, this.homeTeamName,
+      this.awayTeamName);
 
   final String date;
   final String time;
@@ -11,6 +12,8 @@ class Program {
   final String tournamentName;
   final String programName;
   final String commentaryName;
+  final String homeTeamName;
+  final String awayTeamName;
 
   DateTime get dateTime {
     const year = '2021';
