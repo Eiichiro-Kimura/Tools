@@ -35,6 +35,7 @@ class DateFilterViewModel extends ChangeNotifier {
   void clear() {
     _firstDate = null;
     _lastDate = null;
+    _isFavoriteOnly = false;
     notifyListeners();
   }
 }
