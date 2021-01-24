@@ -2,8 +2,10 @@ import 'package:dazn_schedule/model/program_filter.dart';
 import 'package:dazn_schedule/view/app_bar/settings_app_bar.dart';
 import 'package:dazn_schedule/view/helper/controller/settings_controller.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
+import 'package:dazn_schedule/view/part/setting_favorites_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_dropdown_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_text_part.dart';
+import 'package:dazn_schedule/view/part/setting_title_part.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
@@ -58,6 +60,11 @@ class _SettingsPageState extends State<SettingsPage>
         padding: const EdgeInsets.all(marginSize),
         child: Column(
           children: [
+            OutlineButton(
+              child: const Text('About This Application'),
+              onPressed: () => _onPressedAbout(context),
+            ),
+            SettingTitlePart('Settings'),
             SettingItemTextPart(
               context,
               settingsViewModel.getSetting(SettingsKind.googleApiClientId),
@@ -73,12 +80,9 @@ class _SettingsPageState extends State<SettingsPage>
               programFilter.tournamentNames,
               settingsViewModel.getSetting(SettingsKind.filterTournamentName),
             ),
-            Padding(
-                padding: const EdgeInsets.all(marginSize),
-                child: OutlineButton(
-                  child: const Text('About This Application'),
-                  onPressed: () => _onPressedAbout(context),
-                ),
+            SettingTitlePart('Favorite List'),
+            Expanded(
+              child: SettingFavoritesPart(context),
             ),
           ],
         ),
