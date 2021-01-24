@@ -29,4 +29,9 @@ class FavoriteTeamViewModel extends ChangeNotifier {
 
     return isSuccess;
   }
+
+  void clear() {
+    favoriteTeamRepository.clear();
+    notifyListeners();
+  }
 }

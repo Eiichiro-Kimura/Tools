@@ -6,6 +6,7 @@ import 'package:dazn_schedule/view/part/setting_favorites_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_dropdown_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_text_part.dart';
 import 'package:dazn_schedule/view/part/setting_title_part.dart';
+import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
@@ -80,7 +81,17 @@ class _SettingsPageState extends State<SettingsPage>
               programFilter.tournamentNames,
               settingsViewModel.getSetting(SettingsKind.filterTournamentName),
             ),
-            SettingTitlePart('Favorite List'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SettingTitlePart('Favorite List'),
+                OutlineButton(
+                  child: const Text('Clear'),
+                  color: Theme.of(context).accentColor,
+                  onPressed: () => _onPressedClear(context),
+                ),
+              ],
+            ),
             Expanded(
               child: SettingFavoritesPart(context),
             ),
@@ -100,4 +111,7 @@ class _SettingsPageState extends State<SettingsPage>
       applicationLegalese: '2021 Eiichiro Kimura',
     );
   }
+
+  void _onPressedClear(BuildContext context) =>
+      context.read<FavoriteTeamViewModel>().clear();
 }
