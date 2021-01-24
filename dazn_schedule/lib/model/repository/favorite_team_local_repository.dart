@@ -50,4 +50,11 @@ class FavoriteTeamLocalRepository implements IFavoriteTeamRepository {
       return false;
     }
   }
+
+  @override
+  void clear() {
+    if (_isValid) {
+      _box.clear();
+    }
+  }
 }

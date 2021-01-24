@@ -8,4 +8,5 @@ abstract class IFavoriteTeamRepository {
   bool contains(FavoriteTeam favoriteTeam);
   bool save(FavoriteTeam favoriteTeam);
   bool remove(FavoriteTeam favoriteTeam);
+  void clear();
 }
