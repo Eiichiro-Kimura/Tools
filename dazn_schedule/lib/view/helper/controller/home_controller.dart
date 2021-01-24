@@ -8,6 +8,10 @@ class HomeController {
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
         ),
+        favoriteAnimation = AnimationController(
+          duration: const Duration(milliseconds: animationTimeScale),
+          vsync: tickerProvider,
+        ),
         trashAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeScale),
           vsync: tickerProvider,
@@ -31,6 +35,7 @@ class HomeController {
   static const int animationTimeRotate = 300;
   static const int animationTimeScale = 100;
   final AnimationController menuAnimation;
+  final AnimationController favoriteAnimation;
   final AnimationController trashAnimation;
   final AnimationController clearAnimation;
   final AnimationController calendarAnimation;
@@ -39,6 +44,7 @@ class HomeController {
 
   void dispose() {
     menuAnimation.dispose();
+    favoriteAnimation.dispose();
     trashAnimation.dispose();
     clearAnimation.dispose();
     calendarAnimation.dispose();

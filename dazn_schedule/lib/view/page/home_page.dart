@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         appBar: NormalAppBar(
           widget.title,
           _homeController.searchText,
+          _homeController.favoriteAnimation,
           _homeController.menuAnimation,
           _homeController.trashAnimation
         ),
