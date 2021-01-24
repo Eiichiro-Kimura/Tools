@@ -9,7 +9,7 @@
 
 ### dazn_schedule
 
-![demo](https://user-images.githubusercontent.com/77208334/105576397-d5102180-5db5-11eb-8fa5-85570ccf0c81.gif)
+![demo](https://user-images.githubusercontent.com/77208334/105630378-30acde80-5e8c-11eb-8be1-ebc8a23de730.gif)
 
 #### 制作背景
 * Flutterスマホアプリの習作。
@@ -21,6 +21,7 @@
 * 番組表フィルタリング機能（フリーワード、日付）
 * リーグ順位表機能（サッカーのみ）
 * Googleカレンダー登録機能（GoogleAPIのクライアントキーが必要）
+* お気に入り登録機能
 
 #### 使用している技術的要素
 * Webスクレイピング：番組表機能
@@ -28,6 +29,7 @@
 * Provider + MVVM：ソフトウェア アーキテクチャパターン
 * DI：Provider + リポジトリのコンストラクタ インジェクション
 * Flutter Widget Animaion：アイコンアニメーション
+* Database：hive
 
 ### RedmineSupporter
 
