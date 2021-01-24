@@ -6,6 +6,7 @@ import 'package:dazn_schedule/view/part/setting_item_dropdown_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_text_part.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -72,9 +73,27 @@ class _SettingsPageState extends State<SettingsPage>
               programFilter.tournamentNames,
               settingsViewModel.getSetting(SettingsKind.filterTournamentName),
             ),
+            Padding(
+                padding: const EdgeInsets.all(marginSize),
+                child: OutlineButton(
+                  child: const Text('About This Application'),
+                  onPressed: () => _onPressedAbout(context),
+                ),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _onPressedAbout(BuildContext context) async {
+    final packageInfo = await PackageInfo.fromPlatform();
+
+    showLicensePage(
+      context: context,
+      applicationName: packageInfo.appName,
+      applicationVersion: packageInfo.version,
+      applicationLegalese: '2021 Eiichiro Kimura',
     );
   }
 }
