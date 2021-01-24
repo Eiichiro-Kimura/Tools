@@ -8,6 +8,8 @@ class FavoriteTeamViewModel extends ChangeNotifier {
 
   final IFavoriteTeamRepository favoriteTeamRepository;
 
+  List<FavoriteTeam> get all => favoriteTeamRepository.all;
+
   Future<void> init() =>
       favoriteTeamRepository.init();
 

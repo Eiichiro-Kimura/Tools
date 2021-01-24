@@ -7,7 +7,10 @@ class FavoriteTeamLocalRepository implements IFavoriteTeamRepository {
 
   Box<FavoriteTeam> _box;
 
-  bool get isValid => null != _box && _box.isOpen;
+  bool get _isValid => null != _box && _box.isOpen;
+
+  @override
+  List<FavoriteTeam> get all => _isValid ? _box.values.toList() : [];
 
   @override
   Future<void> init() async =>
@@ -15,11 +18,11 @@ class FavoriteTeamLocalRepository implements IFavoriteTeamRepository {
 
   @override
   bool contains(FavoriteTeam favoriteTeam) =>
-      isValid && _box.values.contains(favoriteTeam);
+      _isValid && _box.values.contains(favoriteTeam);
 
   @override
   bool save(FavoriteTeam favoriteTeam) {
-    if (isValid) {
+    if (_isValid) {
       if (!contains(favoriteTeam)) {
         _box.add(favoriteTeam);
       }
@@ -32,7 +35,7 @@ class FavoriteTeamLocalRepository implements IFavoriteTeamRepository {
 
   @override
   bool remove(FavoriteTeam favoriteTeam) {
-    if (isValid) {
+    if (_isValid) {
       if (contains(favoriteTeam)) {
         final dynamic key = _box
             .values
