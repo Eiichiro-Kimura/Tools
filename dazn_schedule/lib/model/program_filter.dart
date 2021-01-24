@@ -9,6 +9,7 @@ class ProgramFilter {
   final List<String> genres;
   final List<String> tournamentNames;
   static const tournamentNameMaxLength = 15;
+  static const allFilterName = '指定なし';
 
   static List<String> _toFilterListGenres(List<Program> programs) =>
       _toFilterList(programs, (program) => program.genre);
@@ -19,7 +20,7 @@ class ProgramFilter {
   static List<String> _toFilterList(List<Program> programs,
       String Function(Program) addFunction) {
 
-    final filterList = <String>[];
+    final filterList = <String>[]..add(allFilterName);
 
     for (final program in programs) {
       // 長過ぎる名前は設定画面に表示できないので

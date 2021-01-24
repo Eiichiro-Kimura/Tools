@@ -45,23 +45,49 @@ class DaznProgramsRepository implements IProgramsRepository {
     var programRowUse = programRow;
 
     while (null != programRowUse && 'date-row' != programRowUse.className) {
-      final program = Program(
-        date,
-        programRowUse.querySelector('.date').text,
-        programRowUse.querySelector('.genre').text,
-        programRowUse.querySelector('.tournament').text,
-        programRowUse.querySelector('.tournament').nextElementSibling.text,
-        programRowUse.querySelector('.tournament').nextElementSibling
-            .nextElementSibling.text,
-      );
+      final time = programRowUse
+          .querySelector('.date')
+          .text;
+      final genre = programRowUse
+          .querySelector('.genre')
+          .text;
+      final tournamentName = programRowUse
+          .querySelector('.tournament')
+          .text;
+      final programName = programRowUse
+          .querySelector('.tournament')
+          .nextElementSibling
+          .text;
+      final commentaryName = programRowUse
+          .querySelector('.tournament')
+          .nextElementSibling
+          .nextElementSibling
+          .text;
+      final teamNames = _parseTeamNames(programName);
+      final homeTeamName = 2 == teamNames.length ? teamNames[0] : null;
+      final awayTeamName = 2 == teamNames.length ? teamNames[1] : null;
 
-      programs.add(program);
+      programs.add(
+          Program(
+              date,
+              time,
+              genre,
+              tournamentName,
+              programName,
+              commentaryName,
+              homeTeamName,
+              awayTeamName
+          )
+      );
 
       programRowUse = programRowUse.nextElementSibling;
     }
 
     return _ParseResult(programs, programRowUse);
   }
+
+  List<String> _parseTeamNames(String programName) =>
+      programName.split(' : ')[0].split(' (')[0].split(' vs ');
 }
 
 class _ParseResult {

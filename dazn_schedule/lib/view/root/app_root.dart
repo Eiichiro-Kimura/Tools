@@ -1,10 +1,12 @@
 import 'package:dazn_schedule/model/repository/dazn_programs_repository.dart';
+import 'package:dazn_schedule/model/repository/favorite_team_local_repository.dart';
 import 'package:dazn_schedule/model/repository/football_competition_repository.dart';
 import 'package:dazn_schedule/model/repository/google_calendar_repository.dart';
 import 'package:dazn_schedule/model/repository/preferences_repository.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
+import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:dazn_schedule/view_model/standings_view_model.dart';
@@ -29,6 +31,9 @@ class AppRoot extends StatelessWidget {
         ),
         ChangeNotifierProvider(
             create: (_) => DateFilterViewModel()
+        ),
+        ChangeNotifierProvider(
+            create: (_) => FavoriteTeamViewModel(FavoriteTeamLocalRepository())
         ),
         Provider<CloudCalendarViewModel>.value(
             value: CloudCalendarViewModel(GoogleCalendarRepository())

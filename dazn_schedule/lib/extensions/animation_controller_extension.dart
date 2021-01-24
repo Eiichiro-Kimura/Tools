@@ -6,12 +6,16 @@ extension AnimationControllerExtension on AnimationController {
   void forwardReverse(VoidCallback callback) =>
       forward().then((_) {
         reverse();
-        callback();
+        if (null != callback) {
+          callback();
+        }
       });
 
   void forwardReset(VoidCallback callback) =>
       forward().then((_) {
         reset();
-        callback();
+        if (null != callback) {
+          callback();
+        }
       });
 }
