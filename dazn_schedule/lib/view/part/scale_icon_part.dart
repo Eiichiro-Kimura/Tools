@@ -10,5 +10,5 @@ class ScaleIconPart extends ScaleTransition {
   );
 
   static const double tweenBegin = 1;
-  static const double tweenEnd = 1.25;
+  static const double tweenEnd = 1.4;
 }

@@ -7,9 +7,11 @@ class DateFilterViewModel extends ChangeNotifier {
 
   DateTime _firstDate;
   DateTime _lastDate;
+  bool _isFavoriteOnly = false;
 
   DateTime get firstDate => _firstDate;
   DateTime get lastDate => _lastDate;
+  bool get isFavoriteOnly => _isFavoriteOnly;
   DateTime get firstDayStart =>
       (_firstDate ?? DateTime.now()).cloneToDayStart();
   DateTime get lastDayStart =>
@@ -22,6 +24,11 @@ class DateFilterViewModel extends ChangeNotifier {
 
   set lastDate(DateTime value) {
     _lastDate = value.cloneToDayEnd();
+    notifyListeners();
+  }
+
+  void flipFavoriteOnly() {
+    _isFavoriteOnly = !_isFavoriteOnly;
     notifyListeners();
   }
 

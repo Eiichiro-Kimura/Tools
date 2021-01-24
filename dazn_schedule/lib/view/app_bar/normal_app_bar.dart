@@ -8,17 +8,33 @@ import 'package:provider/provider.dart';
 class NormalAppBar extends BaseAppBar {
 
   NormalAppBar(String title, TextEditingController textEditingController,
-      AnimationController leadingAnimationController,
+      AnimationController menuAnimationController,
+      AnimationController favoriteAnimationController,
       AnimationController trashAnimationController) : super(
     title,
     AnimatedIcons.menu_arrow,
-    leadingAnimationController,
+    menuAnimationController,
     (context) => Scaffold.of(context).openDrawer(),
     actions: [
       Padding(
         padding: const EdgeInsets.all(marginSize),
         child: Row(
           children: [
+            Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: ScaleIconPart(
+                      context.watch<DateFilterViewModel>().isFavoriteOnly ?
+                        Icons.favorite : Icons.favorite_border,
+                      favoriteAnimationController
+                  ),
+                  onPressed: () => _onPressedFavorite(
+                      context,
+                      favoriteAnimationController
+                  ),
+                );
+              },
+            ),
             Builder(
               builder: (context) {
                 return IconButton(
@@ -38,6 +54,12 @@ class NormalAppBar extends BaseAppBar {
   );
 
   static const double marginSize = 8;
+
+  static void _onPressedFavorite(BuildContext context,
+      AnimationController animationController) =>
+      animationController.forwardReverse(
+              () => context.read<DateFilterViewModel>().flipFavoriteOnly()
+      );
 
   static void _onPressedTrash(BuildContext context,
       TextEditingController textEditingController,
