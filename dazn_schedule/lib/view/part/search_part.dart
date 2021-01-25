@@ -7,9 +7,9 @@ import 'package:dazn_schedule/view_model/programs_filter_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchComponent extends Container {
+class SearchPart extends Container {
 
-  SearchComponent(BuildContext context) : super(
+  SearchPart(BuildContext context) : super(
     color: Theme.of(context).primaryColor,
     child: Padding(
       padding: const EdgeInsets.all(marginSize),
@@ -20,7 +20,7 @@ class SearchComponent extends Container {
               child: ListTile(
                 leading: const Icon(Icons.search),
                 title: TextField(
-                  controller: context.read<CtrlHomeVM>().searchText,
+                  controller: context.watch<CtrlHomeVM>().searchText,
                   decoration: const InputDecoration(
                     hintText: 'Search',
                     border: InputBorder.none,

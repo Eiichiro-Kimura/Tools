@@ -5,6 +5,7 @@ import 'package:dazn_schedule/view/floating_action_button/home_floating_action_b
 import 'package:dazn_schedule/view/part/programs_part.dart';
 import 'package:dazn_schedule/view/part/search_part.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_vm.dart';
+import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
 import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
 import 'package:dazn_schedule/view_model/programs_vm.dart';
 import 'package:dazn_schedule/view_model/settings_vm.dart';
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         drawer: HomeDrawer(context),
         body: Column(
           children: [
-            SearchComponent(context),
+            SearchPart(context),
             Expanded(
               child: ProgramsPart(context),
             ),
@@ -71,6 +72,7 @@ class _HomePageState extends State<HomePage> {
   void _init(String apiClientId) {
     context.read<CloudCalendarVM>().init(apiClientId);
     context.read<FavoriteTeamsVM>().init();
+    context.read<CtrlHomeVM>().setSearchTextCallback(_updateScreen);
 
     _initProgramsAndStandings();
   }
@@ -87,4 +89,6 @@ class _HomePageState extends State<HomePage> {
     programsVM.generate();
     standingsVM.generate(daznTournamentName);
   }
+
+  void _updateScreen() => setState(() {});
 }

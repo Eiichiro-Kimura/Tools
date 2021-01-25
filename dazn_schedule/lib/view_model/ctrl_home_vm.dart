@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CtrlHomeVM extends ChangeNotifier {
 
-  CtrlHomeVM(TickerProvider tickerProvider, VoidCallback searchTextCallback) :
+  CtrlHomeVM(TickerProvider tickerProvider) :
         menuAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
@@ -27,10 +27,7 @@ class CtrlHomeVM extends ChangeNotifier {
         settingsAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
-        )
-  {
-    searchText.addListener(searchTextCallback);
-  }
+        );
 
   static const int animationTimeRotate = 300;
   static const int animationTimeScale = 100;
@@ -54,4 +51,7 @@ class CtrlHomeVM extends ChangeNotifier {
 
     super.dispose();
   }
+
+  void setSearchTextCallback(VoidCallback searchTextCallback) =>
+      searchText.addListener(searchTextCallback);
 }

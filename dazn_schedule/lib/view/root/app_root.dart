@@ -34,7 +34,7 @@ class _AppRootState extends State<AppRoot>
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) =>
-            CtrlHomeVM(this, _updateScreen)
+            CtrlHomeVM(this)
         ),
         ChangeNotifierProvider(create: (_) =>
             CtrlSettingsVM(this)
@@ -78,6 +78,4 @@ class _AppRootState extends State<AppRoot>
       ),
     );
   }
-
-  void _updateScreen() => setState(() {});
 }
