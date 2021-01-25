@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ScaleIconPart extends ScaleTransition {
+class IconScalePart extends ScaleTransition {
 
-  ScaleIconPart(IconData iconData,
+  IconScalePart(IconData iconData,
       AnimationController animationController) : super(
     scale: Tween<double>(begin: tweenBegin, end: tweenEnd)
         .animate(animationController),

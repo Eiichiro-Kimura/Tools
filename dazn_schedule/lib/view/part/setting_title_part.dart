@@ -11,6 +11,7 @@ class SettingTitlePart extends Column {
         title,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
         ),
       ),
       const Padding(
@@ -19,5 +20,5 @@ class SettingTitlePart extends Column {
     ],
   );
 
-  static const double marginSize = 10;
+  static const double marginSize = 5;
 }

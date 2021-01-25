@@ -8,41 +8,41 @@ enum SettingsKind {
   filterTournamentName,
 }
 
-class SettingsViewModel extends ChangeNotifier {
+class SettingsVM extends ChangeNotifier {
 
-  SettingsViewModel(this.preferencesRepository);
+  SettingsVM(this._preferencesRepository);
 
-  final IPreferencesRepository preferencesRepository;
+  final IPreferencesRepository _preferencesRepository;
   final _infoMap = <SettingsKind, Setting>{};
 
-  bool get isValid => preferencesRepository.isValid;
+  bool get isValid => _preferencesRepository.isValid;
 
   Setting getSetting(SettingsKind settingsKind) => _infoMap[settingsKind];
 
   void setValue(SettingsKind settingsKind, String value) {
-    preferencesRepository.setString(getSetting(settingsKind).key, value);
+    _preferencesRepository.setString(getSetting(settingsKind).key, value);
     notifyListeners();
   }
 
   Future<void> init() async {
-    await preferencesRepository.init();
+    await _preferencesRepository.init();
 
     _infoMap[SettingsKind.googleApiClientId] = Setting(
-      preferencesRepository,
+      _preferencesRepository,
       SettingsKind.googleApiClientId,
       'GoogleApiクライアントID',
       'GoogleApiClientId',
       '',
     );
     _infoMap[SettingsKind.filterGenre] = Setting(
-      preferencesRepository,
+      _preferencesRepository,
       SettingsKind.filterGenre,
       'ジャンル',
       'FilterGenre',
       '',
     );
     _infoMap[SettingsKind.filterTournamentName] = Setting(
-      preferencesRepository,
+      _preferencesRepository,
       SettingsKind.filterTournamentName,
       'リーグ',
       'FilterTournamentName',

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class FavoriteMenuItemPart extends PopupMenuItem<String> {
+class FavoriteTeamsMenuItemPart extends PopupMenuItem<String> {
 
-  FavoriteMenuItemPart(BuildContext context, String value,
+  FavoriteTeamsMenuItemPart(BuildContext context, String value,
       {@required bool isSelected}) : super(
     value: value,
     child: Row(

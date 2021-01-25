@@ -1,9 +1,9 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/io/hive_database.dart';
-import 'package:dazn_schedule/model/repository/i_favorite_team_repository.dart';
+import 'package:dazn_schedule/model/repository/i_favorite_teams_repository.dart';
 import 'package:hive/hive.dart';
 
-class FavoriteTeamLocalRepository implements IFavoriteTeamRepository {
+class LocalFavoriteTeamsRepository implements IFavoriteTeamsRepository {
 
   Box<FavoriteTeam> _box;
 

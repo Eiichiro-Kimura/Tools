@@ -5,5 +5,5 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   await HiveDatabase().init();
 
-  runApp(AppRoot());
+  runApp(const AppRoot());
 }

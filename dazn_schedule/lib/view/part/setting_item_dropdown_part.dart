@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/setting.dart';
-import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,5 +34,5 @@ class SettingItemDropdownPart extends Row {
   }
 
   static void _onChanged(BuildContext context, Setting setting, String value) =>
-      context.read<SettingsViewModel>().setValue(setting.settingsKind, value);
+      context.read<SettingsVM>().setValue(setting.settingsKind, value);
 }

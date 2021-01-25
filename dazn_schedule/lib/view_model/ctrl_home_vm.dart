@@ -1,22 +1,22 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
-class HomeController {
+class CtrlHomeVM extends ChangeNotifier {
 
-  HomeController(TickerProvider tickerProvider, VoidCallback callback) :
+  CtrlHomeVM(TickerProvider tickerProvider) :
         menuAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
         ),
-        favoriteAnimation = AnimationController(
+        favoriteFilterAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeScale),
           vsync: tickerProvider,
         ),
-        trashAnimation = AnimationController(
+        clearFilterAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeScale),
           vsync: tickerProvider,
         ),
-        clearAnimation = AnimationController(
+        clearSearchTextAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
         ),
@@ -27,28 +27,31 @@ class HomeController {
         settingsAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
-        )
-  {
-    searchText.addListener(callback);
-  }
+        );
 
   static const int animationTimeRotate = 300;
   static const int animationTimeScale = 100;
   final AnimationController menuAnimation;
-  final AnimationController favoriteAnimation;
-  final AnimationController trashAnimation;
-  final AnimationController clearAnimation;
+  final AnimationController favoriteFilterAnimation;
+  final AnimationController clearFilterAnimation;
+  final AnimationController clearSearchTextAnimation;
   final AnimationController calendarAnimation;
   final AnimationController settingsAnimation;
   final searchText = TextEditingController();
 
+  @override
   void dispose() {
     menuAnimation.dispose();
-    favoriteAnimation.dispose();
-    trashAnimation.dispose();
-    clearAnimation.dispose();
+    favoriteFilterAnimation.dispose();
+    clearFilterAnimation.dispose();
+    clearSearchTextAnimation.dispose();
     calendarAnimation.dispose();
     settingsAnimation.dispose();
     searchText.dispose();
+
+    super.dispose();
   }
+
+  void setSearchTextCallback(VoidCallback searchTextCallback) =>
+      searchText.addListener(searchTextCallback);
 }

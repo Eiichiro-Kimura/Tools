@@ -1,7 +1,7 @@
 import 'package:dazn_schedule/model/repository/i_preferences_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferencesRepository implements IPreferencesRepository {
+class LocalPreferencesRepository implements IPreferencesRepository {
 
   SharedPreferences _sharedPreferences;
 

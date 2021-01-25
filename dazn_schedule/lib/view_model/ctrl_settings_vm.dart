@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SettingsController {
+class CtrlSettingsVM extends ChangeNotifier {
 
-  SettingsController(TickerProvider tickerProvider) :
+  CtrlSettingsVM(TickerProvider tickerProvider) :
         menuAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTime),
           vsync: tickerProvider,
@@ -12,8 +12,11 @@ class SettingsController {
   final AnimationController menuAnimation;
   final googleApiClientIdText = TextEditingController();
 
+  @override
   void dispose() {
     menuAnimation.dispose();
     googleApiClientIdText.dispose();
+
+    super.dispose();
   }
 }

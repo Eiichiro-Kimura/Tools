@@ -1,19 +1,17 @@
 import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
-import 'package:dazn_schedule/view/part/scale_icon_part.dart';
-import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
+import 'package:dazn_schedule/view/part/icon_scale_part.dart';
+import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
+import 'package:dazn_schedule/view_model/programs_filter_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NormalAppBar extends BaseAppBar {
 
-  NormalAppBar(String title, TextEditingController textEditingController,
-      AnimationController menuAnimationController,
-      AnimationController favoriteAnimationController,
-      AnimationController trashAnimationController) : super(
+  NormalAppBar(BuildContext context, String title) : super(
     title,
     AnimatedIcons.menu_arrow,
-    menuAnimationController,
+    context.watch<CtrlHomeVM>().menuAnimation,
     (context) => Scaffold.of(context).openDrawer(),
     actions: [
       Padding(
@@ -23,27 +21,23 @@ class NormalAppBar extends BaseAppBar {
             Builder(
               builder: (context) {
                 return IconButton(
-                  icon: ScaleIconPart(
-                      context.watch<DateFilterViewModel>().isFavoriteOnly ?
+                  icon: IconScalePart(
+                      context.watch<ProgramsFilterVM>().isFavoriteOnly ?
                         Icons.favorite : Icons.favorite_border,
-                      favoriteAnimationController
+                      context.watch<CtrlHomeVM>().favoriteFilterAnimation
                   ),
-                  onPressed: () => _onPressedFavorite(
-                      context,
-                      favoriteAnimationController
-                  ),
+                  onPressed: () => _onPressedFavoriteFilter(context),
                 );
               },
             ),
             Builder(
               builder: (context) {
                 return IconButton(
-                  icon: ScaleIconPart(Icons.delete, trashAnimationController),
-                  onPressed: () => _onPressedTrash(
-                      context,
-                      textEditingController,
-                      trashAnimationController
+                  icon: IconScalePart(
+                      Icons.delete,
+                      context.watch<CtrlHomeVM>().clearFilterAnimation
                   ),
+                  onPressed: () => _onPressedClearFilter(context),
                 );
               },
             ),
@@ -55,17 +49,24 @@ class NormalAppBar extends BaseAppBar {
 
   static const double marginSize = 8;
 
-  static void _onPressedFavorite(BuildContext context,
-      AnimationController animationController) =>
-      animationController.forwardReverse(
-              () => context.read<DateFilterViewModel>().flipFavoriteOnly()
-      );
+  static void _onPressedFavoriteFilter(BuildContext context) {
+    final ctrlHomeVM = context.read<CtrlHomeVM>();
+    final programsFilterVM = context.read<ProgramsFilterVM>();
 
-  static void _onPressedTrash(BuildContext context,
-      TextEditingController textEditingController,
-      AnimationController animationController) =>
-      animationController.forwardReverse(() {
-        textEditingController.text = '';
-        context.read<DateFilterViewModel>().clear();
-      });
+    ctrlHomeVM
+        .favoriteFilterAnimation
+        .forwardReverse(programsFilterVM.flipFavoriteOnly);
+  }
+
+  static void _onPressedClearFilter(BuildContext context) {
+    final ctrlHomeVM = context.read<CtrlHomeVM>();
+    final programsFilterVM = context.read<ProgramsFilterVM>();
+
+    ctrlHomeVM
+        .clearFilterAnimation
+        .forwardReverse(() {
+          ctrlHomeVM.searchText.text = '';
+          programsFilterVM.clear();
+        });
+  }
 }
