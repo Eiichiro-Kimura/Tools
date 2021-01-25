@@ -29,9 +29,9 @@ class SearchComponent extends Container {
                 trailing: IconButton(
                   icon: IconRotationPart(
                       Icons.cancel,
-                      context.watch<CtrlHomeVM>().clearAnimation
+                      context.watch<CtrlHomeVM>().clearSearchTextAnimation
                   ),
-                  onPressed: () => _onPressedClear(context),
+                  onPressed: () => _onPressedClearSearchText(context),
                 ),
               ),
             ),
@@ -51,11 +51,11 @@ class SearchComponent extends Container {
 
   static const double marginSize = 8;
 
-  static void _onPressedClear(BuildContext context) {
+  static void _onPressedClearSearchText(BuildContext context) {
     final ctrlHomeVM = context.read<CtrlHomeVM>();
 
     ctrlHomeVM
-        .clearAnimation
+        .clearSearchTextAnimation
         .forwardReset(ctrlHomeVM.searchText.clear);
   }
 

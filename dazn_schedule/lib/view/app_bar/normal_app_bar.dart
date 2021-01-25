@@ -24,9 +24,9 @@ class NormalAppBar extends BaseAppBar {
                   icon: IconScalePart(
                       context.watch<ProgramsFilterVM>().isFavoriteOnly ?
                         Icons.favorite : Icons.favorite_border,
-                      context.watch<CtrlHomeVM>().favoriteAnimation
+                      context.watch<CtrlHomeVM>().favoriteFilterAnimation
                   ),
-                  onPressed: () => _onPressedFavorite(context),
+                  onPressed: () => _onPressedFavoriteFilter(context),
                 );
               },
             ),
@@ -35,9 +35,9 @@ class NormalAppBar extends BaseAppBar {
                 return IconButton(
                   icon: IconScalePart(
                       Icons.delete,
-                      context.watch<CtrlHomeVM>().trashAnimation
+                      context.watch<CtrlHomeVM>().clearFilterAnimation
                   ),
-                  onPressed: () => _onPressedTrash(context),
+                  onPressed: () => _onPressedClearFilter(context),
                 );
               },
             ),
@@ -49,21 +49,21 @@ class NormalAppBar extends BaseAppBar {
 
   static const double marginSize = 8;
 
-  static void _onPressedFavorite(BuildContext context) {
+  static void _onPressedFavoriteFilter(BuildContext context) {
     final ctrlHomeVM = context.read<CtrlHomeVM>();
     final programsFilterVM = context.read<ProgramsFilterVM>();
 
     ctrlHomeVM
-        .favoriteAnimation
+        .favoriteFilterAnimation
         .forwardReverse(programsFilterVM.flipFavoriteOnly);
   }
 
-  static void _onPressedTrash(BuildContext context) {
+  static void _onPressedClearFilter(BuildContext context) {
     final ctrlHomeVM = context.read<CtrlHomeVM>();
     final programsFilterVM = context.read<ProgramsFilterVM>();
 
     ctrlHomeVM
-        .trashAnimation
+        .clearFilterAnimation
         .forwardReverse(() {
           ctrlHomeVM.searchText.text = '';
           programsFilterVM.clear();
