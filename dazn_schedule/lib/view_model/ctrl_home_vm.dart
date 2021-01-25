@@ -1,9 +1,9 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
-class HomeController {
+class CtrlHomeVM extends ChangeNotifier {
 
-  HomeController(TickerProvider tickerProvider, VoidCallback callback) :
+  CtrlHomeVM(TickerProvider tickerProvider, VoidCallback searchTextCallback) :
         menuAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeRotate),
           vsync: tickerProvider,
@@ -29,7 +29,7 @@ class HomeController {
           vsync: tickerProvider,
         )
   {
-    searchText.addListener(callback);
+    searchText.addListener(searchTextCallback);
   }
 
   static const int animationTimeRotate = 300;
@@ -42,6 +42,7 @@ class HomeController {
   final AnimationController settingsAnimation;
   final searchText = TextEditingController();
 
+  @override
   void dispose() {
     menuAnimation.dispose();
     favoriteAnimation.dispose();
@@ -50,5 +51,7 @@ class HomeController {
     calendarAnimation.dispose();
     settingsAnimation.dispose();
     searchText.dispose();
+
+    super.dispose();
   }
 }

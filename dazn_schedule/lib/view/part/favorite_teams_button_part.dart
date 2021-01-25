@@ -1,7 +1,7 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/view/part/favorite_teams_menu_item_part.dart';
-import 'package:dazn_schedule/view_model/favorite_teams_view_model.dart';
+import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,13 +23,13 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
   static void _onSelected(BuildContext context, Program program,
       String teamName) {
 
-    final favoriteTeamsViewModel = context.read<FavoriteTeamsViewModel>();
+    final favoriteTeamsVM = context.read<FavoriteTeamsVM>();
     final favoriteTeam = _createFavoriteTeam(program.genre, teamName);
 
-    if (favoriteTeamsViewModel.contains(favoriteTeam)) {
-      favoriteTeamsViewModel.remove(favoriteTeam);
+    if (favoriteTeamsVM.contains(favoriteTeam)) {
+      favoriteTeamsVM.remove(favoriteTeam);
     } else {
-      favoriteTeamsViewModel.save(favoriteTeam);
+      favoriteTeamsVM.save(favoriteTeam);
     }
   }
 
@@ -47,13 +47,11 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
 
   static bool _isFavorite(BuildContext context, String genre,
       String teamName, bool isWatch) {
-    final favoriteTeamsViewModel = isWatch ?
-      context.watch<FavoriteTeamsViewModel>() :
-      context.read<FavoriteTeamsViewModel>();
+    final favoriteTeamsVM = isWatch ?
+      context.read<FavoriteTeamsVM>() :
+      context.read<FavoriteTeamsVM>();
 
-    return favoriteTeamsViewModel.contains(
-        _createFavoriteTeam(genre, teamName)
-    );
+    return favoriteTeamsVM.contains(_createFavoriteTeam(genre, teamName));
   }
 
   static FavoriteTeam _createFavoriteTeam(String genre, String teamName) =>

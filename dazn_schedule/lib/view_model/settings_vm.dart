@@ -8,9 +8,9 @@ enum SettingsKind {
   filterTournamentName,
 }
 
-class SettingsViewModel extends ChangeNotifier {
+class SettingsVM extends ChangeNotifier {
 
-  SettingsViewModel(this._preferencesRepository);
+  SettingsVM(this._preferencesRepository);
 
   final IPreferencesRepository _preferencesRepository;
   final _infoMap = <SettingsKind, Setting>{};

@@ -2,9 +2,9 @@ import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/repository/i_favorite_teams_repository.dart';
 import 'package:flutter/material.dart';
 
-class FavoriteTeamsViewModel extends ChangeNotifier {
+class FavoriteTeamsVM extends ChangeNotifier {
 
-  FavoriteTeamsViewModel(this._favoriteTeamsRepository);
+  FavoriteTeamsVM(this._favoriteTeamsRepository);
 
   final IFavoriteTeamsRepository _favoriteTeamsRepository;
 

@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/repository/i_preferences_repository.dart';
-import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view_model/settings_vm.dart';
 
 class Setting {
 

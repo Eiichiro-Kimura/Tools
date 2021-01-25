@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/view/part/standings_card_part.dart';
-import 'package:dazn_schedule/view_model/standings_view_model.dart';
+import 'package:dazn_schedule/view_model/standings_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class StandingsPart extends SingleChildScrollView {
 
   static List<Widget> _createWidgets(BuildContext context) {
     var widgets = <Widget>[];
-    final teamStandings = context.watch<StandingsViewModel>().value;
+    final teamStandings = context.watch<StandingsVM>().value;
 
     if (null != teamStandings) {
       widgets = teamStandings

@@ -2,15 +2,14 @@ import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/helper/notice/date_range_picker.dart';
 import 'package:dazn_schedule/view/part/icon_rotation_part.dart';
 import 'package:dazn_schedule/view/part/icon_scale_part.dart';
-import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
+import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
+import 'package:dazn_schedule/view_model/programs_filter_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchComponent extends Container {
 
-  SearchComponent(BuildContext context, TextEditingController textController,
-      AnimationController clearAnimationController,
-      AnimationController calendarAnimationController) : super(
+  SearchComponent(BuildContext context) : super(
     color: Theme.of(context).primaryColor,
     child: Padding(
       padding: const EdgeInsets.all(marginSize),
@@ -21,7 +20,7 @@ class SearchComponent extends Container {
               child: ListTile(
                 leading: const Icon(Icons.search),
                 title: TextField(
-                  controller: textController,
+                  controller: context.read<CtrlHomeVM>().searchText,
                   decoration: const InputDecoration(
                     hintText: 'Search',
                     border: InputBorder.none,
@@ -30,13 +29,9 @@ class SearchComponent extends Container {
                 trailing: IconButton(
                   icon: IconRotationPart(
                       Icons.cancel,
-                      clearAnimationController
+                      context.watch<CtrlHomeVM>().clearAnimation
                   ),
-                  onPressed: () => _onPressedClear(
-                      context,
-                      textController,
-                      clearAnimationController
-                  ),
+                  onPressed: () => _onPressedClear(context),
                 ),
               ),
             ),
@@ -44,13 +39,10 @@ class SearchComponent extends Container {
           IconButton(
             icon: IconScalePart(
                 Icons.calendar_today_outlined,
-                calendarAnimationController
+                context.watch<CtrlHomeVM>().calendarAnimation
             ),
             color: Theme.of(context).scaffoldBackgroundColor,
-            onPressed: () => _onPressedCalendar(
-                context,
-                calendarAnimationController
-            ),
+            onPressed: () => _onPressedCalendar(context),
           ),
         ],
       ),
@@ -59,28 +51,35 @@ class SearchComponent extends Container {
 
   static const double marginSize = 8;
 
-  static void _onPressedClear(BuildContext context,
-      TextEditingController textController,
-      AnimationController animationController) =>
-      animationController.forwardReset(textController.clear);
+  static void _onPressedClear(BuildContext context) {
+    final ctrlHomeVM = context.read<CtrlHomeVM>();
 
-  static void _onPressedCalendar(BuildContext context,
-      AnimationController animationController) =>
-      animationController.forwardReverse(() async {
-        final programsFilterViewModel = context.read<ProgramsFilterViewModel>();
-        final now = DateTime.now();
-        final selectedDates = await DateRangePicker.show(
-            context,
-            programsFilterViewModel.firstDayStart,
-            programsFilterViewModel.lastDayStart,
-            now.subtract(const Duration(days: 1)),
-            now.add(const Duration(days: 30))
-        );
+    ctrlHomeVM
+        .clearAnimation
+        .forwardReset(ctrlHomeVM.searchText.clear);
+  }
 
-        if (null != selectedDates) {
-          programsFilterViewModel
-            ..firstDate = selectedDates[0]
-            ..lastDate = selectedDates[selectedDates.length - 1];
-        }
-      });
+  static void _onPressedCalendar(BuildContext context) {
+    final ctrlHomeVM = context.read<CtrlHomeVM>();
+    final programsFilterVM = context.read<ProgramsFilterVM>();
+
+    ctrlHomeVM
+        .calendarAnimation
+        .forwardReverse(() async {
+          final now = DateTime.now();
+          final selectedDates = await DateRangePicker.show(
+              context,
+              programsFilterVM.firstDayStart,
+              programsFilterVM.lastDayStart,
+              now.subtract(const Duration(days: 1)),
+              now.add(const Duration(days: 30))
+          );
+
+          if (null != selectedDates) {
+            programsFilterVM
+              ..firstDate = selectedDates[0]
+              ..lastDate = selectedDates[selectedDates.length - 1];
+          }
+        });
+  }
 }

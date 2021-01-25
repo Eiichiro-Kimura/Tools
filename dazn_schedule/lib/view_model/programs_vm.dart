@@ -3,9 +3,9 @@ import 'package:dazn_schedule/model/program_filter.dart';
 import 'package:dazn_schedule/model/repository/i_programs_repository.dart';
 import 'package:flutter/material.dart';
 
-class ProgramsViewModel extends ValueNotifier<List<Program>> {
+class ProgramsVM extends ValueNotifier<List<Program>> {
 
-  ProgramsViewModel(this._programsRepository) : super(null);
+  ProgramsVM(this._programsRepository) : super(null);
 
   final IProgramsRepository _programsRepository;
   ProgramFilter _programFilter;

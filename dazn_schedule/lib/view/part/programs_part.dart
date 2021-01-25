@@ -1,45 +1,49 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/view/part/programs_card_part.dart';
-import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
-import 'package:dazn_schedule/view_model/favorite_teams_view_model.dart';
-import 'package:dazn_schedule/view_model/programs_view_model.dart';
-import 'package:dazn_schedule/view_model/settings_view_model.dart';
+import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
+import 'package:dazn_schedule/view_model/programs_filter_vm.dart';
+import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
+import 'package:dazn_schedule/view_model/programs_vm.dart';
+import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProgramsPart extends SingleChildScrollView {
 
-  ProgramsPart(BuildContext context, String keyword) : super(
+  ProgramsPart(BuildContext context) : super(
       child: Column(
-        children: _createWidgets(context, keyword),
+        children: _createWidgets(context),
       )
   );
 
-  static List<Widget> _createWidgets(BuildContext context, String keyword) {
+  static List<Widget> _createWidgets(BuildContext context) {
+    final ctrlHomeVM = context.watch<CtrlHomeVM>();
+    final programsVM = context.watch<ProgramsVM>();
+    final settingsVM = context.watch<SettingsVM>();
+    final programsFilterVM = context.watch<ProgramsFilterVM>();
+    final favoriteTeamsVM = context.watch<FavoriteTeamsVM>();
+
     final widgets = <Widget>[];
-    final programs = context.watch<ProgramsViewModel>().value;
-    final settingsViewModel = context.watch<SettingsViewModel>();
-    final programsFilterViewModel = context.watch<ProgramsFilterViewModel>();
-    final favoriteTeamsViewModel = context.watch<FavoriteTeamsViewModel>();
-    final genre = settingsViewModel
+    final programs = programsVM.value;
+    final genre = settingsVM
         .getSetting(SettingsKind.filterGenre)
         .value;
-    final tournamentName = settingsViewModel
+    final tournamentName = settingsVM
         .getSetting(SettingsKind.filterTournamentName)
         .value;
 
     if (null != programs) {
       for (final program in programs) {
-        if (programsFilterViewModel.isFavoriteOnly &&
-            !_isFavorite(program, favoriteTeamsViewModel)) {
+        if (programsFilterVM.isFavoriteOnly &&
+            !_isFavorite(program, favoriteTeamsVM)) {
           continue;
         }
 
         final isContains = program.contains(
-            keyword,
-            programsFilterViewModel.firstDate,
-            programsFilterViewModel.lastDate,
+            ctrlHomeVM.searchText.text,
+            programsFilterVM.firstDate,
+            programsFilterVM.lastDate,
             genre,
             tournamentName
         );
@@ -53,9 +57,7 @@ class ProgramsPart extends SingleChildScrollView {
     return widgets;
   }
 
-  static bool _isFavorite(Program program,
-      FavoriteTeamsViewModel favoriteTeamsViewModel) {
-
+  static bool _isFavorite(Program program, FavoriteTeamsVM favoriteTeamsVM) {
     final favoriteTeamHome = FavoriteTeam()
       ..genre = program.genre
       ..teamName = program.homeTeamName;
@@ -63,7 +65,7 @@ class ProgramsPart extends SingleChildScrollView {
       ..genre = program.genre
       ..teamName = program.awayTeamName;
 
-    return favoriteTeamsViewModel.contains(favoriteTeamHome) ||
-        favoriteTeamsViewModel.contains(favoriteTeamAway);
+    return favoriteTeamsVM.contains(favoriteTeamHome) ||
+        favoriteTeamsVM.contains(favoriteTeamAway);
   }
 }

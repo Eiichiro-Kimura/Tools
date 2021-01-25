@@ -1,9 +1,9 @@
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart';
 
-class CloudCalendarViewModel {
+class CloudCalendarVM {
 
-  CloudCalendarViewModel(this._cloudCalendarRepository);
+  CloudCalendarVM(this._cloudCalendarRepository);
 
   final ICloudCalendarRepository _cloudCalendarRepository;
 
