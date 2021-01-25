@@ -10,6 +10,6 @@ class SettingsAppBar extends BaseAppBar {
       title,
       AnimatedIcons.arrow_menu,
       context.watch<CtrlSettingsVM>().menuAnimation,
-      (context) => PageManager().backward(context)
+      (contextCB) => PageManager().backward(contextCB)
   );
 }
