@@ -12,34 +12,26 @@ class NormalAppBar extends BaseAppBar {
     title,
     AnimatedIcons.menu_arrow,
     context.watch<CtrlHomeVM>().menuAnimation,
-    (context) => Scaffold.of(context).openDrawer(),
+    (context_cb) => Scaffold.of(context_cb).openDrawer(),
     actions: [
       Padding(
         padding: const EdgeInsets.all(marginSize),
         child: Row(
           children: [
-            Builder(
-              builder: (context) {
-                return IconButton(
-                  icon: IconScalePart(
-                      context.watch<ProgramsFilterVM>().isFavoriteOnly ?
-                        Icons.favorite : Icons.favorite_border,
-                      context.watch<CtrlHomeVM>().favoriteFilterAnimation
-                  ),
-                  onPressed: () => _onPressedFavoriteFilter(context),
-                );
-              },
+            IconButton(
+              icon: IconScalePart(
+                  context.watch<ProgramsFilterVM>().isFavoriteOnly ?
+                    Icons.favorite : Icons.favorite_border,
+                  context.watch<CtrlHomeVM>().favoriteFilterAnimation
+              ),
+              onPressed: () => _onPressedFavoriteFilter(context),
             ),
-            Builder(
-              builder: (context) {
-                return IconButton(
-                  icon: IconScalePart(
-                      Icons.delete,
-                      context.watch<CtrlHomeVM>().clearFilterAnimation
-                  ),
-                  onPressed: () => _onPressedClearFilter(context),
-                );
-              },
+            IconButton(
+              icon: IconScalePart(
+                  Icons.delete,
+                  context.watch<CtrlHomeVM>().clearFilterAnimation
+              ),
+              onPressed: () => _onPressedClearFilter(context),
             ),
           ],
         ),
