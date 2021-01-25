@@ -1,7 +1,7 @@
 import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/helper/notice/date_range_picker.dart';
-import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
-import 'package:dazn_schedule/view/part/scale_icon_part.dart';
+import 'package:dazn_schedule/view/part/icon_rotation_part.dart';
+import 'package:dazn_schedule/view/part/icon_scale_part.dart';
 import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ class SearchComponent extends Container {
                   ),
                 ),
                 trailing: IconButton(
-                  icon: RotationIconPart(
+                  icon: IconRotationPart(
                       Icons.cancel,
                       clearAnimationController
                   ),
@@ -42,7 +42,7 @@ class SearchComponent extends Container {
             ),
           ),
           IconButton(
-            icon: ScaleIconPart(
+            icon: IconScalePart(
                 Icons.calendar_today_outlined,
                 calendarAnimationController
             ),

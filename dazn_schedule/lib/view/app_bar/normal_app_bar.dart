@@ -1,6 +1,6 @@
 import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
-import 'package:dazn_schedule/view/part/scale_icon_part.dart';
+import 'package:dazn_schedule/view/part/icon_scale_part.dart';
 import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +23,7 @@ class NormalAppBar extends BaseAppBar {
             Builder(
               builder: (context) {
                 return IconButton(
-                  icon: ScaleIconPart(
+                  icon: IconScalePart(
                       context.watch<ProgramsFilterViewModel>().isFavoriteOnly ?
                           Icons.favorite : Icons.favorite_border,
                       favoriteAnimationController
@@ -38,7 +38,7 @@ class NormalAppBar extends BaseAppBar {
             Builder(
               builder: (context) {
                 return IconButton(
-                  icon: ScaleIconPart(Icons.delete, trashAnimationController),
+                  icon: IconScalePart(Icons.delete, trashAnimationController),
                   onPressed: () => _onPressedTrash(
                       context,
                       textEditingController,
