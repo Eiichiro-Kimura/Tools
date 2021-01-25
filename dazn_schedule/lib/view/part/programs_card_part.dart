@@ -7,20 +7,22 @@ import 'package:provider/provider.dart';
 
 class ProgramsCardPart extends Card {
 
-  ProgramsCardPart(BuildContext context, Program program) : super(
+  ProgramsCardPart(Program program) : super(
     margin: const EdgeInsets.all(marginSize),
-    child: Container(
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(marginSize),
-        leading: Text(
-          '${program.date}\n${program.time}',
-          textScaleFactor: textScale,
-        ),
-        title: Text(program.programName),
-        subtitle: Text('${program.genre} : ${program.tournamentName}'),
-        trailing: FavoriteTeamsButtonPart(context, program),
-        onTap: () => _onTap(context, program),
-      ),
+    child: Builder(
+      builder: (context) {
+        return ListTile(
+          contentPadding: const EdgeInsets.all(marginSize),
+          leading: Text(
+            '${program.date}\n${program.time}',
+            textScaleFactor: textScale,
+          ),
+          title: Text(program.programName),
+          subtitle: Text('${program.genre} : ${program.tournamentName}'),
+          trailing: FavoriteTeamsButtonPart(context, program),
+          onTap: () => _onTap(context, program),
+        );
+      },
     ),
   );
 
