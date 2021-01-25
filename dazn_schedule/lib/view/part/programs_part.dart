@@ -49,7 +49,7 @@ class ProgramsPart extends SingleChildScrollView {
         );
 
         if (isContains) {
-          widgets.add(ProgramsCardPart(context, program));
+          widgets.add(ProgramsCardPart(program));
         }
       }
     }
