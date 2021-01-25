@@ -12,7 +12,7 @@ class NormalAppBar extends BaseAppBar {
     title,
     AnimatedIcons.menu_arrow,
     context.watch<CtrlHomeVM>().menuAnimation,
-    (context_cb) => Scaffold.of(context_cb).openDrawer(),
+    (contextCB) => Scaffold.of(contextCB).openDrawer(),
     actions: [
       Padding(
         padding: const EdgeInsets.all(marginSize),
