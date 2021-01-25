@@ -1,6 +1,6 @@
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/view/helper/notice/snack_bar_notice.dart';
-import 'package:dazn_schedule/view/part/favorite_button_part.dart';
+import 'package:dazn_schedule/view/part/favorite_teams_button_part.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class ProgramsCardPart extends Card {
         ),
         title: Text(program.programName),
         subtitle: Text('${program.genre} : ${program.tournamentName}'),
-        trailing: FavoriteButtonPart(context, program),
+        trailing: FavoriteTeamsButtonPart(context, program),
         onTap: () => _onTap(context, program),
       ),
     ),

@@ -1,8 +1,8 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/view/part/programs_card_part.dart';
-import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
-import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
+import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
+import 'package:dazn_schedule/view_model/favorite_teams_view_model.dart';
 import 'package:dazn_schedule/view_model/programs_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +18,10 @@ class ProgramsPart extends SingleChildScrollView {
 
   static List<Widget> _createWidgets(BuildContext context, String keyword) {
     final widgets = <Widget>[];
-    final programs = context
-        .watch<ProgramsViewModel>()
-        .value;
+    final programs = context.watch<ProgramsViewModel>().value;
     final settingsViewModel = context.watch<SettingsViewModel>();
-    final dateFilterViewModel = context.watch<DateFilterViewModel>();
-    final favoriteTeamViewModel = context.watch<FavoriteTeamViewModel>();
+    final programsFilterViewModel = context.watch<ProgramsFilterViewModel>();
+    final favoriteTeamsViewModel = context.watch<FavoriteTeamsViewModel>();
     final genre = settingsViewModel
         .getSetting(SettingsKind.filterGenre)
         .value;
@@ -33,15 +31,15 @@ class ProgramsPart extends SingleChildScrollView {
 
     if (null != programs) {
       for (final program in programs) {
-        if (dateFilterViewModel.isFavoriteOnly &&
-            !_isFavorite(program, favoriteTeamViewModel)) {
+        if (programsFilterViewModel.isFavoriteOnly &&
+            !_isFavorite(program, favoriteTeamsViewModel)) {
           continue;
         }
 
         final isContains = program.contains(
             keyword,
-            dateFilterViewModel.firstDate,
-            dateFilterViewModel.lastDate,
+            programsFilterViewModel.firstDate,
+            programsFilterViewModel.lastDate,
             genre,
             tournamentName
         );
@@ -56,7 +54,7 @@ class ProgramsPart extends SingleChildScrollView {
   }
 
   static bool _isFavorite(Program program,
-      FavoriteTeamViewModel favoriteTeamViewModel) {
+      FavoriteTeamsViewModel favoriteTeamsViewModel) {
 
     final favoriteTeamHome = FavoriteTeam()
       ..genre = program.genre
@@ -65,7 +63,7 @@ class ProgramsPart extends SingleChildScrollView {
       ..genre = program.genre
       ..teamName = program.awayTeamName;
 
-    return favoriteTeamViewModel.contains(favoriteTeamHome) ||
-        favoriteTeamViewModel.contains(favoriteTeamAway);
+    return favoriteTeamsViewModel.contains(favoriteTeamHome) ||
+        favoriteTeamsViewModel.contains(favoriteTeamAway);
   }
 }

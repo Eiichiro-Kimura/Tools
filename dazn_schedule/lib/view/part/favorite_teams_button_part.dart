@@ -1,13 +1,13 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/program.dart';
-import 'package:dazn_schedule/view/part/favorite_menu_item_part.dart';
-import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
+import 'package:dazn_schedule/view/part/favorite_teams_menu_item_part.dart';
+import 'package:dazn_schedule/view_model/favorite_teams_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FavoriteButtonPart extends PopupMenuButton<String> {
+class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
 
-  FavoriteButtonPart(BuildContext context, Program program) : super(
+  FavoriteTeamsButtonPart(BuildContext context, Program program) : super(
     child: Icon(
       _isFavoriteProgram(context, program) ?
         Icons.favorite : Icons.favorite_border,
@@ -23,19 +23,19 @@ class FavoriteButtonPart extends PopupMenuButton<String> {
   static void _onSelected(BuildContext context, Program program,
       String teamName) {
 
-    final favoriteTeamViewModel = context.read<FavoriteTeamViewModel>();
+    final favoriteTeamsViewModel = context.read<FavoriteTeamsViewModel>();
     final favoriteTeam = _createFavoriteTeam(program.genre, teamName);
 
-    if (favoriteTeamViewModel.contains(favoriteTeam)) {
-      favoriteTeamViewModel.remove(favoriteTeam);
+    if (favoriteTeamsViewModel.contains(favoriteTeam)) {
+      favoriteTeamsViewModel.remove(favoriteTeam);
     } else {
-      favoriteTeamViewModel.save(favoriteTeam);
+      favoriteTeamsViewModel.save(favoriteTeam);
     }
   }
 
-  static FavoriteMenuItemPart _createMenuItemPart(BuildContext context,
+  static FavoriteTeamsMenuItemPart _createMenuItemPart(BuildContext context,
       String genre, String teamName) =>
-      FavoriteMenuItemPart(
+      FavoriteTeamsMenuItemPart(
           context,
           teamName,
           isSelected: _isFavorite(context, genre, teamName, false)
@@ -47,11 +47,13 @@ class FavoriteButtonPart extends PopupMenuButton<String> {
 
   static bool _isFavorite(BuildContext context, String genre,
       String teamName, bool isWatch) {
-    final favoriteTeamViewModel = isWatch ?
-      context.watch<FavoriteTeamViewModel>() :
-      context.read<FavoriteTeamViewModel>();
+    final favoriteTeamsViewModel = isWatch ?
+      context.watch<FavoriteTeamsViewModel>() :
+      context.read<FavoriteTeamsViewModel>();
 
-    return favoriteTeamViewModel.contains(_createFavoriteTeam(genre, teamName));
+    return favoriteTeamsViewModel.contains(
+        _createFavoriteTeam(genre, teamName)
+    );
   }
 
   static FavoriteTeam _createFavoriteTeam(String genre, String teamName) =>

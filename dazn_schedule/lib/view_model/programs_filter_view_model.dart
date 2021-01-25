@@ -1,9 +1,9 @@
 import 'package:dazn_schedule/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 
-class DateFilterViewModel extends ChangeNotifier {
+class ProgramsFilterViewModel extends ChangeNotifier {
 
-  DateFilterViewModel();
+  ProgramsFilterViewModel();
 
   DateTime _firstDate;
   DateTime _lastDate;

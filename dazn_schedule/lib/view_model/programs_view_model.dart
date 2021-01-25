@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 
 class ProgramsViewModel extends ValueNotifier<List<Program>> {
 
-  ProgramsViewModel(this.programsRepository) : super(null);
+  ProgramsViewModel(this._programsRepository) : super(null);
 
-  final IProgramsRepository programsRepository;
+  final IProgramsRepository _programsRepository;
   ProgramFilter _programFilter;
 
   ProgramFilter get programFilter => _programFilter;
 
   Future<void> generate() async {
     // 番組表を生成
-    value = await programsRepository.createPrograms();
+    value = await _programsRepository.createPrograms();
 
     // 番組フィルターを作成
     _programFilter = ProgramFilter(value);

@@ -1,7 +1,7 @@
 import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
-import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
+import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +24,8 @@ class NormalAppBar extends BaseAppBar {
               builder: (context) {
                 return IconButton(
                   icon: ScaleIconPart(
-                      context.watch<DateFilterViewModel>().isFavoriteOnly ?
-                        Icons.favorite : Icons.favorite_border,
+                      context.watch<ProgramsFilterViewModel>().isFavoriteOnly ?
+                          Icons.favorite : Icons.favorite_border,
                       favoriteAnimationController
                   ),
                   onPressed: () => _onPressedFavorite(
@@ -57,8 +57,9 @@ class NormalAppBar extends BaseAppBar {
 
   static void _onPressedFavorite(BuildContext context,
       AnimationController animationController) =>
-      animationController.forwardReverse(
-              () => context.read<DateFilterViewModel>().flipFavoriteOnly()
+      animationController.forwardReverse(() => context
+          .read<ProgramsFilterViewModel>()
+          .flipFavoriteOnly()
       );
 
   static void _onPressedTrash(BuildContext context,
@@ -66,6 +67,6 @@ class NormalAppBar extends BaseAppBar {
       AnimationController animationController) =>
       animationController.forwardReverse(() {
         textEditingController.text = '';
-        context.read<DateFilterViewModel>().clear();
+        context.read<ProgramsFilterViewModel>().clear();
       });
 }

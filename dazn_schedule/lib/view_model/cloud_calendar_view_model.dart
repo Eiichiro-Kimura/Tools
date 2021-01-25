@@ -3,11 +3,11 @@ import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart'
 
 class CloudCalendarViewModel {
 
-  CloudCalendarViewModel(this.cloudCalendarRepository);
+  CloudCalendarViewModel(this._cloudCalendarRepository);
 
-  final ICloudCalendarRepository cloudCalendarRepository;
+  final ICloudCalendarRepository _cloudCalendarRepository;
 
-  void init(String apiClientId) => cloudCalendarRepository.init(apiClientId);
+  void init(String apiClientId) => _cloudCalendarRepository.init(apiClientId);
 
-  void addEvent(Program program) => cloudCalendarRepository.addEvent(program);
+  void addEvent(Program program) => _cloudCalendarRepository.addEvent(program);
 }

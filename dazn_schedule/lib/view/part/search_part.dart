@@ -2,7 +2,7 @@ import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/helper/notice/date_range_picker.dart';
 import 'package:dazn_schedule/view/part/rotation_icon_part.dart';
 import 'package:dazn_schedule/view/part/scale_icon_part.dart';
-import 'package:dazn_schedule/view_model/date_filter_view_model.dart';
+import 'package:dazn_schedule/view_model/programs_filter_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,18 +67,18 @@ class SearchComponent extends Container {
   static void _onPressedCalendar(BuildContext context,
       AnimationController animationController) =>
       animationController.forwardReverse(() async {
-        final dateFilterViewModel = context.read<DateFilterViewModel>();
+        final programsFilterViewModel = context.read<ProgramsFilterViewModel>();
         final now = DateTime.now();
         final selectedDates = await DateRangePicker.show(
             context,
-            dateFilterViewModel.firstDayStart,
-            dateFilterViewModel.lastDayStart,
+            programsFilterViewModel.firstDayStart,
+            programsFilterViewModel.lastDayStart,
             now.subtract(const Duration(days: 1)),
             now.add(const Duration(days: 30))
         );
 
         if (null != selectedDates) {
-          dateFilterViewModel
+          programsFilterViewModel
             ..firstDate = selectedDates[0]
             ..lastDate = selectedDates[selectedDates.length - 1];
         }

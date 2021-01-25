@@ -6,7 +6,7 @@ import 'package:dazn_schedule/view/part/setting_favorites_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_dropdown_part.dart';
 import 'package:dazn_schedule/view/part/setting_item_text_part.dart';
 import 'package:dazn_schedule/view/part/setting_title_part.dart';
-import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
+import 'package:dazn_schedule/view_model/favorite_teams_view_model.dart';
 import 'package:dazn_schedule/view_model/settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
@@ -65,7 +65,12 @@ class _SettingsPageState extends State<SettingsPage>
               child: const Text('About This Application'),
               onPressed: () => _onPressedAbout(context),
             ),
-            SettingTitlePart('Settings'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SettingTitlePart('Settings'),
+              ],
+            ),
             SettingItemTextPart(
               context,
               settingsViewModel.getSetting(SettingsKind.googleApiClientId),
@@ -87,7 +92,6 @@ class _SettingsPageState extends State<SettingsPage>
                 SettingTitlePart('Favorite List'),
                 OutlineButton(
                   child: const Text('Clear'),
-                  color: Theme.of(context).accentColor,
                   onPressed: () => _onPressedClear(context),
                 ),
               ],
@@ -113,5 +117,5 @@ class _SettingsPageState extends State<SettingsPage>
   }
 
   void _onPressedClear(BuildContext context) =>
-      context.read<FavoriteTeamViewModel>().clear();
+      context.read<FavoriteTeamsViewModel>().clear();
 }

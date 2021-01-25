@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
-import 'package:dazn_schedule/view_model/favorite_team_view_model.dart';
+import 'package:dazn_schedule/view_model/favorite_teams_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,5 +19,5 @@ class SettingFavoritesCardPart extends Card {
 
   static void _onPressedDelete(BuildContext context,
       FavoriteTeam favoriteTeam) =>
-      context.read<FavoriteTeamViewModel>().remove(favoriteTeam);
+      context.read<FavoriteTeamsViewModel>().remove(favoriteTeam);
 }

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class StandingsViewModel extends ValueNotifier<List<TeamStanding>> {
 
-  StandingsViewModel(this.competitionRepository) : super(null);
+  StandingsViewModel(this._competitionRepository) : super(null);
 
-  final ICompetitionRepository competitionRepository;
+  final ICompetitionRepository _competitionRepository;
 
   Future<void> generate(String tournamentName) async {
-    value = await competitionRepository.getStandings(tournamentName);
+    value = await _competitionRepository.getStandings(tournamentName);
   }
 }
