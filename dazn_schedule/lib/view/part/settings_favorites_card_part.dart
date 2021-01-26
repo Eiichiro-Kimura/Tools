@@ -3,9 +3,9 @@ import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingFavoritesCardPart extends Card {
+class SettingsFavoritesCardPart extends Card {
 
-  SettingFavoritesCardPart(BuildContext context,
+  SettingsFavoritesCardPart(BuildContext context,
       FavoriteTeam favoriteTeam) : super(
     child: ListTile(
       leading: IconButton(

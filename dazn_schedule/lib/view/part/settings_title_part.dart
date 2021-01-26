@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SettingTitlePart extends Column {
+class SettingsTitlePart extends Column {
 
-  SettingTitlePart(String title) : super(
+  SettingsTitlePart(String title) : super(
     children: [
       const Padding(
         padding: EdgeInsets.only(top: marginSize * 2),

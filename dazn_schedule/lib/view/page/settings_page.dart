@@ -1,15 +1,10 @@
-import 'package:dazn_schedule/model/program_filter.dart';
 import 'package:dazn_schedule/view/app_bar/settings_app_bar.dart';
+import 'package:dazn_schedule/view/part/settings_section_about_part.dart';
+import 'package:dazn_schedule/view/part/settings_section_favorites_part.dart';
+import 'package:dazn_schedule/view/part/settings_section_general_part.dart';
 import 'package:dazn_schedule/view_model/ctrl_settings_vm.dart';
-import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
-import 'package:dazn_schedule/view/part/setting_favorites_part.dart';
-import 'package:dazn_schedule/view/part/setting_item_dropdown_part.dart';
-import 'package:dazn_schedule/view/part/setting_item_text_part.dart';
-import 'package:dazn_schedule/view/part/setting_title_part.dart';
-import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
 import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -40,71 +35,20 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsVM = context.watch<SettingsVM>();
-    final programFilter = PageManager()
-        .getPrevArguments<ProgramFilter>(context);
-
     return Scaffold(
       appBar: SettingsAppBar(context, widget.title),
       body: Padding(
         padding: const EdgeInsets.all(marginSize),
         child: Column(
           children: [
-            OutlineButton(
-              child: const Text('About This Application'),
-              onPressed: () => _onPressedAbout(context),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SettingTitlePart('Settings'),
-              ],
-            ),
-            SettingItemTextPart(
-              context,
-              settingsVM.getSetting(SettingsKind.googleApiClientId),
-              context.watch<CtrlSettingsVM>().googleApiClientIdText,
-            ),
-            SettingItemDropdownPart(
-              context,
-              programFilter.genres,
-              settingsVM.getSetting(SettingsKind.filterGenre),
-            ),
-            SettingItemDropdownPart(
-              context,
-              programFilter.tournamentNames,
-              settingsVM.getSetting(SettingsKind.filterTournamentName),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SettingTitlePart('Favorite List'),
-                OutlineButton(
-                  child: const Text('Clear'),
-                  onPressed: () => _onPressedClear(context),
-                ),
-              ],
-            ),
+            SettingsSectionAboutPart(context),
+            SettingsSectionGeneralPart(context),
             Expanded(
-              child: SettingFavoritesPart(context),
+                child: SettingsSectionFavoritesPart(context),
             ),
           ],
         ),
       ),
     );
   }
-
-  Future<void> _onPressedAbout(BuildContext context) async {
-    final packageInfo = await PackageInfo.fromPlatform();
-
-    showLicensePage(
-      context: context,
-      applicationName: packageInfo.appName,
-      applicationVersion: packageInfo.version,
-      applicationLegalese: '2021 Eiichiro Kimura',
-    );
-  }
-
-  void _onPressedClear(BuildContext context) =>
-      context.read<FavoriteTeamsVM>().clear();
 }
