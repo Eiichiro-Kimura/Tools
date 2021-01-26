@@ -24,7 +24,7 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
       String teamName) {
 
     final favoriteTeamsVM = context.read<FavoriteTeamsVM>();
-    final favoriteTeam = _createFavoriteTeam(program.genre, teamName);
+    final favoriteTeam = FavoriteTeam.withData(program.genre, teamName);
 
     if (favoriteTeamsVM.contains(favoriteTeam)) {
       favoriteTeamsVM.remove(favoriteTeam);
@@ -51,11 +51,6 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
       context.read<FavoriteTeamsVM>() :
       context.read<FavoriteTeamsVM>();
 
-    return favoriteTeamsVM.contains(_createFavoriteTeam(genre, teamName));
+    return favoriteTeamsVM.contains(FavoriteTeam.withData(genre, teamName));
   }
-
-  static FavoriteTeam _createFavoriteTeam(String genre, String teamName) =>
-      FavoriteTeam()
-        ..genre = genre
-        ..teamName = teamName;
 }

@@ -6,6 +6,10 @@ part 'favorite_team.g.dart';
 @HiveType(typeId: 0)
 class FavoriteTeam extends HiveObject with EquatableMixin {
 
+  FavoriteTeam();
+
+  FavoriteTeam.withData(this.genre, this.teamName);
+
   @HiveField(0)
   String genre;
 
