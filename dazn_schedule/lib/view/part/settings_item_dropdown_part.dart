@@ -3,9 +3,9 @@ import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingItemDropdownPart extends Row {
+class SettingsItemDropdownPart extends Row {
 
-  SettingItemDropdownPart(BuildContext context, List<String> textList,
+  SettingsItemDropdownPart(BuildContext context, List<String> textList,
       Setting setting) : super(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
