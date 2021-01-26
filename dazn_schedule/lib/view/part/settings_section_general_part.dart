@@ -15,7 +15,7 @@ class SettingsSectionGeneralPart extends Column {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SettingsTitlePart('Settings'),
+          SettingsTitlePart('General'),
         ],
       ),
       SettingsItemTextPart(
