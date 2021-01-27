@@ -20,7 +20,7 @@ class ProgramsCardPart extends Card {
           title: Text(program.programName),
           subtitle: Text('${program.genre} : ${program.tournamentName}'),
           trailing: FavoriteTeamsButtonPart(context, program),
-          onTap: () => _onTap(context, program),
+          onTap: () => _onTapListTile(context, program),
         );
       },
     ),
@@ -29,7 +29,7 @@ class ProgramsCardPart extends Card {
   static const double marginSize = 10;
   static const double textScale = 0.9;
 
-  static void _onTap(BuildContext context, Program program) {
+  static void _onTapListTile(BuildContext context, Program program) {
     try {
       context.read<CloudCalendarVM>().addEvent(program);
     } on Exception catch (ex) {
