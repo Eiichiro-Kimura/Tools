@@ -7,17 +7,20 @@ class SettingsVM extends ChangeNotifier {
   SettingsVM(this._preferencesRepository);
 
   final IPreferencesRepository _preferencesRepository;
-  final _infoMap = <SettingsKind, Setting>{};
+  final _settings = <SettingsKind, Setting>{};
 
   bool get isValid => _preferencesRepository.isValid;
 
-  Setting getSetting(SettingsKind settingsKind) => _infoMap[settingsKind];
+  Setting getSetting(SettingsKind settingsKind) {
+    final _setting = _settings[settingsKind];
 
-  void setValue(SettingsKind settingsKind, String value) {
-    _preferencesRepository.storeStringValue(
-        getSetting(settingsKind).key,
-        value
-    );
+    return _setting
+      ..value = _preferencesRepository.fetchStringValue(_setting.key) ??
+          _setting.defaultValue as String;
+  }
+
+  void setSetting(Setting setting) {
+    _preferencesRepository.storeStringValue(setting.key, setting.value);
 
     notifyListeners();
   }
@@ -25,26 +28,23 @@ class SettingsVM extends ChangeNotifier {
   Future<void> init() async {
     await _preferencesRepository.init();
 
-    _infoMap[SettingsKind.googleApiClientId] = Setting(
-      _preferencesRepository,
+    _settings[SettingsKind.googleApiClientId] = Setting(
       SettingsKind.googleApiClientId,
       'GoogleApiクライアントID',
       'GoogleApiClientId',
-      '',
+      ''
     );
-    _infoMap[SettingsKind.filterGenre] = Setting(
-      _preferencesRepository,
+    _settings[SettingsKind.filterGenre] = Setting(
       SettingsKind.filterGenre,
       'ジャンル',
       'FilterGenre',
-      '',
+      ''
     );
-    _infoMap[SettingsKind.filterTournamentName] = Setting(
-      _preferencesRepository,
+    _settings[SettingsKind.filterTournamentName] = Setting(
       SettingsKind.filterTournamentName,
       'リーグ',
       'FilterTournamentName',
-      '',
+      ''
     );
 
     notifyListeners();
