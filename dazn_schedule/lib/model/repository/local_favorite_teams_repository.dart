@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/entity/favorite_team.dart';
-import 'package:dazn_schedule/model/io/hive_database.dart';
+import 'package:dazn_schedule/model/io/hive_database_opener.dart';
 import 'package:dazn_schedule/model/repository/i_favorite_teams_repository.dart';
 
 class LocalFavoriteTeamsRepository implements IFavoriteTeamsRepository {
@@ -13,7 +13,7 @@ class LocalFavoriteTeamsRepository implements IFavoriteTeamsRepository {
 
   @override
   Future<void> init() async =>
-      _box = await HiveDatabase().open<FavoriteTeam>();
+      _box = await HiveDatabaseOpener().open<FavoriteTeam>();
 
   @override
   bool contains(FavoriteTeam favoriteTeam) =>

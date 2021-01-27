@@ -1,9 +1,9 @@
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class GoogleAuth {
+class GoogleAuthExecutor {
 
-  GoogleAuth(this.scopes, this.googleApiClientId);
+  GoogleAuthExecutor(this.scopes, this.googleApiClientId);
 
   final List<String> scopes;
   final String googleApiClientId;

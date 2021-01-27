@@ -1,12 +1,12 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HiveDatabase {
+class HiveDatabaseOpener {
 
-  factory HiveDatabase() => _instance;
-  HiveDatabase._internal();
+  factory HiveDatabaseOpener() => _instance;
+  HiveDatabaseOpener._internal();
 
-  static final HiveDatabase _instance = HiveDatabase._internal();
+  static final HiveDatabaseOpener _instance = HiveDatabaseOpener._internal();
 
   Future<void> init() => Hive.initFlutter();
 

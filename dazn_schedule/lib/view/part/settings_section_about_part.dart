@@ -14,12 +14,12 @@ class SettingsSectionAboutPart extends Column {
   );
 
   static void _onPressedAbout(BuildContext context) {
-    final systemInfoVM = context.read<SystemInfoVM>();
+    final systemInfo = context.read<SystemInfoVM>().fetch();
 
     showLicensePage(
       context: context,
-      applicationName: systemInfoVM.appName,
-      applicationVersion: systemInfoVM.version,
+      applicationName: systemInfo.appName,
+      applicationVersion: systemInfo.version,
       applicationLegalese: '2021 Eiichiro Kimura',
     );
   }

@@ -1,5 +1,5 @@
 import 'package:dazn_schedule/model/entity/team_standing.dart';
-import 'package:dazn_schedule/model/io/web_api.dart';
+import 'package:dazn_schedule/model/io/web_api_executor.dart';
 import 'package:dazn_schedule/model/repository/i_competition_repository.dart';
 
 class FootballCompetitionRepository implements ICompetitionRepository {
@@ -18,7 +18,7 @@ class FootballCompetitionRepository implements ICompetitionRepository {
 
   @override
   Future<List<TeamStanding>> fetch(String tournamentName) async {
-    final response = await WebApi.get(
+    final response = await WebApiExecutor.get(
       WebApiGetRequest(_getUrl(tournamentName), {'X-Auth-Token': _apiToken})
     );
     if (!response.isSuccess) {
