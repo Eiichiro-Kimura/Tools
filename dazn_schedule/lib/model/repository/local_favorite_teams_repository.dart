@@ -1,11 +1,10 @@
 import 'package:dazn_schedule/model/favorite_team.dart';
 import 'package:dazn_schedule/model/io/hive_database.dart';
 import 'package:dazn_schedule/model/repository/i_favorite_teams_repository.dart';
-import 'package:hive/hive.dart';
 
 class LocalFavoriteTeamsRepository implements IFavoriteTeamsRepository {
 
-  Box<FavoriteTeam> _box;
+  HiveBox<FavoriteTeam> _box;
 
   bool get _isValid => null != _box && _box.isOpen;
 
