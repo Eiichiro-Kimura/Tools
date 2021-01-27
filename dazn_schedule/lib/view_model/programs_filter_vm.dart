@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/extensions/date_time_extension.dart';
+import 'package:dazn_schedule/common/extensions/date_time_extension.dart';
 import 'package:flutter/material.dart';
 
 class ProgramsFilterVM extends ChangeNotifier {

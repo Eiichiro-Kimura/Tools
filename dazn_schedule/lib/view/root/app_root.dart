@@ -14,8 +14,7 @@ class AppRoot extends StatefulWidget {
   _AppRootState createState() => _AppRootState();
 }
 
-class _AppRootState extends State<AppRoot>
-    with TickerProviderStateMixin {
+class _AppRootState extends State<AppRoot> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
