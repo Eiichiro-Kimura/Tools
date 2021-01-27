@@ -34,10 +34,18 @@ class Program {
         tournamentName.contains(keyword) ||
         programName.contains(keyword) ||
         commentaryName.contains(keyword);
-    final isValidDate = _isValidDate(selectedFirstDate, selectedLastDate);
-    final isSelectedGenre = _isSelectedSettings(selectedGenre, genre);
-    final isSelectedTournamentName = _isSelectedSettings(selectedTournamentName,
-        tournamentName);
+    final isValidDate = _isValidDate(
+        selectedFirstDate,
+        selectedLastDate
+    );
+    final isSelectedGenre = _isSelectedSettings(
+        selectedGenre,
+        genre
+    );
+    final isSelectedTournamentName = _isSelectedSettings(
+        selectedTournamentName,
+        tournamentName
+    );
 
     return isHitKeyword &&
         isValidDate &&

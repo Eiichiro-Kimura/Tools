@@ -17,7 +17,7 @@ class FavoriteTeamsVM extends ChangeNotifier {
       _favoriteTeamsRepository.contains(favoriteTeam);
 
   bool save(FavoriteTeam favoriteTeam) {
-    final isSuccess = _favoriteTeamsRepository.save(favoriteTeam);
+    final isSuccess = _favoriteTeamsRepository.store(favoriteTeam);
     notifyListeners();
 
     return isSuccess;

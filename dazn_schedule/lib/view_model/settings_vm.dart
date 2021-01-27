@@ -20,7 +20,11 @@ class SettingsVM extends ChangeNotifier {
   Setting getSetting(SettingsKind settingsKind) => _infoMap[settingsKind];
 
   void setValue(SettingsKind settingsKind, String value) {
-    _preferencesRepository.setString(getSetting(settingsKind).key, value);
+    _preferencesRepository.storeStringValue(
+        getSetting(settingsKind).key,
+        value
+    );
+
     notifyListeners();
   }
 

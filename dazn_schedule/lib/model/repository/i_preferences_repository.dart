@@ -3,6 +3,6 @@ abstract class IPreferencesRepository {
   bool get isValid;
 
   Future<void> init();
-  String getString(String key);
-  Future<bool> setString(String key, String value);
+  String fetchStringValue(String key);
+  Future<bool> storeStringValue(String key, String value);
 }

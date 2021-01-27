@@ -6,7 +6,7 @@ abstract class IFavoriteTeamsRepository {
 
   Future<void> init();
   bool contains(FavoriteTeam favoriteTeam);
-  bool save(FavoriteTeam favoriteTeam);
+  bool store(FavoriteTeam favoriteTeam);
   bool remove(FavoriteTeam favoriteTeam);
   void clear();
 }

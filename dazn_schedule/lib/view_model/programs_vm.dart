@@ -14,7 +14,7 @@ class ProgramsVM extends ValueNotifier<List<Program>> {
 
   Future<void> generate() async {
     // 番組表を生成
-    value = await _programsRepository.createPrograms();
+    value = await _programsRepository.fetch();
 
     // 番組フィルターを作成
     _programFilter = ProgramFilter(value);

@@ -1,7 +1,7 @@
 extension DateTimeExtension on DateTime {
 
   DateTime cloneToDayStart() =>
-      copyWith(
+      clone(
           hour: 0,
           minute: 0,
           second: 0,
@@ -10,7 +10,7 @@ extension DateTimeExtension on DateTime {
       );
 
   DateTime cloneToDayEnd() =>
-      copyWith(
+      clone(
           hour: 23,
           minute: 59,
           second: 59,
@@ -18,7 +18,7 @@ extension DateTimeExtension on DateTime {
           microsecond: 999
       );
 
-  DateTime copyWith({
+  DateTime clone({
     int year,
     int month,
     int day,

@@ -38,19 +38,16 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
       FavoriteTeamsMenuItemPart(
           context,
           teamName,
-          isSelected: _isFavorite(context, genre, teamName, false)
+          isSelected: _isFavorite(context, genre, teamName)
       );
 
   static bool _isFavoriteProgram(BuildContext context, Program program) =>
-      _isFavorite(context, program.genre, program.homeTeamName, true) ||
-      _isFavorite(context, program.genre, program.awayTeamName, true);
+      _isFavorite(context, program.genre, program.homeTeamName) ||
+      _isFavorite(context, program.genre, program.awayTeamName);
 
   static bool _isFavorite(BuildContext context, String genre,
-      String teamName, bool isWatch) {
-    final favoriteTeamsVM = isWatch ?
-      context.read<FavoriteTeamsVM>() :
-      context.read<FavoriteTeamsVM>();
-
-    return favoriteTeamsVM.contains(FavoriteTeam.withData(genre, teamName));
-  }
+      String teamName) =>
+      context
+          .read<FavoriteTeamsVM>()
+          .contains(FavoriteTeam.withData(genre, teamName));
 }

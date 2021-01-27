@@ -1,22 +1,22 @@
+import 'package:dazn_schedule/model/io/preferences.dart';
 import 'package:dazn_schedule/model/repository/i_preferences_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalPreferencesRepository implements IPreferencesRepository {
 
-  SharedPreferences _sharedPreferences;
+  final _preferences = Preferences();
 
   @override
-  bool get isValid => null != _sharedPreferences;
+  bool get isValid => _preferences.isValid;
 
   @override
   Future<void> init() async =>
-      _sharedPreferences = await SharedPreferences.getInstance();
+      _preferences.init();
 
   @override
-  String getString(String key) =>
-      _sharedPreferences.getString(key);
+  String fetchStringValue(String key) =>
+      _preferences.getString(key);
 
   @override
-  Future<bool> setString(String key, String value) =>
-      _sharedPreferences.setString(key, value);
+  Future<bool> storeStringValue(String key, String value) =>
+      _preferences.setString(key, value);
 }

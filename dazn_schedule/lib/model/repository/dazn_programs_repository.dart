@@ -8,7 +8,7 @@ class DaznProgramsRepository implements IProgramsRepository {
   static const url = 'https://flyingsc.github.io/dazn-schedule/';
 
   @override
-  Future<List<Program>> createPrograms() async {
+  Future<List<Program>> fetch() async {
     final programs = <Program>[];
 
     // クライアントを取得
