@@ -1,7 +1,6 @@
-import 'dart:convert';
+import 'package:dazn_schedule/model/io/web_api.dart';
 import 'package:dazn_schedule/model/repository/i_competition_repository.dart';
 import 'package:dazn_schedule/model/team_standing.dart';
-import 'package:http/http.dart' as http;
 
 class FootballCompetitionRepository implements ICompetitionRepository {
 
@@ -19,15 +18,14 @@ class FootballCompetitionRepository implements ICompetitionRepository {
 
   @override
   Future<List<TeamStanding>> getStandings(String tournamentName) async {
-    final response = await http.get(
-        _getUrl(tournamentName),
-        headers: {'X-Auth-Token': _apiToken}
+    final response = await WebApi.get(
+      WebApiGetRequest(_getUrl(tournamentName), {'X-Auth-Token': _apiToken})
     );
-    if (200 != response.statusCode) {
+    if (!response.isSuccess) {
       return null;
     }
 
-    final root = json.decoder.convert(response.body) as Map<String, dynamic>;
+    final root = response.bodyObject as Map<String, dynamic>;
     final total = root['standings'][0] as Map<String, dynamic>;
     final table = total['table'] as List<dynamic>;
 
