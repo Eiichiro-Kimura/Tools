@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+enum LocaleKind {
+  en,
+  ja,
+}
+
 class LocaleManager {
 
   factory LocaleManager() => _instance;
@@ -14,10 +19,12 @@ class LocaleManager {
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
   ];
+  final Map<LocaleKind, Locale> _locales = const {
+    LocaleKind.en : Locale('en'),
+    LocaleKind.ja : Locale('ja'),
+  };
 
-  final Iterable<Locale> supportedLocales = const
-  [
-    Locale('en'),
-    Locale('ja'),
-  ];
+  Iterable<Locale> get supportedLocales => _locales.values;
+
+  Locale getLocale(LocaleKind localeKind) => _locales[localeKind];
 }

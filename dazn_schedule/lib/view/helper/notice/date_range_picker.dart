@@ -1,4 +1,5 @@
 import 'package:date_range_picker/date_range_picker.dart' as date_range_picker;
+import 'package:dazn_schedule/view/helper/manager/locale_manager.dart';
 import 'package:flutter/material.dart';
 
 class DateRangePicker {
@@ -8,7 +9,7 @@ class DateRangePicker {
       DateTime lastDate) async =>
       date_range_picker.showDatePicker(
           context: context,
-          locale: const Locale('ja'),
+          locale: LocaleManager().getLocale(LocaleKind.ja),
           initialFirstDate: initialFirstDate,
           initialLastDate: initialLastDate,
           firstDate: firstDate,

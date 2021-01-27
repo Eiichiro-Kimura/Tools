@@ -1,5 +1,6 @@
+import 'package:dazn_schedule/view_model/system_info_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 
 class SettingsSectionAboutPart extends Column {
 
@@ -12,13 +13,13 @@ class SettingsSectionAboutPart extends Column {
     ],
   );
 
-  static Future<void> _onPressedAbout(BuildContext context) async {
-    final packageInfo = await PackageInfo.fromPlatform();
+  static void _onPressedAbout(BuildContext context) {
+    final systemInfoVM = context.read<SystemInfoVM>();
 
     showLicensePage(
       context: context,
-      applicationName: packageInfo.appName,
-      applicationVersion: packageInfo.version,
+      applicationName: systemInfoVM.appName,
+      applicationVersion: systemInfoVM.version,
       applicationLegalese: '2021 Eiichiro Kimura',
     );
   }
