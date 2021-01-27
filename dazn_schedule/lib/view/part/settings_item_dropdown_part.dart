@@ -34,5 +34,5 @@ class SettingsItemDropdownPart extends Row {
   }
 
   static void _onChanged(BuildContext context, Setting setting, String value) =>
-      context.read<SettingsVM>().setValue(setting.settingsKind, value);
+      context.read<SettingsVM>().setSetting(setting..value = value);
 }
