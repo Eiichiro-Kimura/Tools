@@ -4,6 +4,7 @@ import 'package:dazn_schedule/view_model/cloud_calendar_vm.dart';
 import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
 import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
 import 'package:dazn_schedule/view_model/settings_vm.dart';
+import 'package:dazn_schedule/view_model/system_info_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
         HomeScaffold(context, widget.title) : BlankScaffold(widget.title);
 
   void _init() {
+    final systemInfoVM = context.read<SystemInfoVM>();
     final settingsVM = context.read<SettingsVM>();
     final cloudCalendarVM = context.read<CloudCalendarVM>();
     final favoriteTeamsVM = context.read<FavoriteTeamsVM>();
@@ -44,6 +46,7 @@ class _HomePageState extends State<HomePage> {
         .getSetting(SettingsKind.googleApiClientId)
         .value;
 
+    systemInfoVM.init();
     cloudCalendarVM.init(apiClientId);
     favoriteTeamsVM.init();
     ctrlHomeVM.setSearchTextCallback(_updateScreen);
