@@ -17,7 +17,7 @@ class FootballCompetitionRepository implements ICompetitionRepository {
   };
 
   @override
-  Future<List<TeamStanding>> getStandings(String tournamentName) async {
+  Future<List<TeamStanding>> fetch(String tournamentName) async {
     final response = await WebApi.get(
       WebApiGetRequest(_getUrl(tournamentName), {'X-Auth-Token': _apiToken})
     );

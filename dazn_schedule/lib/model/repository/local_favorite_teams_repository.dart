@@ -20,7 +20,7 @@ class LocalFavoriteTeamsRepository implements IFavoriteTeamsRepository {
       _isValid && _box.values.contains(favoriteTeam);
 
   @override
-  bool save(FavoriteTeam favoriteTeam) {
+  bool store(FavoriteTeam favoriteTeam) {
     if (_isValid) {
       if (!contains(favoriteTeam)) {
         _box.add(favoriteTeam);
