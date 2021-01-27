@@ -1,5 +1,5 @@
-import 'package:dazn_schedule/model/favorite_team.dart';
-import 'package:dazn_schedule/model/program.dart';
+import 'package:dazn_schedule/model/entity/favorite_team.dart';
+import 'package:dazn_schedule/model/entity/program.dart';
 import 'package:dazn_schedule/view/part/programs_card_part.dart';
 import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
 import 'package:dazn_schedule/view_model/programs_filter_vm.dart';

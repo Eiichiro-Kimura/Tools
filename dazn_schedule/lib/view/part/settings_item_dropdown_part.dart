@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/setting.dart';
+import 'package:dazn_schedule/model/entity/setting.dart';
 import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

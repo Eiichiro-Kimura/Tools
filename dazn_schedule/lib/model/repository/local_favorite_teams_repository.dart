@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/favorite_team.dart';
+import 'package:dazn_schedule/model/entity/favorite_team.dart';
 import 'package:dazn_schedule/model/io/hive_database.dart';
 import 'package:dazn_schedule/model/repository/i_favorite_teams_repository.dart';
 

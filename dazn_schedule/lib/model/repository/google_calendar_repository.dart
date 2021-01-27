@@ -1,5 +1,5 @@
+import 'package:dazn_schedule/model/entity/program.dart';
 import 'package:dazn_schedule/model/io/google_auth.dart';
-import 'package:dazn_schedule/model/program.dart';
 import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart';
 import 'package:googleapis/calendar/v3.dart';
 import 'package:googleapis_auth/auth.dart';

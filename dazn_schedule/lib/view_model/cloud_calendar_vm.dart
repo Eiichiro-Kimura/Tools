@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/program.dart';
+import 'package:dazn_schedule/model/entity/program.dart';
 import 'package:dazn_schedule/model/repository/i_cloud_calendar_repository.dart';
 
 class CloudCalendarVM {

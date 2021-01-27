@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/favorite_team.dart';
+import 'package:dazn_schedule/model/entity/favorite_team.dart';
 
 abstract class IFavoriteTeamsRepository {
 

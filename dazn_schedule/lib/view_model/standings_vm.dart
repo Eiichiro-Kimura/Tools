@@ -1,5 +1,5 @@
+import 'package:dazn_schedule/model/entity/team_standing.dart';
 import 'package:dazn_schedule/model/repository/i_competition_repository.dart';
-import 'package:dazn_schedule/model/team_standing.dart';
 import 'package:flutter/material.dart';
 
 class StandingsVM extends ValueNotifier<List<TeamStanding>> {

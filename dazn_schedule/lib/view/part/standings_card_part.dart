@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/team_standing.dart';
+import 'package:dazn_schedule/model/entity/team_standing.dart';
 import 'package:flutter/material.dart';
 
 class StandingsCardPart extends Card {

@@ -1,12 +1,6 @@
+import 'package:dazn_schedule/model/entity/setting.dart';
 import 'package:dazn_schedule/model/repository/i_preferences_repository.dart';
-import 'package:dazn_schedule/model/setting.dart';
 import 'package:flutter/material.dart';
-
-enum SettingsKind {
-  googleApiClientId,
-  filterGenre,
-  filterTournamentName,
-}
 
 class SettingsVM extends ChangeNotifier {
 
@@ -55,4 +49,10 @@ class SettingsVM extends ChangeNotifier {
 
     notifyListeners();
   }
+}
+
+enum SettingsKind {
+  googleApiClientId,
+  filterGenre,
+  filterTournamentName,
 }
