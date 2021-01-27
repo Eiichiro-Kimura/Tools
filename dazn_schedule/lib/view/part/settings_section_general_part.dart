@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/program_filter.dart';
+import 'package:dazn_schedule/model/entity/program_filter.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view/part/settings_item_dropdown_part.dart';
 import 'package:dazn_schedule/view/part/settings_item_text_part.dart';

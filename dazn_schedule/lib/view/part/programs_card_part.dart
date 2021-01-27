@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/program.dart';
+import 'package:dazn_schedule/model/entity/program.dart';
 import 'package:dazn_schedule/view/helper/notice/snack_bar_notice.dart';
 import 'package:dazn_schedule/view/part/favorite_teams_button_part.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_vm.dart';

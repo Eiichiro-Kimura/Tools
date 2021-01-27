@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/program.dart';
+import 'package:dazn_schedule/model/entity/program.dart';
 import 'package:dazn_schedule/model/repository/i_programs_repository.dart';
 import 'package:universal_html/driver.dart' as driver;
 import 'package:universal_html/src/html_with_internals.dart' as html_internals;

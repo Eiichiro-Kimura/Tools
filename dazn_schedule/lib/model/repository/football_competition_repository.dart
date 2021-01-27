@@ -1,6 +1,6 @@
+import 'package:dazn_schedule/model/entity/team_standing.dart';
 import 'package:dazn_schedule/model/io/web_api.dart';
 import 'package:dazn_schedule/model/repository/i_competition_repository.dart';
-import 'package:dazn_schedule/model/team_standing.dart';
 
 class FootballCompetitionRepository implements ICompetitionRepository {
 

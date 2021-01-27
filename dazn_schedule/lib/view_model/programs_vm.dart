@@ -1,5 +1,5 @@
-import 'package:dazn_schedule/model/program.dart';
-import 'package:dazn_schedule/model/program_filter.dart';
+import 'package:dazn_schedule/model/entity/program.dart';
+import 'package:dazn_schedule/model/entity/program_filter.dart';
 import 'package:dazn_schedule/model/repository/i_programs_repository.dart';
 import 'package:flutter/material.dart';
 

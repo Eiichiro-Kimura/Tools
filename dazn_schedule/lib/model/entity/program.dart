@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/program_filter.dart';
+import 'package:dazn_schedule/model/entity/program_filter.dart';
 import 'package:intl/intl.dart';
 
 class Program {

@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/model/favorite_team.dart';
+import 'package:dazn_schedule/model/entity/favorite_team.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
 import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
