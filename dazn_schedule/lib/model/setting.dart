@@ -13,5 +13,5 @@ class Setting {
   final dynamic _defaultValue;
 
   String get value =>
-      _preferencesRepository.getString(key) ?? _defaultValue as String;
+      _preferencesRepository.fetchStringValue(key) ?? _defaultValue as String;
 }
