@@ -1,22 +1,14 @@
-import 'package:dazn_schedule/model/io/system_info.dart';
+import 'package:dazn_schedule/model/entity/system_info.dart';
+import 'package:dazn_schedule/model/io/system_info_provider.dart';
 import 'package:dazn_schedule/model/repository/i_system_info_repository.dart';
 
 class SystemInfoRepository implements ISystemInfoRepository {
 
-  final _systemInfo = SystemInfo();
+  final _systemInfoProvider = SystemInfoProvider();
 
   @override
-  String get appName => _systemInfo.appName;
+  Future<void> init() => _systemInfoProvider.init();
 
   @override
-  String get buildNumber => _systemInfo.buildNumber;
-
-  @override
-  String get packageName => _systemInfo.packageName;
-
-  @override
-  String get version => _systemInfo.version;
-
-  @override
-  Future<void> init() => _systemInfo.init();
+  SystemInfo fetch() => _systemInfoProvider.fetch();
 }

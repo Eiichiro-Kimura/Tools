@@ -1,9 +1,7 @@
+import 'package:dazn_schedule/model/entity/system_info.dart';
+
 abstract class ISystemInfoRepository {
 
-  String get appName;
-  String get packageName;
-  String get version;
-  String get buildNumber;
-
   Future<void> init();
+  SystemInfo fetch();
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class WebApi {
+class WebApiExecutor {
 
   static Future<WebApiResponse> get(WebApiGetRequest request) async =>
       WebApiResponse(await http.get(request.url, headers: request.headers));
