@@ -1,11 +1,12 @@
-import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
+import 'package:dazn_schedule/common/extensions/animation_controller_extension.dart';
+import 'package:dazn_schedule/common/types/functions.dart';
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends AppBar {
 
   BaseAppBar(String title, AnimatedIconData animatedIconData,
       AnimationController animationController,
-      void Function(BuildContext) callback, {List<Widget> actions}) : super(
+      BuildContextCallback callback, {List<Widget> actions}) : super(
     title: Text(title),
     leading: Builder(
       builder: (context) {
@@ -27,7 +28,6 @@ class BaseAppBar extends AppBar {
   );
 
   static void _onPressedMenu(BuildContext context,
-      AnimationController animationController,
-      void Function(BuildContext) callback) =>
+      AnimationController animationController, BuildContextCallback callback) =>
       animationController.forwardReset(() => callback(context));
 }

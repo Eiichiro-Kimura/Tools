@@ -1,4 +1,4 @@
-import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
+import 'package:dazn_schedule/common/extensions/animation_controller_extension.dart';
 import 'package:dazn_schedule/view/helper/notice/date_range_picker.dart';
 import 'package:dazn_schedule/view/part/icon_rotation_part.dart';
 import 'package:dazn_schedule/view/part/icon_scale_part.dart';

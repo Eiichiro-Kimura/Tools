@@ -1,4 +1,5 @@
-import 'package:dazn_schedule/extensions/animation_controller_extension.dart';
+import 'package:dazn_schedule/common/extensions/animation_controller_extension.dart';
+import 'package:dazn_schedule/common/types/functions.dart';
 import 'package:dazn_schedule/view/helper/manager/page_manager.dart';
 import 'package:dazn_schedule/view/part/icon_rotation_part.dart';
 import 'package:dazn_schedule/view_model/ctrl_home_vm.dart';
@@ -8,7 +9,8 @@ import 'package:provider/provider.dart';
 
 class HomeFloatingActionButton extends FloatingActionButton {
 
-  HomeFloatingActionButton(BuildContext context, VoidCallback callback) : super(
+  HomeFloatingActionButton(BuildContext context,
+      BuildContextCallback callback) : super(
     onPressed: () => _onPressedSettings(context, callback),
     child: IconRotationPart(
         Icons.settings,
@@ -16,7 +18,9 @@ class HomeFloatingActionButton extends FloatingActionButton {
     ),
   );
 
-  static void _onPressedSettings(BuildContext context, VoidCallback callback) {
+  static void _onPressedSettings(BuildContext context,
+      BuildContextCallback callback) {
+
     final ctrlHomeVM = context.read<CtrlHomeVM>();
     final programsVM = context.read<ProgramsVM>();
 
@@ -25,7 +29,7 @@ class HomeFloatingActionButton extends FloatingActionButton {
         .forwardReset(() {
           PageManager()
               .forward(context, PageKind.settings, programsVM.programFilter)
-              .then((_) => callback());
+              .then((_) => callback(context));
         });
   }
 }

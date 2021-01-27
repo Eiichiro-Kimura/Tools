@@ -22,10 +22,7 @@ class HomeScaffold extends Scaffold {
         ),
       ],
     ),
-    floatingActionButton: HomeFloatingActionButton(
-      context,
-      () => init(context),
-    ),
+    floatingActionButton: HomeFloatingActionButton(context, init),
   );
 
   static void init(BuildContext context) {
