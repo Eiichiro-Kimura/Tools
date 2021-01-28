@@ -9,7 +9,7 @@
 
 ### dazn_schedule
 
-![demo](https://user-images.githubusercontent.com/77208334/105646462-72b53f00-5ee3-11eb-8071-e9688af6ac68.gif)
+![demo](https://user-images.githubusercontent.com/77208334/106139537-e8096400-61b0-11eb-9324-fcbec47004a2.gif)
 
 #### 制作背景
 * Flutterスマホアプリの習作。
