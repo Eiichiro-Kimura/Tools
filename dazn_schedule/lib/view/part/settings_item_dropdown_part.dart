@@ -14,8 +14,6 @@ class SettingsItemDropdownPart extends Row {
     ],
   );
 
-  static const double marginSize = 20;
-
   static DropdownButton _createDropdownButton(BuildContext context,
       List<String> textList, Setting setting) {
 

@@ -15,7 +15,7 @@ class NormalAppBar extends BaseAppBar {
     (contextCB) => Scaffold.of(contextCB).openDrawer(),
     actions: [
       Padding(
-        padding: const EdgeInsets.all(marginSize),
+        padding: const EdgeInsets.all(_marginSize),
         child: Row(
           children: [
             IconButton(
@@ -39,7 +39,7 @@ class NormalAppBar extends BaseAppBar {
     ],
   );
 
-  static const double marginSize = 8;
+  static const double _marginSize = 8;
 
   static void _onPressedFavoriteFilter(BuildContext context) {
     final ctrlHomeVM = context.read<CtrlHomeVM>();

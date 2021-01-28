@@ -5,10 +5,10 @@ class HomeDrawer extends Drawer {
 
   HomeDrawer(BuildContext context) : super(
     child: Padding(
-      padding: const EdgeInsets.only(top: marginSize),
+      padding: const EdgeInsets.only(top: _marginSize),
       child: StandingsPart(context),
     ),
   );
 
-  static const double marginSize = 30;
+  static const double _marginSize = 30;
 }
