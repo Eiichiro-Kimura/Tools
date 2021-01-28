@@ -8,7 +8,7 @@ class FavoriteTeamsMenuItemPart extends PopupMenuItem<String> {
     child: Row(
       children: [
         Padding(
-          padding: const EdgeInsets.only(right: marginSize),
+          padding: const EdgeInsets.only(right: _marginSize),
           child: Icon(
             isSelected ? Icons.favorite : Icons.favorite_border,
             color: Theme.of(context).accentColor,
@@ -19,5 +19,5 @@ class FavoriteTeamsMenuItemPart extends PopupMenuItem<String> {
     ),
   );
 
-  static const double marginSize = 10;
+  static const double _marginSize = 10;
 }

@@ -5,7 +5,7 @@ class SettingsTitlePart extends Column {
   SettingsTitlePart(String title) : super(
     children: [
       const Padding(
-        padding: EdgeInsets.only(top: marginSize * 2),
+        padding: EdgeInsets.only(top: _marginSize * 2),
       ),
       Text(
         title,
@@ -15,10 +15,10 @@ class SettingsTitlePart extends Column {
         ),
       ),
       const Padding(
-        padding: EdgeInsets.only(bottom: marginSize),
+        padding: EdgeInsets.only(bottom: _marginSize),
       ),
     ],
   );
 
-  static const double marginSize = 5;
+  static const double _marginSize = 5;
 }

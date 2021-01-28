@@ -9,7 +9,7 @@ class SettingsItemTextPart extends Row {
       TextEditingController textEditingController) : super(
     children: [
       Text(setting.name),
-      const SizedBox(width: marginSize),
+      const SizedBox(width: _marginSize),
       Expanded(
         child: TextField(
           textAlign: TextAlign.end,
@@ -21,7 +21,7 @@ class SettingsItemTextPart extends Row {
     ],
   );
 
-  static const double marginSize = 40;
+  static const double _marginSize = 40;
 
   static void _onChanged(BuildContext context, Setting setting, String value) =>
       context.read<SettingsVM>().setSetting(setting..value = value);

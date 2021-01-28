@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class StandingsCardPart extends Card {
 
   StandingsCardPart(TeamStanding teamStanding): super(
-    margin: const EdgeInsets.all(marginSize),
+    margin: const EdgeInsets.all(_marginSize),
     child: Container(
       child: ListTile(
-        contentPadding: const EdgeInsets.all(marginSize),
+        contentPadding: const EdgeInsets.all(_marginSize),
         leading: Text('${teamStanding.position}位'),
         title: Text('${teamStanding.teamName}'),
         subtitle: Text('''${teamStanding.won}勝${teamStanding.draw}分${teamStanding.lost}敗'''),
@@ -16,6 +16,6 @@ class StandingsCardPart extends Card {
     ),
   );
 
-  static const double marginSize = 10;
+  static const double _marginSize = 10;
 }
 

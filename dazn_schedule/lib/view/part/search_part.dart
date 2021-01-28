@@ -12,7 +12,7 @@ class SearchPart extends Container {
   SearchPart(BuildContext context) : super(
     color: Theme.of(context).primaryColor,
     child: Padding(
-      padding: const EdgeInsets.all(marginSize),
+      padding: const EdgeInsets.all(_marginSize),
       child: Row(
         children: [
           Expanded(
@@ -49,7 +49,7 @@ class SearchPart extends Container {
     ),
   );
 
-  static const double marginSize = 8;
+  static const double _marginSize = 8;
 
   static void _onPressedClearSearchText(BuildContext context) {
     final ctrlHomeVM = context.read<CtrlHomeVM>();
