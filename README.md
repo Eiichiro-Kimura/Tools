@@ -9,7 +9,7 @@
 
 ### dazn_schedule
 
-![demo](https://user-images.githubusercontent.com/77208334/106139537-e8096400-61b0-11eb-9324-fcbec47004a2.gif)
+![demo](https://user-images.githubusercontent.com/77208334/106357676-e2e01c80-634a-11eb-9661-25236d8c33a4.gif)
 
 #### 制作背景
 * Flutterスマホアプリの習作。
@@ -19,6 +19,7 @@
 #### 主な機能
 * DAZN番組表機能
 * リーグ順位表機能（サッカーのみ）
+* 得点順位表機能（サッカーのみ）
 * お気に入り登録機能
 * 番組表フィルタリング機能（フリーワード、日付、お気に入り）
 * Googleカレンダー登録機能（GoogleAPIのクライアントキーが必要）
