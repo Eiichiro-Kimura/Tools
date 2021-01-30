@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildNormal(BuildContext context) =>
       DefaultTabController(
         length: TabManager().tabCount,
-        child: HomeScaffold(context, widget.title),
+        child: HomeScaffold(context, GlobalKey<ScaffoldState>(), widget.title),
       );
 
   Widget _buildLoading(BuildContext context) =>

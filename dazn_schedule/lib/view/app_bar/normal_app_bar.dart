@@ -9,11 +9,12 @@ import 'package:provider/provider.dart';
 
 class NormalAppBar extends BaseAppBar {
 
-  NormalAppBar(BuildContext context, String title) : super(
+  NormalAppBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey,
+      String title) : super(
     title,
     AnimatedIcons.menu_arrow,
     null,
-    TabManager().createTabBar(),
+    TabManager().createTabBar(scaffoldKey),
     (contextCB) => Scaffold.of(contextCB).openDrawer(),
     actions: [
       Padding(
