@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/common/extensions/build_context_extension.dart';
 import 'package:dazn_schedule/view/helper/notice/snack_bar_notice.dart';
 import 'package:dazn_schedule/view/part/programs_part.dart';
 import 'package:dazn_schedule/view/part/scorers_part.dart';
@@ -36,7 +37,8 @@ class TabManager {
 
   int get tabCount => _tabDetails.length;
 
-  PreferredSizeWidget createTabBar(GlobalKey<ScaffoldState> scaffoldKey) =>
+  PreferredSizeWidget createTabBar(BuildContext context,
+      GlobalKey<ScaffoldState> scaffoldKey) =>
       TabBar(
         tabs: _tabDetails.map(
                 (tabDetail) => Container(
@@ -44,7 +46,10 @@ class TabManager {
                   child: Text(tabDetail.name),
                 )
         ).toList(),
-        onTap: (_) => SnackBarNotice.hide(scaffoldKey.currentState),
+        onTap: (_) {
+          context.hideKeyboard();
+          SnackBarNotice.hide(scaffoldKey.currentState);
+        },
       );
 
   Widget createTabBarView(BuildContext context) =>
