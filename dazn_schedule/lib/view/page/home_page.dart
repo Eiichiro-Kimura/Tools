@@ -21,6 +21,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildNormal(BuildContext context) =>
       DefaultTabController(
         length: TabManager().tabCount,
-        child: HomeScaffold(context, GlobalKey<ScaffoldState>(), widget.title),
+        child: HomeScaffold(context, _scaffoldKey, widget.title),
       );
 
   Widget _buildLoading(BuildContext context) =>
