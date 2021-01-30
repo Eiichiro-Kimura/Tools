@@ -1,26 +1,13 @@
 import 'package:dazn_schedule/model/entity/team_standing.dart';
-import 'package:dazn_schedule/model/io/web_api_executor.dart';
-import 'package:dazn_schedule/model/repository/i_competition_repository.dart';
+import 'package:dazn_schedule/model/repository/football_base_repository.dart';
+import 'package:dazn_schedule/model/repository/i_standings_repository.dart';
 
-class FootballCompetitionRepository implements ICompetitionRepository {
-
-  static const _baseUrl = 'http://api.football-data.org/v2/competitions';
-  static const _apiToken = 'cce49f9cf8104f8da53c7e5bae7a3094';
-  static const _competitionIdMap = {
-    'プレミアリーグ': 2021,
-    'リーグアン': 2015,
-    'セリエA': 2019,
-    'コパ・デル・レイ': 2014,
-    'ラ・リーガ': 2014,
-    'FAカップ': 2021,
-    'コッパ・イタリア': 2019,
-  };
+class FootballStandingsRepository extends FootballBaseRepository
+    implements IStandingsRepository {
 
   @override
   Future<List<TeamStanding>> fetch(String tournamentName) async {
-    final response = await WebApiExecutor.get(
-      WebApiGetRequest(_getUrl(tournamentName), {'X-Auth-Token': _apiToken})
-    );
+    final response = await callGetWebApi(tournamentName, 'standings');
     if (!response.isSuccess) {
       return null;
     }
@@ -31,9 +18,6 @@ class FootballCompetitionRepository implements ICompetitionRepository {
 
     return table.map(_createTeamStanding).toList();
   }
-
-  String _getUrl(String tournamentName) =>
-      '$_baseUrl/${_competitionIdMap[tournamentName]}/standings';
 
   TeamStanding _createTeamStanding(dynamic element) {
     final teamResult = element as Map<String, dynamic>;

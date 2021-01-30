@@ -13,6 +13,7 @@ class SettingsAppBar extends BaseAppBar {
     title,
     AnimatedIcons.arrow_menu,
     context.watch<CtrlSettingsVM>().menuAnimation,
+    null,
     (contextCB) => PageManager().backward(contextCB),
     actions: [
       Padding(

@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/view/helper/manager/tab_manager.dart';
 import 'package:dazn_schedule/view/scaffold/blank_scaffold.dart';
 import 'package:dazn_schedule/view/scaffold/home_scaffold.dart';
 import 'package:dazn_schedule/view_model/cloud_calendar_vm.dart';
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) =>
       context.watch<SettingsVM>().isValid ?
-        HomeScaffold(context, widget.title) : BlankScaffold(widget.title);
+      _buildNormal(context) : _buildLoading(context);
 
   void _init() {
     final systemInfoVM = context.read<SystemInfoVM>();
@@ -53,6 +54,15 @@ class _HomePageState extends State<HomePage> {
 
     HomeScaffold.init(context);
   }
+
+  Widget _buildNormal(BuildContext context) =>
+      DefaultTabController(
+        length: TabManager().tabCount,
+        child: HomeScaffold(context, widget.title),
+      );
+
+  Widget _buildLoading(BuildContext context) =>
+      BlankScaffold(widget.title);
 
   void _updateScreen() => setState(() {});
 }

@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 class CtrlHomeVM extends ChangeNotifier {
 
   CtrlHomeVM(TickerProvider tickerProvider) :
-        menuAnimation = AnimationController(
-          duration: const Duration(milliseconds: animationTimeRotate),
-          vsync: tickerProvider,
-        ),
         favoriteFilterAnimation = AnimationController(
           duration: const Duration(milliseconds: animationTimeScale),
           vsync: tickerProvider,
@@ -31,7 +27,6 @@ class CtrlHomeVM extends ChangeNotifier {
 
   static const int animationTimeRotate = 300;
   static const int animationTimeScale = 100;
-  final AnimationController menuAnimation;
   final AnimationController favoriteFilterAnimation;
   final AnimationController clearFilterAnimation;
   final AnimationController clearSearchTextAnimation;
@@ -41,7 +36,6 @@ class CtrlHomeVM extends ChangeNotifier {
 
   @override
   void dispose() {
-    menuAnimation.dispose();
     favoriteFilterAnimation.dispose();
     clearFilterAnimation.dispose();
     clearSearchTextAnimation.dispose();
