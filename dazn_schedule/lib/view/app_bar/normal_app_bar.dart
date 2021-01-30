@@ -1,4 +1,5 @@
 import 'package:dazn_schedule/common/extensions/animation_controller_extension.dart';
+import 'package:dazn_schedule/common/extensions/build_context_extension.dart';
 import 'package:dazn_schedule/view/app_bar/base_app_bar.dart';
 import 'package:dazn_schedule/view/helper/manager/tab_manager.dart';
 import 'package:dazn_schedule/view/part/icon_scale_part.dart';
@@ -9,11 +10,12 @@ import 'package:provider/provider.dart';
 
 class NormalAppBar extends BaseAppBar {
 
-  NormalAppBar(BuildContext context, String title) : super(
+  NormalAppBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey,
+      String title) : super(
     title,
     AnimatedIcons.menu_arrow,
     null,
-    TabManager().createTabBar(),
+    TabManager().createTabBar(context, scaffoldKey),
     (contextCB) => Scaffold.of(contextCB).openDrawer(),
     actions: [
       Padding(
@@ -50,6 +52,8 @@ class NormalAppBar extends BaseAppBar {
     ctrlHomeVM
         .favoriteFilterAnimation
         .forwardReverse(programsFilterVM.flipFavoriteOnly);
+
+    context.hideKeyboard();
   }
 
   static void _onPressedClearFilter(BuildContext context) {
@@ -62,5 +66,7 @@ class NormalAppBar extends BaseAppBar {
           ctrlHomeVM.searchText.text = '';
           programsFilterVM.clear();
         });
+
+    context.hideKeyboard();
   }
 }

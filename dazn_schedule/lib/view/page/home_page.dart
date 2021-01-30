@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/common/extensions/build_context_extension.dart';
 import 'package:dazn_schedule/view/helper/manager/tab_manager.dart';
 import 'package:dazn_schedule/view/scaffold/blank_scaffold.dart';
 import 'package:dazn_schedule/view/scaffold/home_scaffold.dart';
@@ -20,6 +21,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -56,9 +59,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildNormal(BuildContext context) =>
-      DefaultTabController(
-        length: TabManager().tabCount,
-        child: HomeScaffold(context, widget.title),
+      GestureDetector(
+          onTap: context.hideKeyboard,
+          child: DefaultTabController(
+            length: TabManager().tabCount,
+            child: HomeScaffold(context, _scaffoldKey, widget.title),
+          )
       );
 
   Widget _buildLoading(BuildContext context) =>

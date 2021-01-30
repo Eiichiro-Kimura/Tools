@@ -1,3 +1,4 @@
+import 'package:dazn_schedule/model/entity/player.dart';
 import 'package:dazn_schedule/model/entity/scorer.dart';
 import 'package:dazn_schedule/model/repository/football_base_repository.dart';
 import 'package:dazn_schedule/model/repository/i_scorers_repository.dart';
@@ -23,7 +24,13 @@ class FootballScorersRepository extends FootballBaseRepository
     final team = element['team'] as Map<String, dynamic>;
 
     return Scorer(
-        player['name'] as String,
+        Player(
+            player['name'] as String,
+            player['dateOfBirth'] as String,
+            player['countryOfBirth'] as String,
+            player['nationality'] as String,
+            player['position'] as String
+        ),
         team['name'] as String,
         (element['numberOfGoals'] as int).toString()
     );

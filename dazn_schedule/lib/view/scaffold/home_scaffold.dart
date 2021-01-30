@@ -10,8 +10,10 @@ import 'package:provider/provider.dart';
 
 class HomeScaffold extends Scaffold {
 
-  HomeScaffold(BuildContext context, String title) : super(
-    appBar: NormalAppBar(context, title),
+  HomeScaffold(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey,
+      String title) : super(
+    key: scaffoldKey,
+    appBar: NormalAppBar(context, scaffoldKey, title),
     body: TabManager().createTabBarView(context),
     floatingActionButton: HomeFloatingActionButton(context, init),
   );
