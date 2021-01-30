@@ -1,9 +1,8 @@
 import 'package:dazn_schedule/view/app_bar/normal_app_bar.dart';
-import 'package:dazn_schedule/view/drawer/home_drawer.dart';
 import 'package:dazn_schedule/view/floating_action_button/home_floating_action_button.dart';
-import 'package:dazn_schedule/view/part/programs_part.dart';
-import 'package:dazn_schedule/view/part/search_part.dart';
+import 'package:dazn_schedule/view/helper/manager/tab_manager.dart';
 import 'package:dazn_schedule/view_model/programs_vm.dart';
+import 'package:dazn_schedule/view_model/scorers_vm.dart';
 import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:dazn_schedule/view_model/standings_vm.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +12,7 @@ class HomeScaffold extends Scaffold {
 
   HomeScaffold(BuildContext context, String title) : super(
     appBar: NormalAppBar(context, title),
-    drawer: HomeDrawer(context),
-    body: Column(
-      children: [
-        SearchPart(context),
-        Expanded(
-          child: ProgramsPart(context),
-        ),
-      ],
-    ),
+    body: TabManager().createTabBarView(context),
     floatingActionButton: HomeFloatingActionButton(context, init),
   );
 
@@ -29,6 +20,7 @@ class HomeScaffold extends Scaffold {
     final settingsVM = context.read<SettingsVM>();
     final programsVM = context.read<ProgramsVM>();
     final standingsVM = context.read<StandingsVM>();
+    final scorersVM = context.read<ScorersVM>();
 
     final daznTournamentName = settingsVM
         .getSetting(SettingsKind.filterTournamentName)
@@ -36,5 +28,6 @@ class HomeScaffold extends Scaffold {
 
     programsVM.generate();
     standingsVM.generate(daznTournamentName);
+    scorersVM.generate(daznTournamentName);
   }
 }

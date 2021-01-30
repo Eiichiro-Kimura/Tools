@@ -6,9 +6,11 @@ class BaseAppBar extends AppBar {
 
   BaseAppBar(String title, AnimatedIconData animatedIconData,
       AnimationController animationController,
+      PreferredSizeWidget bottomWidget,
       BuildContextCallback callback, {List<Widget> actions}) : super(
+
     title: Text(title),
-    leading: Builder(
+    leading: null == animationController ? null : Builder(
       builder: (context) {
         return IconButton(
           icon: AnimatedIcon(
@@ -24,6 +26,7 @@ class BaseAppBar extends AppBar {
         );
       },
     ),
+    bottom: bottomWidget,
     actions: actions,
   );
 

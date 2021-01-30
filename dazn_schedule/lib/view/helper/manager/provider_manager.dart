@@ -1,5 +1,6 @@
 import 'package:dazn_schedule/model/repository/dazn_programs_repository.dart';
-import 'package:dazn_schedule/model/repository/football_competition_repository.dart';
+import 'package:dazn_schedule/model/repository/football_scorers_repository.dart';
+import 'package:dazn_schedule/model/repository/football_standings_repository.dart';
 import 'package:dazn_schedule/model/repository/google_calendar_repository.dart';
 import 'package:dazn_schedule/model/repository/local_favorite_teams_repository.dart';
 import 'package:dazn_schedule/model/repository/local_preferences_repository.dart';
@@ -10,6 +11,7 @@ import 'package:dazn_schedule/view_model/ctrl_settings_vm.dart';
 import 'package:dazn_schedule/view_model/favorite_teams_vm.dart';
 import 'package:dazn_schedule/view_model/programs_filter_vm.dart';
 import 'package:dazn_schedule/view_model/programs_vm.dart';
+import 'package:dazn_schedule/view_model/scorers_vm.dart';
 import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:dazn_schedule/view_model/standings_vm.dart';
 import 'package:dazn_schedule/view_model/system_info_vm.dart';
@@ -33,7 +35,10 @@ class ProviderManager {
         ProgramsVM(DaznProgramsRepository())
     ),
     ChangeNotifierProvider(create: (_) =>
-        StandingsVM(FootballCompetitionRepository())
+        StandingsVM(FootballStandingsRepository())
+    ),
+    ChangeNotifierProvider(create: (_) =>
+        ScorersVM(FootballScorersRepository())
     ),
     ChangeNotifierProvider(create: (_) =>
         ProgramsFilterVM()
