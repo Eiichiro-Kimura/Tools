@@ -17,7 +17,7 @@ import 'package:dazn_schedule/view_model/settings_vm.dart';
 import 'package:dazn_schedule/view_model/standings_vm.dart';
 import 'package:dazn_schedule/view_model/system_info_vm.dart';
 import 'package:dazn_schedule/view_model/teams_vm.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

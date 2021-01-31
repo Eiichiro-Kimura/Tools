@@ -8,4 +8,12 @@ class Player {
   final String countryOfBirth;
   final String nationality;
   final String position;
+
+  Map<String, String> toMap() => {
+    'Name': name,
+    'DateOfBirth': dateOfBirth,
+    'CountryOfBirth': countryOfBirth,
+    'Nationality': nationality,
+    'Position': position,
+  };
 }

@@ -11,4 +11,14 @@ class Team {
   final String clubColors;
   final String venue;
   final String address;
+
+  Map<String, String> toMap() => {
+    'Name': name,
+    'Phone': phone,
+    'Website': website,
+    'Email': email,
+    'ClubColors': clubColors,
+    'Venue': venue,
+    'Address': address,
+  };
 }
