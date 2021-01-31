@@ -5,23 +5,18 @@ import 'package:flutter/material.dart';
 
 class ScorersCardPart extends Card {
 
-  ScorersCardPart(int position, Scorer scorer) : super(
+  ScorersCardPart(Scorer scorer) : super(
     margin: const EdgeInsets.all(_marginSize),
     child: Builder(
       builder: (context) {
         return Container(
           child: ListTile(
             contentPadding: const EdgeInsets.all(_marginSize),
-            leading: Text('$position位'),
+            leading: Text('${scorer.position}位'),
             title: Text(scorer.player.name),
             subtitle: Text(scorer.teamName),
             trailing: Text('${scorer.goalCount}Goals'),
-            onTap: () =>
-                SnackBarNotice.showWithContent(
-                    context,
-                    _createSnackBarWidget(context, scorer.player),
-                    const Duration(minutes: 1)
-                ),
+            onTap: () => _onTapListTile(context, scorer),
           ),
         );
       },
@@ -29,6 +24,13 @@ class ScorersCardPart extends Card {
   );
 
   static const double _marginSize = 10;
+
+  static void _onTapListTile(BuildContext context, Scorer scorer) =>
+      SnackBarNotice.showWithContent(
+          context,
+          _createSnackBarWidget(context, scorer.player),
+          const Duration(minutes: 1)
+      );
 
   static Widget _createSnackBarWidget(BuildContext context, Player player) =>
       Column(

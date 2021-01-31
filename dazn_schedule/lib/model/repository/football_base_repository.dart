@@ -14,15 +14,14 @@ class FootballBaseRepository {
     'コッパ・イタリア': 2019,
   };
 
-  Future<WebApiResponse> callGetWebApi(String tournamentName,
-      String resourceName) =>
-      WebApiExecutor.get(
-          WebApiGetRequest(
-              _getUrl(tournamentName, resourceName),
-              {'X-Auth-Token': _apiToken}
-          )
-      );
+  Map<String, String> get _headers => {'X-Auth-Token': _apiToken};
 
   String _getUrl(String tournamentName, String resourceName) =>
       '$_baseUrl/${_competitionIdMap[tournamentName]}/$resourceName';
+
+  Future<WebApiResponse> callGetWebApi(String tournamentName,
+      String resourceName) =>
+      WebApiExecutor.get(
+          WebApiGetRequest(_getUrl(tournamentName, resourceName), _headers)
+      );
 }

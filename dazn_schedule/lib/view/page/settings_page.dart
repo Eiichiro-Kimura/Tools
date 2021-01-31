@@ -29,6 +29,5 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      SettingsScaffold(context, widget.title);
+  Widget build(BuildContext context) => SettingsScaffold(context, widget.title);
 }

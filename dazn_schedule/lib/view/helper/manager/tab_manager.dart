@@ -13,6 +13,7 @@ class TabManager {
   TabManager._internal();
 
   static final TabManager _instance = TabManager._internal();
+  static const double _marginSize = 8;
   final List<_TabDetail> _tabDetails = [
     _TabDetail(
       'Programs',
@@ -40,16 +41,8 @@ class TabManager {
   PreferredSizeWidget createTabBar(BuildContext context,
       GlobalKey<ScaffoldState> scaffoldKey) =>
       TabBar(
-        tabs: _tabDetails.map(
-                (tabDetail) => Container(
-                  padding: const EdgeInsets.all(_marginSize),
-                  child: Text(tabDetail.name),
-                )
-        ).toList(),
-        onTap: (_) {
-          context.hideKeyboard();
-          SnackBarNotice.hide(scaffoldKey.currentState);
-        },
+        tabs: _tabDetails.map(_createTabWidget).toList(),
+        onTap: (_) => _onTabTap(context, scaffoldKey),
       );
 
   Widget createTabBarView(BuildContext context) =>
@@ -59,7 +52,16 @@ class TabManager {
               .toList(),
       );
 
-  static const double _marginSize = 8;
+  Widget _createTabWidget(_TabDetail tabDetail) =>
+      Container(
+        padding: const EdgeInsets.all(_marginSize),
+        child: Text(tabDetail.name),
+      );
+
+  void _onTabTap(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
+    context.hideKeyboard();
+    SnackBarNotice.hide(scaffoldKey.currentState);
+  }
 }
 
 class _TabDetail {

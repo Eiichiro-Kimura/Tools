@@ -29,22 +29,22 @@ class ProviderManager {
         CtrlSettingsVM(tickerProvider)
     ),
     ChangeNotifierProvider(create: (_) =>
-        SettingsVM(LocalPreferencesRepository())
-    ),
-    ChangeNotifierProvider(create: (_) =>
-        ProgramsVM(DaznProgramsRepository())
-    ),
-    ChangeNotifierProvider(create: (_) =>
-        StandingsVM(FootballStandingsRepository())
-    ),
-    ChangeNotifierProvider(create: (_) =>
-        ScorersVM(FootballScorersRepository())
+        FavoriteTeamsVM(LocalFavoriteTeamsRepository())
     ),
     ChangeNotifierProvider(create: (_) =>
         ProgramsFilterVM()
     ),
     ChangeNotifierProvider(create: (_) =>
-        FavoriteTeamsVM(LocalFavoriteTeamsRepository())
+        ProgramsVM(DaznProgramsRepository())
+    ),
+    ChangeNotifierProvider(create: (_) =>
+        ScorersVM(FootballScorersRepository())
+    ),
+    ChangeNotifierProvider(create: (_) =>
+        SettingsVM(LocalPreferencesRepository())
+    ),
+    ChangeNotifierProvider(create: (_) =>
+        StandingsVM(FootballStandingsRepository())
     ),
     Provider<CloudCalendarVM>.value(
         value: CloudCalendarVM(GoogleCalendarRepository())

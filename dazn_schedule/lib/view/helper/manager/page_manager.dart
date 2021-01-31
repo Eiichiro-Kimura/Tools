@@ -8,16 +8,16 @@ class PageManager {
   PageManager._internal();
 
   static final PageManager _instance = PageManager._internal();
-  final Map<PageKind, PageInfo> _pageInfoMap = {
-    PageKind.home:      PageInfo('/',         (context) => const HomePage(title: 'Dazn Schedule')),
-    PageKind.settings:  PageInfo('/settings', (context) => const SettingsPage(title: 'Settings')),
+  final Map<PageKind, PageDetail> _pageDetails = {
+    PageKind.home:      PageDetail('/',         (context) => const HomePage(title: 'Dazn Schedule')),
+    PageKind.settings:  PageDetail('/settings', (context) => const SettingsPage(title: 'Settings')),
   };
 
-  String get initialRoute => _pageInfoMap[PageKind.home].route;
+  String get initialRoute => _pageDetails[PageKind.home].route;
 
   Map<String, WidgetBuilder> get routes {
     final routes = <String, WidgetBuilder>{};
-    _pageInfoMap.forEach((key, value) => routes[value.route] = value.builder);
+    _pageDetails.forEach((key, value) => routes[value.route] = value.builder);
 
     return routes;
   }
@@ -29,7 +29,7 @@ class PageManager {
       Object arguments) =>
       Navigator
           .of(context)
-          .pushNamed(_pageInfoMap[pageKind].route, arguments: arguments);
+          .pushNamed(_pageDetails[pageKind].route, arguments: arguments);
 
   void backward(BuildContext context) => Navigator.of(context).pop();
 }
@@ -39,9 +39,9 @@ enum PageKind {
   settings,
 }
 
-class PageInfo {
+class PageDetail {
 
-  PageInfo(this.route, this.builder);
+  PageDetail(this.route, this.builder);
 
   final String route;
   final WidgetBuilder builder;
