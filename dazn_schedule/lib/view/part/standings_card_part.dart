@@ -1,10 +1,11 @@
 import 'package:dazn_schedule/model/entity/team_standing.dart';
-import 'package:dazn_schedule/view/mixin/snack_bar_information_mixin.dart';
+import 'package:dazn_schedule/view/helper/notice/snack_bar_notice.dart';
+import 'package:dazn_schedule/view/part/map_information_part.dart';
 import 'package:dazn_schedule/view_model/teams_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class StandingsCardPart extends Card with SnackBarInformationMixin {
+class StandingsCardPart extends Card {
 
   StandingsCardPart(TeamStanding teamStanding): super(
     margin: const EdgeInsets.all(_marginSize),
@@ -31,7 +32,11 @@ class StandingsCardPart extends Card with SnackBarInformationMixin {
 
     final team = await context.read<TeamsVM>().fetch(teamStanding.teamId);
 
-    SnackBarInformationMixin.showSnackBar(context, team.toMap());
+    SnackBarNotice.showWithContent(
+        context,
+        MapInformationPart(context, team.toMap()),
+        const Duration(minutes: 1)
+    );
   }
 }
 
