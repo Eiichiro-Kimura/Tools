@@ -15,35 +15,37 @@ class NormalAppBar extends BaseAppBar {
     title,
     AnimatedIcons.menu_arrow,
     null,
+    (contextInner) => Scaffold.of(contextInner).openDrawer(),
     TabManager().createTabBar(context, scaffoldKey),
-    (contextCB) => Scaffold.of(contextCB).openDrawer(),
-    actions: [
-      Padding(
-        padding: const EdgeInsets.all(_marginSize),
-        child: Row(
-          children: [
-            IconButton(
-              icon: IconScalePart(
-                  context.watch<ProgramsFilterVM>().isFavoriteOnly ?
-                    Icons.favorite : Icons.favorite_border,
-                  context.watch<CtrlHomeVM>().favoriteFilterAnimation
-              ),
-              onPressed: () => _onPressedFavoriteFilter(context),
-            ),
-            IconButton(
-              icon: IconScalePart(
-                  Icons.delete,
-                  context.watch<CtrlHomeVM>().clearFilterAnimation
-              ),
-              onPressed: () => _onPressedClearFilter(context),
-            ),
-          ],
-        ),
-      ),
-    ],
+    actions: _createActions(context),
   );
 
   static const double _marginSize = 8;
+
+  static List<Widget> _createActions(BuildContext context) => [
+    Padding(
+      padding: const EdgeInsets.all(_marginSize),
+      child: Row(
+        children: [
+          IconButton(
+            icon: IconScalePart(
+                context.watch<ProgramsFilterVM>().isFavoriteOnly ?
+                Icons.favorite : Icons.favorite_border,
+                context.watch<CtrlHomeVM>().favoriteFilterAnimation
+            ),
+            onPressed: () => _onPressedFavoriteFilter(context),
+          ),
+          IconButton(
+            icon: IconScalePart(
+                Icons.delete,
+                context.watch<CtrlHomeVM>().clearFilterAnimation
+            ),
+            onPressed: () => _onPressedClearFilter(context),
+          ),
+        ],
+      ),
+    ),
+  ];
 
   static void _onPressedFavoriteFilter(BuildContext context) {
     final ctrlHomeVM = context.read<CtrlHomeVM>();

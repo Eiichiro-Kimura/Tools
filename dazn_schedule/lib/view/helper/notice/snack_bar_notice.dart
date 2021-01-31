@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 class SnackBarNotice {
 
-  static void show(BuildContext context, String message) =>
-      showWithContent(
-          context,
-          Text(message),
-          const Duration(milliseconds: 4000)
-      );
+  static const _defaultDuration = Duration(milliseconds: 4000);
+
+  static void showWithMessage(BuildContext context, String message) =>
+      showWithContent(context, Text(message), _defaultDuration);
 
   static void showWithContent(BuildContext context, Widget content,
       Duration duration) {

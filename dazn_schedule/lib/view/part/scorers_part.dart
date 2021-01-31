@@ -13,10 +13,9 @@ class ScorersPart extends SingleChildScrollView {
 
   static List<Widget> _createWidgets(BuildContext context) {
     final scorers = context.watch<ScorersVM>().value;
-    var position = 0;
 
     return null == scorers ? <Widget>[] : scorers
-        .map((scorer) => ScorersCardPart(++position, scorer))
+        .map((scorer) => ScorersCardPart(scorer))
         .toList();
   }
 }

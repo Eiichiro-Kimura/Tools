@@ -8,18 +8,21 @@ class FootballScorersRepository extends FootballBaseRepository
 
   @override
   Future<List<Scorer>> fetch(String tournamentName) async {
-    final response = await callGetWebApi(tournamentName, 'scorers');
+    final response = await fetchCompetition(tournamentName, 'scorers');
     if (!response.isSuccess) {
       return null;
     }
 
     final root = response.bodyObject as Map<String, dynamic>;
     final scorers = root['scorers'] as List<dynamic>;
+    var position = 0;
 
-    return scorers.map(_createScorer).toList();
+    return scorers
+        .map((dynamic element) => _createScorer(++position, element))
+        .toList();
   }
 
-  Scorer _createScorer(dynamic element) {
+  Scorer _createScorer(int position, dynamic element) {
     final player = element['player'] as Map<String, dynamic>;
     final team = element['team'] as Map<String, dynamic>;
 
@@ -32,6 +35,7 @@ class FootballScorersRepository extends FootballBaseRepository
             player['position'] as String
         ),
         team['name'] as String,
+        position.toString(),
         (element['numberOfGoals'] as int).toString()
     );
   }

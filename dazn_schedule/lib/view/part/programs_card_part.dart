@@ -33,7 +33,10 @@ class ProgramsCardPart extends Card {
     try {
       context.read<CloudCalendarVM>().addEvent(program);
     } on Exception catch (ex) {
-      SnackBarNotice.show(context, 'エラーが発生しました[${ex.toString()}]');
+      SnackBarNotice.showWithMessage(
+          context,
+          'エラーが発生しました[${ex.toString()}]'
+      );
     }
   }
 }

@@ -13,23 +13,25 @@ class SettingsAppBar extends BaseAppBar {
     title,
     AnimatedIcons.arrow_menu,
     context.watch<CtrlSettingsVM>().menuAnimation,
-    null,
     (contextCB) => PageManager().backward(contextCB),
-    actions: [
-      Padding(
-        padding: const EdgeInsets.all(_marginSize),
-        child: IconButton(
-          icon: IconScalePart(
-            Icons.info,
-            context.watch<CtrlSettingsVM>().aboutAnimation
-          ),
-          onPressed: () => _onPressedAbout(context),
-        ),
-      ),
-    ],
+    null,
+    actions: _createActions(context),
   );
 
   static const double _marginSize = 8;
+
+  static List<Widget> _createActions(BuildContext context) => [
+    Padding(
+      padding: const EdgeInsets.all(_marginSize),
+      child: IconButton(
+        icon: IconScalePart(
+            Icons.info,
+            context.watch<CtrlSettingsVM>().aboutAnimation
+        ),
+        onPressed: () => _onPressedAbout(context),
+      ),
+    ),
+  ];
 
   static void _onPressedAbout(BuildContext context) =>
       context

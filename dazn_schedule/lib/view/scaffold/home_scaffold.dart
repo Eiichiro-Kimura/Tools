@@ -28,8 +28,8 @@ class HomeScaffold extends Scaffold {
         .getSetting(SettingsKind.filterTournamentName)
         .value;
 
-    programsVM.generate();
-    standingsVM.generate(daznTournamentName);
-    scorersVM.generate(daznTournamentName);
+    programsVM.fetch();
+    standingsVM.fetch(daznTournamentName);
+    scorersVM.fetch(daznTournamentName);
   }
 }
