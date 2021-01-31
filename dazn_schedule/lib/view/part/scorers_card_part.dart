@@ -1,8 +1,9 @@
 import 'package:dazn_schedule/model/entity/scorer.dart';
-import 'package:dazn_schedule/view/mixin/snack_bar_information_mixin.dart';
+import 'package:dazn_schedule/view/helper/notice/snack_bar_notice.dart';
+import 'package:dazn_schedule/view/part/map_information_part.dart';
 import 'package:flutter/material.dart';
 
-class ScorersCardPart extends Card with SnackBarInformationMixin {
+class ScorersCardPart extends Card {
 
   ScorersCardPart(Scorer scorer) : super(
     margin: const EdgeInsets.all(_marginSize),
@@ -25,6 +26,10 @@ class ScorersCardPart extends Card with SnackBarInformationMixin {
   static const double _marginSize = 10;
 
   static void _onTapListTile(BuildContext context, Scorer scorer) =>
-      SnackBarInformationMixin.showSnackBar(context, scorer.player.toMap());
+      SnackBarNotice.showWithContent(
+          context,
+          MapInformationPart(context, scorer.player.toMap()),
+          const Duration(minutes: 1)
+      );
 }
 
