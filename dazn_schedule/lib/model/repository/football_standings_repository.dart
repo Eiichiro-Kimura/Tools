@@ -7,7 +7,7 @@ class FootballStandingsRepository extends FootballBaseRepository
 
   @override
   Future<List<TeamStanding>> fetch(String tournamentName) async {
-    final response = await callGetWebApi(tournamentName, 'standings');
+    final response = await fetchCompetition(tournamentName, 'standings');
     if (!response.isSuccess) {
       return null;
     }
@@ -24,6 +24,7 @@ class FootballStandingsRepository extends FootballBaseRepository
     final teamDetail = teamResult['team'] as Map<String, dynamic>;
 
     return TeamStanding(
+      teamDetail['id'] as int,
       teamDetail['name'] as String,
       _toStringFromInt(teamResult['position']),
       _toStringFromInt(teamResult['won']),

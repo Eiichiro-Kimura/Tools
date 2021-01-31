@@ -8,6 +8,6 @@ class ScorersVM extends ValueNotifier<List<Scorer>> {
 
   final IScorersRepository _scorersRepository;
 
-  Future<void> generate(String tournamentName) async =>
+  Future<List<Scorer>> fetch(String tournamentName) async =>
       value = await _scorersRepository.fetch(tournamentName);
 }

@@ -8,6 +8,6 @@ class StandingsVM extends ValueNotifier<List<TeamStanding>> {
 
   final IStandingsRepository _standingsRepository;
 
-  Future<void> generate(String tournamentName) async =>
+  Future<List<TeamStanding>> fetch(String tournamentName) async =>
       value = await _standingsRepository.fetch(tournamentName);
 }

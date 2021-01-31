@@ -8,7 +8,7 @@ class FootballScorersRepository extends FootballBaseRepository
 
   @override
   Future<List<Scorer>> fetch(String tournamentName) async {
-    final response = await callGetWebApi(tournamentName, 'scorers');
+    final response = await fetchCompetition(tournamentName, 'scorers');
     if (!response.isSuccess) {
       return null;
     }
