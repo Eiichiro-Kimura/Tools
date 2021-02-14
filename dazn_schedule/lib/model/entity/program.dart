@@ -24,6 +24,8 @@ class Program {
     return DateTime.parse('$year-$month-$day $time:00');
   }
 
+  bool get haveTeamName => null != homeTeamName && null != awayTeamName;
+
   bool contains(String keyword, DateTime selectedFirstDate,
       DateTime selectedLastDate, String selectedGenre,
       String selectedTournamentName) {

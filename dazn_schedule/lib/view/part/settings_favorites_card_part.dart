@@ -15,7 +15,8 @@ class SettingsFavoritesCardPart extends Card {
         onPressed: () => _onPressedDelete(context, favoriteTeam),
       ),
       title: Text(favoriteTeam.teamName),
-      subtitle: Text(favoriteTeam.genre),
+      subtitle: Text(favoriteTeam.tournamentName),
+      trailing: Text(favoriteTeam.genre),
       onTap: () => _onTapListTile(context, favoriteTeam),
     ),
   );
