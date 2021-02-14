@@ -19,7 +19,8 @@ class ProgramsCardPart extends Card {
           ),
           title: Text(program.programName),
           subtitle: Text('${program.genre} : ${program.tournamentName}'),
-          trailing: FavoriteTeamsButtonPart(context, program),
+          trailing: program.haveTeamName ?
+            FavoriteTeamsButtonPart(context, program) : null,
           onTap: () => _onTapListTile(context, program),
         );
       },
