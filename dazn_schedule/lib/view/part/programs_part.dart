@@ -59,10 +59,18 @@ class ProgramsPart extends SingleChildScrollView {
 
   static bool _isFavorite(Program program, FavoriteTeamsVM favoriteTeamsVM) {
     final isFavoriteTeamHome = favoriteTeamsVM.contains(
-        FavoriteTeam.withData(program.genre, program.homeTeamName)
+        FavoriteTeam.withData(
+            program.homeTeamName,
+            program.genre,
+            program.tournamentName
+        )
     );
     final isFavoriteTeamAway = favoriteTeamsVM.contains(
-        FavoriteTeam.withData(program.genre, program.awayTeamName)
+        FavoriteTeam.withData(
+            program.awayTeamName,
+            program.genre,
+            program.tournamentName
+        )
     );
 
     return isFavoriteTeamHome || isFavoriteTeamAway;

@@ -15,8 +15,18 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
     ),
     onSelected: (teamName) => _onSelected(context, program, teamName),
     itemBuilder: (_) => [
-      _createMenuItemPart(context, program.genre, program.homeTeamName),
-      _createMenuItemPart(context, program.genre, program.awayTeamName),
+      _createMenuItemPart(
+          context,
+          program.homeTeamName,
+          program.genre,
+          program.tournamentName
+      ),
+      _createMenuItemPart(
+          context,
+          program.awayTeamName,
+          program.genre,
+          program.tournamentName
+      ),
     ],
   );
 
@@ -24,7 +34,11 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
       String teamName) {
 
     final favoriteTeamsVM = context.read<FavoriteTeamsVM>();
-    final favoriteTeam = FavoriteTeam.withData(program.genre, teamName);
+    final favoriteTeam = FavoriteTeam.withData(
+        teamName,
+        program.genre,
+        program.tournamentName
+    );
 
     if (favoriteTeamsVM.contains(favoriteTeam)) {
       favoriteTeamsVM.remove(favoriteTeam);
@@ -34,20 +48,30 @@ class FavoriteTeamsButtonPart extends PopupMenuButton<String> {
   }
 
   static FavoriteTeamsMenuItemPart _createMenuItemPart(BuildContext context,
-      String genre, String teamName) =>
+      String teamName, String genre, String tournamentName) =>
       FavoriteTeamsMenuItemPart(
           context,
           teamName,
-          isSelected: _isFavorite(context, genre, teamName)
+          isSelected: _isFavorite(context, teamName, genre, tournamentName)
       );
 
   static bool _isFavoriteProgram(BuildContext context, Program program) =>
-      _isFavorite(context, program.genre, program.homeTeamName) ||
-      _isFavorite(context, program.genre, program.awayTeamName);
+      _isFavorite(
+          context,
+          program.homeTeamName,
+          program.genre,
+          program.tournamentName
+      ) ||
+      _isFavorite(
+          context,
+          program.awayTeamName,
+          program.genre,
+          program.tournamentName
+      );
 
-  static bool _isFavorite(BuildContext context, String genre,
-      String teamName) =>
+  static bool _isFavorite(BuildContext context, String teamName, String genre,
+      String tournamentName) =>
       context
           .read<FavoriteTeamsVM>()
-          .contains(FavoriteTeam.withData(genre, teamName));
+          .contains(FavoriteTeam.withData(teamName, genre, tournamentName));
 }

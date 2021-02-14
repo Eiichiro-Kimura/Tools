@@ -8,14 +8,17 @@ class FavoriteTeam extends HiveObject with EquatableMixin {
 
   FavoriteTeam();
 
-  FavoriteTeam.withData(this.genre, this.teamName);
+  FavoriteTeam.withData(this.teamName, this.genre, this.tournamentName);
 
   @HiveField(0)
-  String genre;
-
-  @HiveField(1)
   String teamName;
 
+  @HiveField(1)
+  String genre;
+
+  @HiveField(2)
+  String tournamentName;
+
   @override
-  List<Object> get props => [genre, teamName];
+  List<Object> get props => [teamName, genre, tournamentName];
 }

@@ -17,18 +17,21 @@ class FavoriteTeamAdapter extends TypeAdapter<FavoriteTeam> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FavoriteTeam()
-      ..genre = fields[0] as String
-      ..teamName = fields[1] as String;
+      ..teamName = fields[0] as String
+      ..genre = fields[1] as String
+      ..tournamentName = fields[2] as String;
   }
 
   @override
   void write(BinaryWriter writer, FavoriteTeam obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.genre)
+      ..write(obj.teamName)
       ..writeByte(1)
-      ..write(obj.teamName);
+      ..write(obj.genre)
+      ..writeByte(2)
+      ..write(obj.tournamentName);
   }
 
   @override
