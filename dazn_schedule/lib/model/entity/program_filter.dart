@@ -20,7 +20,7 @@ class ProgramFilter {
   static List<String> _toFilterList(List<Program> programs,
       String Function(Program) addFunction) {
 
-    final filterList = <String>[]..add(allFilterName);
+    final filterList = <String>[allFilterName];
 
     for (final program in programs) {
       // 長過ぎる名前は設定画面に表示できないので
