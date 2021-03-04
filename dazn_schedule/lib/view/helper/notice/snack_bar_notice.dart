@@ -9,21 +9,23 @@ class SnackBarNotice {
 
   static void showWithContent(BuildContext context, Widget content,
       Duration duration) {
-    final scaffoldState = Scaffold.of(context);
+    final scaffoldMessengerState = ScaffoldMessenger.of(context);
     final snackBar = SnackBar(
       content: content,
       duration: duration,
       action: SnackBarAction(
         label: 'Hide',
-        onPressed: () => hide(scaffoldState),
+        onPressed: () => hide(scaffoldMessengerState),
       ),
     );
 
-    hide(scaffoldState);
+    hide(scaffoldMessengerState);
 
-    scaffoldState.showSnackBar(snackBar);
+    scaffoldMessengerState.showSnackBar(snackBar);
   }
 
-  static void hide(ScaffoldState scaffoldState) =>
-      scaffoldState.hideCurrentSnackBar(reason: SnackBarClosedReason.hide);
+  static void hide(ScaffoldMessengerState scaffoldMessengerState) =>
+      scaffoldMessengerState.hideCurrentSnackBar(
+          reason: SnackBarClosedReason.hide
+      );
 }
