@@ -22,8 +22,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   void initState() {
     super.initState();
@@ -63,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           onTap: context.hideKeyboard,
           child: DefaultTabController(
             length: TabManager().tabCount,
-            child: HomeScaffold(context, _scaffoldKey, widget.title),
+            child: HomeScaffold(context, widget.title),
           )
       );
 

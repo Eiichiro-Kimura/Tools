@@ -38,11 +38,10 @@ class TabManager {
 
   int get tabCount => _tabDetails.length;
 
-  PreferredSizeWidget createTabBar(BuildContext context,
-      GlobalKey<ScaffoldState> scaffoldKey) =>
+  PreferredSizeWidget createTabBar(BuildContext context) =>
       TabBar(
         tabs: _tabDetails.map(_createTabWidget).toList(),
-        onTap: (_) => _onTabTap(context, scaffoldKey),
+        onTap: (_) => _onTabTap(context),
       );
 
   Widget createTabBarView(BuildContext context) =>
@@ -58,9 +57,9 @@ class TabManager {
         child: Text(tabDetail.name),
       );
 
-  void _onTabTap(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
+  void _onTabTap(BuildContext context) {
     context.hideKeyboard();
-    SnackBarNotice.hide(scaffoldKey.currentState);
+    SnackBarNotice.hide(ScaffoldMessenger.of(context));
   }
 }
 

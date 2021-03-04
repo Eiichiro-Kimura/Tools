@@ -12,7 +12,7 @@ class SettingsSectionFavoritesPart extends Column {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SettingsTitlePart('Favorite List'),
-            OutlineButton(
+            OutlinedButton(
               child: const Text('Clear'),
               onPressed: () => _onPressedClear(context),
             ),
