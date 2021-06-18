@@ -69,14 +69,15 @@ class WebViewPageB extends StatelessWidget {
       body: WebViewB.InAppWebView(
         initialUrlRequest: _toUrlRequest(initialUrl),
         initialOptions: WebViewB.InAppWebViewGroupOptions(
-            crossPlatform: WebViewB.InAppWebViewOptions(
-              useShouldOverrideUrlLoading: true,
-              javaScriptEnabled: true,
-            ),
+          crossPlatform: WebViewB.InAppWebViewOptions(
+            javaScriptEnabled: true,
+          ),
+          android: WebViewB.AndroidInAppWebViewOptions(
+            useShouldInterceptRequest: true,
+          )
         ),
         onWebViewCreated: _onWebViewCreated,
-        onLoadStart: _onLoadStart,
-        shouldOverrideUrlLoading: _shouldOverrideUrlLoading,
+        androidShouldInterceptRequest: _androidShouldInterceptRequest,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onPressed,
@@ -89,24 +90,16 @@ class WebViewPageB extends StatelessWidget {
 
   void _onWebViewCreated(WebViewB.InAppWebViewController controller) => _controller = controller;
 
-  void _onLoadStart(WebViewB.InAppWebViewController controller, Uri? url) {
-    final urlText = url?.toString();
+  Future<WebViewB.WebResourceResponse?> _androidShouldInterceptRequest(WebViewB.InAppWebViewController controller, WebViewB.WebResourceRequest request) {
+    final url = request.url.toString();
 
-    if (Platform.isAndroid && null != urlText && urlText.endsWith(pdfExt)) {
-      _controller?.loadUrl(urlRequest: _toUrlRequest(docsUrl + urlText));
+    if (Platform.isAndroid && !url.startsWith(docsUrl) && url.endsWith(pdfExt)) {
+      _controller?.stopLoading().then(
+              (value) => _controller?.loadUrl(urlRequest: _toUrlRequest(docsUrl + url))
+      );
     }
-  }
 
-  Future<WebViewB.NavigationActionPolicy> _shouldOverrideUrlLoading(WebViewB.InAppWebViewController controller, WebViewB.NavigationAction navigationAction) {
-    final url = navigationAction.request.url.toString();
-
-    if (Platform.isAndroid && url.endsWith(pdfExt)) {
-      _controller?.loadUrl(urlRequest: _toUrlRequest(docsUrl + url));
-
-      return Future.value(WebViewB.NavigationActionPolicy.CANCEL);
-    } else {
-      return Future.value(WebViewB.NavigationActionPolicy.ALLOW);
-    }
+    return Future.value(null);
   }
 
   void _onPressed() => _controller?.loadUrl(urlRequest: _toUrlRequest(pdfUrl));
