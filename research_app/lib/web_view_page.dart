@@ -10,7 +10,8 @@ class WebViewPage extends StatelessWidget {
         title: Text("WebViewPage"),
       ),
       body: WebView(
-        initialUrl: 'https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf',
+//          initialUrl: 'https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf',
+          initialUrl: 'https://www.kansaigaidai.ac.jp/asp/img/pdf/82/7a79c35f7ce0704dec63be82440c8182.pdf',
       ),
     );
   }
