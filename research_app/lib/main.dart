@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _changeToWebViewPage(BuildContext context) {
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => WebViewPage())
+        MaterialPageRoute(builder: (context) => WebViewPageA())
     );
   }
 

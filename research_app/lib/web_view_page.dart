@@ -1,38 +1,113 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter/webview_flutter.dart' as WebViewA;
+import 'package:flutter_inappwebview/flutter_inappwebview.dart' as WebViewB;
 
-class WebViewPage extends StatelessWidget {
+const initialUrl = 'https://www.google.com';
+const pdfUrl = 'https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf';
+const docsUrl = 'https://docs.google.com/gview?embedded=true&url=';
+const pdfExt = '.pdf';
 
-  WebViewController? _controller;
+class WebViewPageA extends StatelessWidget {
+
+  WebViewA.WebViewController? _controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("WebViewPage"),
+        title: Text("WebViewPageA"),
       ),
-      body: WebView(
-        initialUrl: 'https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf',
+      body: WebViewA.WebView(
+        initialUrl: initialUrl,
+        javascriptMode: WebViewA.JavascriptMode.unrestricted,
         onWebViewCreated: _onWebViewCreated,
+        onPageStarted: _onPageStarted,
         navigationDelegate: _navigationDelegate,
-        javascriptMode: JavascriptMode.unrestricted,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onPressed,
+        child: Icon(Icons.update),
       ),
     );
   }
 
-  void _onWebViewCreated(WebViewController controller) => _controller = controller;
+  void _onWebViewCreated(WebViewA.WebViewController controller) => _controller = controller;
 
-  NavigationDecision _navigationDelegate(NavigationRequest navigationRequest) {
-    final url = navigationRequest.url;
-
-    if (Platform.isAndroid && url.endsWith('.pdf')) {
-      _controller?.loadUrl('https://docs.google.com/gview?embedded=true&url=' + url);
-
-      return NavigationDecision.navigate;
-    } else {
-      return NavigationDecision.prevent;
+  void _onPageStarted(String url) {
+    if (Platform.isAndroid && url.endsWith(pdfExt)) {
+      _controller?.loadUrl(docsUrl + url);
     }
   }
+
+  WebViewA.NavigationDecision _navigationDelegate(WebViewA.NavigationRequest navigationRequest) {
+    final url = navigationRequest.url;
+
+    if (Platform.isAndroid && url.endsWith(pdfExt)) {
+      _controller?.loadUrl(docsUrl + url);
+
+      return WebViewA.NavigationDecision.prevent;
+    } else {
+      return WebViewA.NavigationDecision.navigate;
+    }
+  }
+
+  void _onPressed() => _controller?.loadUrl(pdfUrl);
+}
+
+class WebViewPageB extends StatelessWidget {
+
+  WebViewB.InAppWebViewController? _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("WebViewPageA"),
+      ),
+      body: WebViewB.InAppWebView(
+        initialUrlRequest: _toUrlRequest(initialUrl),
+        initialOptions: WebViewB.InAppWebViewGroupOptions(
+            crossPlatform: WebViewB.InAppWebViewOptions(
+              useShouldOverrideUrlLoading: true,
+              javaScriptEnabled: true,
+            ),
+        ),
+        onWebViewCreated: _onWebViewCreated,
+        onLoadStart: _onLoadStart,
+        shouldOverrideUrlLoading: _shouldOverrideUrlLoading,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onPressed,
+        child: Icon(Icons.update),
+      ),
+    );
+  }
+
+  WebViewB.URLRequest _toUrlRequest(String uri) => WebViewB.URLRequest(url: Uri.parse(uri));
+
+  void _onWebViewCreated(WebViewB.InAppWebViewController controller) => _controller = controller;
+
+  void _onLoadStart(WebViewB.InAppWebViewController controller, Uri? url) {
+    final urlText = url?.toString();
+
+    if (Platform.isAndroid && null != urlText && urlText.endsWith(pdfExt)) {
+      _controller?.loadUrl(urlRequest: _toUrlRequest(docsUrl + urlText));
+    }
+  }
+
+  Future<WebViewB.NavigationActionPolicy> _shouldOverrideUrlLoading(WebViewB.InAppWebViewController controller, WebViewB.NavigationAction navigationAction) {
+    final url = navigationAction.request.url.toString();
+
+    if (Platform.isAndroid && url.endsWith(pdfExt)) {
+      _controller?.loadUrl(urlRequest: _toUrlRequest(docsUrl + url));
+
+      return Future.value(WebViewB.NavigationActionPolicy.CANCEL);
+    } else {
+      return Future.value(WebViewB.NavigationActionPolicy.ALLOW);
+    }
+  }
+
+  void _onPressed() => _controller?.loadUrl(urlRequest: _toUrlRequest(pdfUrl));
 }
