@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -14,8 +14,7 @@ class WebViewPage extends StatelessWidget {
         title: Text("WebViewPage"),
       ),
       body: WebView(
-//          initialUrl: 'https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf',
-        initialUrl: 'https://docs.google.com/gview?embedded=true&url=https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf',
+        initialUrl: 'https://www.pref.kyoto.jp/kenkoshishin/documents/no_1.pdf',
         onWebViewCreated: _onWebViewCreated,
         navigationDelegate: _navigationDelegate,
         javascriptMode: JavascriptMode.unrestricted,
@@ -28,7 +27,7 @@ class WebViewPage extends StatelessWidget {
   NavigationDecision _navigationDelegate(NavigationRequest navigationRequest) {
     final url = navigationRequest.url;
 
-    if (url.endsWith('.pdf')) {
+    if (Platform.isAndroid && url.endsWith('.pdf')) {
       _controller?.loadUrl('https://docs.google.com/gview?embedded=true&url=' + url);
 
       return NavigationDecision.navigate;
