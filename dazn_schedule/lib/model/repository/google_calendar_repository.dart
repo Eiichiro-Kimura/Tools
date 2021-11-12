@@ -13,7 +13,7 @@ class GoogleCalendarRepository implements ICloudCalendarRepository {
   @override
   void init(String apiClientId) =>
       _googleAuthExecutor = GoogleAuthExecutor(
-          [CalendarApi.CalendarScope],
+          [CalendarApi.calendarScope],
           apiClientId
       );
 

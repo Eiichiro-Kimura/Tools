@@ -13,8 +13,8 @@ class SettingsSectionFavoritesPart extends Column {
           children: [
             SettingsTitlePart('Favorite List'),
             OutlinedButton(
-              child: const Text('Clear'),
               onPressed: () => _onPressedClear(context),
+              child: const Text('Clear'),
             ),
           ],
         ),

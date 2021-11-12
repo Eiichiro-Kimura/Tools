@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http;
 class WebApiExecutor {
 
   static Future<WebApiResponse> get(WebApiGetRequest request) async =>
-      WebApiResponse(await http.get(request.url, headers: request.headers));
+      WebApiResponse(await http.get(request.uri, headers: request.headers));
 
   static Future<WebApiResponse> post(WebApiPostRequest request) async =>
       WebApiResponse(
-          await http.post(request.url,
+          await http.post(request.uri,
               headers: request.headers,
               body: request.body,
               encoding: request.encoding
@@ -18,20 +18,24 @@ class WebApiExecutor {
 
 class WebApiGetRequest {
 
-  WebApiGetRequest(this.url, this.headers);
+  WebApiGetRequest(this._uri, this.headers);
 
-  final String url;
+  final String _uri;
   final Map<String, String> headers;
+
+  Uri get uri => Uri.tryParse(_uri);
 }
 
 class WebApiPostRequest {
 
-  WebApiPostRequest(this.url, this.headers, this.body, this.encoding);
+  WebApiPostRequest(this._uri, this.headers, this.body, this.encoding);
 
-  final String url;
+  final String _uri;
   final Map<String, String> headers;
   final dynamic body;
   final Encoding encoding;
+
+  Uri get uri => Uri.tryParse(_uri);
 }
 
 class WebApiResponse {
